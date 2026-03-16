@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"				"ZDEV Core Addon"
+	"version"			"0.7"
+	"up_date"			"7/29/20"
+	"author_name"			"ZCOM Studios"
+	"author_email"			"zcomstudios@gmail.com"
+	"author_url"			"hhtps:--zcomstudios.com"
+	"info"				"ZCOM Development Core Addon; serves as the primary dependency for all other Addons and Gamemodes released by ZCOM Studios."
+	"override"			"0"
+}

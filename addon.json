@@ -1,0 +1,12 @@
+{
+    "title": "ZDEV",
+    "description": "ZCOM Development Master Addon",
+    "type": "servercontent",
+    "tags": [
+        "addon"
+    ],
+    "ignore": [
+        ".git/*",
+        "README.md"
+    ]
+}

@@ -1,0 +1,1679 @@
+{
+  "version": "1.0.0",
+  "generated": "2025-08-13T08:29:42.087825",
+  "stats": {
+    "totalFunctions": 180,
+    "totalTables": 77,
+    "scanPath": "/home/runner/work/zdev_core/zdev_core/zdev"
+  },
+  "functions": {
+    "ZDEV.DBUG.Log": {
+      "uid": "ZDEV_FUNC_BCCDB778",
+      "path": "ZDEV.DBUG.Log",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 24,
+      "type": "function"
+    },
+    "ZDEV.FILE.NewLog": {
+      "uid": "ZDEV_FUNC_A3D44342",
+      "path": "ZDEV.FILE.NewLog",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 63,
+      "type": "function"
+    },
+    "ZDEV.DBUG.RegisterClientEntity": {
+      "uid": "ZDEV_FUNC_432AB938",
+      "path": "ZDEV.DBUG.RegisterClientEntity",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 89,
+      "type": "function"
+    },
+    "ZDEV.DBUG.RegisterClientModel": {
+      "uid": "ZDEV_FUNC_95AA6D4D",
+      "path": "ZDEV.DBUG.RegisterClientModel",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 100,
+      "type": "function"
+    },
+    "ZDEV.MDLS.Get": {
+      "uid": "ZDEV_FUNC_41230FBD",
+      "path": "ZDEV.MDLS.Get",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 111,
+      "type": "function"
+    },
+    "ZDEV.DBUG.PrecacheModel": {
+      "uid": "ZDEV_FUNC_2E64B823",
+      "path": "ZDEV.DBUG.PrecacheModel",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 116,
+      "type": "function"
+    },
+    "ZDEV.DBUG.CSModel": {
+      "uid": "ZDEV_FUNC_D166EBEB",
+      "path": "ZDEV.DBUG.CSModel",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 122,
+      "type": "function"
+    },
+    "ZDEV.DBUG.CSEntity": {
+      "uid": "ZDEV_FUNC_CB67566F",
+      "path": "ZDEV.DBUG.CSEntity",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 130,
+      "type": "function"
+    },
+    "ZDEV.DBUG.PrintAllEnts": {
+      "uid": "ZDEV_FUNC_AFD1B86B",
+      "path": "ZDEV.DBUG.PrintAllEnts",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 139,
+      "type": "function"
+    },
+    "ZDEV.DBUG.GetRandomBone": {
+      "uid": "ZDEV_FUNC_51C6E54A",
+      "path": "ZDEV.DBUG.GetRandomBone",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 162,
+      "type": "function"
+    },
+    "ZDEV.DBUG.GetBoneInfo": {
+      "uid": "ZDEV_FUNC_BBE4C00F",
+      "path": "ZDEV.DBUG.GetBoneInfo",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 186,
+      "type": "function"
+    },
+    "ZDEV.DBUG.GetHitBoxes": {
+      "uid": "ZDEV_FUNC_7B78150D",
+      "path": "ZDEV.DBUG.GetHitBoxes",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 204,
+      "type": "function"
+    },
+    "ZDEV.DBUG.RandomHitBoxPos": {
+      "uid": "ZDEV_FUNC_904E324B",
+      "path": "ZDEV.DBUG.RandomHitBoxPos",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 239,
+      "type": "function"
+    },
+    "ZDEV.DBUG.GetBones": {
+      "uid": "ZDEV_FUNC_2B7AD064",
+      "path": "ZDEV.DBUG.GetBones",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 257,
+      "type": "function"
+    },
+    "ZDEV.DBUG.FreezeBones": {
+      "uid": "ZDEV_FUNC_86F3D99C",
+      "path": "ZDEV.DBUG.FreezeBones",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_debug.lua",
+      "line": 284,
+      "type": "function"
+    },
+    "ZDEV.CATALOG.Generate": {
+      "uid": "ZDEV_FUNC_F13D5B1B",
+      "path": "ZDEV.CATALOG.Generate",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_catalog_generator.lua",
+      "line": 54,
+      "type": "function"
+    },
+    "ZDEV.CATALOG.SaveToFile": {
+      "uid": "ZDEV_FUNC_31F5B267",
+      "path": "ZDEV.CATALOG.SaveToFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_catalog_generator.lua",
+      "line": 77,
+      "type": "function"
+    },
+    "ZDEV.CATALOG.LoadFromFile": {
+      "uid": "ZDEV_FUNC_5F8A23BE",
+      "path": "ZDEV.CATALOG.LoadFromFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_catalog_generator.lua",
+      "line": 102,
+      "type": "function"
+    },
+    "ZDEV.CATALOG.NeedsUpdate": {
+      "uid": "ZDEV_FUNC_76455442",
+      "path": "ZDEV.CATALOG.NeedsUpdate",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_catalog_generator.lua",
+      "line": 127,
+      "type": "function"
+    },
+    "ZDEV.CATALOG.AutoUpdate": {
+      "uid": "ZDEV_FUNC_E8E55C00",
+      "path": "ZDEV.CATALOG.AutoUpdate",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_catalog_generator.lua",
+      "line": 153,
+      "type": "function"
+    },
+    "ZDEV.LOG": {
+      "uid": "ZDEV_FUNC_5CEB0867",
+      "path": "ZDEV.LOG",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 25,
+      "type": "function"
+    },
+    "ZDEV.ADON.AddAddon": {
+      "uid": "ZDEV_FUNC_107F5005",
+      "path": "ZDEV.ADON.AddAddon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 119,
+      "type": "function"
+    },
+    "ZDEV.FILE.GetAllLoaded": {
+      "uid": "ZDEV_FUNC_B625D863",
+      "path": "ZDEV.FILE.GetAllLoaded",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 129,
+      "type": "function"
+    },
+    "ZDEV.FILE.Loaded": {
+      "uid": "ZDEV_FUNC_FA280C27",
+      "path": "ZDEV.FILE.Loaded",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 133,
+      "type": "function"
+    },
+    "ZDEV.FILE.SetLoaded": {
+      "uid": "ZDEV_FUNC_A7C35901",
+      "path": "ZDEV.FILE.SetLoaded",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 137,
+      "type": "function"
+    },
+    "ZDEV.FUNC": {
+      "uid": "ZDEV_FUNC_00831CC1",
+      "path": "ZDEV.FUNC",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_uid_injector.lua",
+      "line": 28,
+      "type": "function"
+    },
+    "ZDEV.UID_INJECTOR.ProcessFile": {
+      "uid": "ZDEV_FUNC_EDABE1B0",
+      "path": "ZDEV.UID_INJECTOR.ProcessFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_uid_injector.lua",
+      "line": 42,
+      "type": "function"
+    },
+    "ZDEV.UID_INJECTOR.ProcessAllFiles": {
+      "uid": "ZDEV_FUNC_BE08770F",
+      "path": "ZDEV.UID_INJECTOR.ProcessAllFiles",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zdev_uid_injector.lua",
+      "line": 109,
+      "type": "function"
+    },
+    "ZDEV.UTIL.VectorizeString": {
+      "uid": "ZDEV_FUNC_426DAFF8",
+      "path": "ZDEV.UTIL.VectorizeString",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 16,
+      "type": "function"
+    },
+    "ZDEV.UTIL.AngleizeString": {
+      "uid": "ZDEV_FUNC_DC482759",
+      "path": "ZDEV.UTIL.AngleizeString",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 23,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ColorizeString": {
+      "uid": "ZDEV_FUNC_B113D67A",
+      "path": "ZDEV.UTIL.ColorizeString",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 30,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GenerateUID": {
+      "uid": "ZDEV_FUNC_51C15DA0",
+      "path": "ZDEV.UTIL.GenerateUID",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 888,
+      "type": "function"
+    },
+    "ZDEV.UTIL.PrintFuncParam": {
+      "uid": "ZDEV_FUNC_A885DCD4",
+      "path": "ZDEV.UTIL.PrintFuncParam",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 904,
+      "type": "function"
+    },
+    "ZDEV.UTIL.DumpEntityMeta": {
+      "uid": "ZDEV_FUNC_BA2C9B40",
+      "path": "ZDEV.UTIL.DumpEntityMeta",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 930,
+      "type": "function"
+    },
+    "ZDEV.UTIL.AddToTbl": {
+      "uid": "ZDEV_FUNC_FF502A16",
+      "path": "ZDEV.UTIL.AddToTbl",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 949,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GetTraceEnt": {
+      "uid": "ZDEV_FUNC_DF56C450",
+      "path": "ZDEV.UTIL.GetTraceEnt",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 954,
+      "type": "function"
+    },
+    "ZDEV.UTIL.DropPrimaryWeapon": {
+      "uid": "ZDEV_FUNC_FC0F4855",
+      "path": "ZDEV.UTIL.DropPrimaryWeapon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 960,
+      "type": "function"
+    },
+    "ZDEV.UTIL.DataFileExists": {
+      "uid": "ZDEV_FUNC_7D4B2DA5",
+      "path": "ZDEV.UTIL.DataFileExists",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 970,
+      "type": "function"
+    },
+    "ZDEV.UTIL.AnalyzeTable": {
+      "uid": "ZDEV_FUNC_BDB6F026",
+      "path": "ZDEV.UTIL.AnalyzeTable",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 974,
+      "type": "function"
+    },
+    "ZDEV.DATA.ExportToJSON": {
+      "uid": "ZDEV_FUNC_C775AAEF",
+      "path": "ZDEV.DATA.ExportToJSON",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 990,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ReIterateTable": {
+      "uid": "ZDEV_FUNC_C3E93CC0",
+      "path": "ZDEV.UTIL.ReIterateTable",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1008,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ReceiveSliderVar": {
+      "uid": "ZDEV_FUNC_553B7A53",
+      "path": "ZDEV.UTIL.ReceiveSliderVar",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1083,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ArgsToString": {
+      "uid": "ZDEV_FUNC_8399ED7A",
+      "path": "ZDEV.UTIL.ArgsToString",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1099,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GarbageCollect": {
+      "uid": "ZDEV_FUNC_0A3E59B1",
+      "path": "ZDEV.UTIL.GarbageCollect",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1118,
+      "type": "function"
+    },
+    "ZDEV.UTIL.Print": {
+      "uid": "ZDEV_FUNC_D0D3D1A1",
+      "path": "ZDEV.UTIL.Print",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1196,
+      "type": "function"
+    },
+    "ZDEV.UTIL.HUDPaint": {
+      "uid": "ZDEV_FUNC_7FB6B668",
+      "path": "ZDEV.UTIL.HUDPaint",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1144,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ReceiveServerMessage": {
+      "uid": "ZDEV_FUNC_3CB36C46",
+      "path": "ZDEV.UTIL.ReceiveServerMessage",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1177,
+      "type": "function"
+    },
+    "ZDEV.UTIL.DirectionFromTo": {
+      "uid": "ZDEV_FUNC_47EFF7B2",
+      "path": "ZDEV.UTIL.DirectionFromTo",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1218,
+      "type": "function"
+    },
+    "ZDEV.UTIL.NoCollideWorld": {
+      "uid": "ZDEV_FUNC_8060B92F",
+      "path": "ZDEV.UTIL.NoCollideWorld",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun_util.lua",
+      "line": 1227,
+      "type": "function"
+    },
+    "ZDEV.FILE.InitDataDirs": {
+      "uid": "ZDEV_FUNC_8E90F53A",
+      "path": "ZDEV.FILE.InitDataDirs",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 33,
+      "type": "function"
+    },
+    "ZDEV.CONV.Create": {
+      "uid": "ZDEV_FUNC_DA5A67C6",
+      "path": "ZDEV.CONV.Create",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 63,
+      "type": "function"
+    },
+    "ZDEV.CONV.EditorCallback": {
+      "uid": "ZDEV_FUNC_6F602247",
+      "path": "ZDEV.CONV.EditorCallback",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 195,
+      "type": "function"
+    },
+    "ZDEV.FONT.GetFontFiles": {
+      "uid": "ZDEV_FUNC_30DE908D",
+      "path": "ZDEV.FONT.GetFontFiles",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 214,
+      "type": "function"
+    },
+    "ZDEV.FONT.Register": {
+      "uid": "ZDEV_FUNC_29501EC9",
+      "path": "ZDEV.FONT.Register",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 221,
+      "type": "function"
+    },
+    "ZDEV.MATS.CreateAll": {
+      "uid": "ZDEV_FUNC_C14336FD",
+      "path": "ZDEV.MATS.CreateAll",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/cl_init.lua",
+      "line": 96,
+      "type": "function"
+    },
+    "ZDEV.FILE.InitDataDirectory": {
+      "uid": "ZDEV_FUNC_CB2F5AEB",
+      "path": "ZDEV.FILE.InitDataDirectory",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared.lua",
+      "line": 14,
+      "type": "function"
+    },
+    "ZDEV.FILE.InitDataFiles": {
+      "uid": "ZDEV_FUNC_EADB8134",
+      "path": "ZDEV.FILE.InitDataFiles",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared.lua",
+      "line": 34,
+      "type": "function"
+    },
+    "ZDEV.CONT.LoadMaterials": {
+      "uid": "ZDEV_FUNC_AF202117",
+      "path": "ZDEV.CONT.LoadMaterials",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared.lua",
+      "line": 61,
+      "type": "function"
+    },
+    "ZDEV.CONT.GetMaterials": {
+      "uid": "ZDEV_FUNC_0DDF5DAB",
+      "path": "ZDEV.CONT.GetMaterials",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared.lua",
+      "line": 85,
+      "type": "function"
+    },
+    "ZDEV.SEFX.RegisterFXType": {
+      "uid": "ZDEV_FUNC_0BDA9AE6",
+      "path": "ZDEV.SEFX.RegisterFXType",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 9,
+      "type": "function"
+    },
+    "ZDEV.SEFX.GetNameFromFolder": {
+      "uid": "ZDEV_FUNC_72EB948D",
+      "path": "ZDEV.SEFX.GetNameFromFolder",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 18,
+      "type": "function"
+    },
+    "ZDEV.SEFX.GetAll": {
+      "uid": "ZDEV_FUNC_B5F3ABB4",
+      "path": "ZDEV.SEFX.GetAll",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 23,
+      "type": "function"
+    },
+    "ZDEV.SEFX.Register": {
+      "uid": "ZDEV_FUNC_1E97812A",
+      "path": "ZDEV.SEFX.Register",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 27,
+      "type": "function"
+    },
+    "ZDEV.SEFX.GetByName": {
+      "uid": "ZDEV_FUNC_142AE1E9",
+      "path": "ZDEV.SEFX.GetByName",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 43,
+      "type": "function"
+    },
+    "ZDEV.SEFX.Create": {
+      "uid": "ZDEV_FUNC_72A5A69F",
+      "path": "ZDEV.SEFX.Create",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 58,
+      "type": "function"
+    },
+    "ZDEV.CONV.GetAll": {
+      "uid": "ZDEV_FUNC_55E4476C",
+      "path": "ZDEV.CONV.GetAll",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_core.lua",
+      "line": 8,
+      "type": "function"
+    },
+    "ZDEV.GAME.Init": {
+      "uid": "ZDEV_FUNC_412EEADC",
+      "path": "ZDEV.GAME.Init",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_core.lua",
+      "line": 13,
+      "type": "function"
+    },
+    "ZDEV.GAME.InitPostEntity": {
+      "uid": "ZDEV_FUNC_B61E1297",
+      "path": "ZDEV.GAME.InitPostEntity",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_core.lua",
+      "line": 27,
+      "type": "function"
+    },
+    "ZDEV.GAME.Think": {
+      "uid": "ZDEV_FUNC_3400F54D",
+      "path": "ZDEV.GAME.Think",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_core.lua",
+      "line": 15,
+      "type": "function"
+    },
+    "ZDEV.GAME.PostGamemodeLoaded": {
+      "uid": "ZDEV_FUNC_816A6132",
+      "path": "ZDEV.GAME.PostGamemodeLoaded",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_core.lua",
+      "line": 44,
+      "type": "function"
+    },
+    "ZDEV.PLYR.DataNWTranslate": {
+      "uid": "ZDEV_FUNC_D46D6728",
+      "path": "ZDEV.PLYR.DataNWTranslate",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 14,
+      "type": "function"
+    },
+    "ZDEV.PLYR.LoadFile": {
+      "uid": "ZDEV_FUNC_87F96276",
+      "path": "ZDEV.PLYR.LoadFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 25,
+      "type": "function"
+    },
+    "ZDEV.RANK.Name": {
+      "uid": "ZDEV_FUNC_A0EF4E6C",
+      "path": "ZDEV.RANK.Name",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 55,
+      "type": "function"
+    },
+    "ZDEV.RANK.Color": {
+      "uid": "ZDEV_FUNC_D9EABF3D",
+      "path": "ZDEV.RANK.Color",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 59,
+      "type": "function"
+    },
+    "ZDEV.RANK.Symbol": {
+      "uid": "ZDEV_FUNC_C256F0DC",
+      "path": "ZDEV.RANK.Symbol",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 63,
+      "type": "function"
+    },
+    "ZDEV.RANK.Icon": {
+      "uid": "ZDEV_FUNC_64328C5A",
+      "path": "ZDEV.RANK.Icon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 67,
+      "type": "function"
+    },
+    "ZDEV.PLYR.GetRank": {
+      "uid": "ZDEV_FUNC_6A123FB4",
+      "path": "ZDEV.PLYR.GetRank",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 71,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Tick": {
+      "uid": "ZDEV_FUNC_41CAA333",
+      "path": "ZDEV.PLYR.Tick",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 75,
+      "type": "function"
+    },
+    "ZDEV.PLYR.PostThink": {
+      "uid": "ZDEV_FUNC_12B380A1",
+      "path": "ZDEV.PLYR.PostThink",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_player.lua",
+      "line": 83,
+      "type": "function"
+    },
+    "ZDEV.AMMO.GetID": {
+      "uid": "ZDEV_FUNC_D7056E30",
+      "path": "ZDEV.AMMO.GetID",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 35,
+      "type": "function"
+    },
+    "ZDEV.AMMO.GetIcon": {
+      "uid": "ZDEV_FUNC_075E6E4A",
+      "path": "ZDEV.AMMO.GetIcon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 40,
+      "type": "function"
+    },
+    "ZDEV.AMMO.GetLabel": {
+      "uid": "ZDEV_FUNC_AFD79260",
+      "path": "ZDEV.AMMO.GetLabel",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 44,
+      "type": "function"
+    },
+    "ZDEV.AMMO.GetName": {
+      "uid": "ZDEV_FUNC_AA1BEFD2",
+      "path": "ZDEV.AMMO.GetName",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 48,
+      "type": "function"
+    },
+    "ZDEV.AMMO.FindByName": {
+      "uid": "ZDEV_FUNC_8E132CE0",
+      "path": "ZDEV.AMMO.FindByName",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 52,
+      "type": "function"
+    },
+    "ZDEV.WEAP.ForEach": {
+      "uid": "ZDEV_FUNC_D06CE55F",
+      "path": "ZDEV.WEAP.ForEach",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 67,
+      "type": "function"
+    },
+    "ZDEV.WEAP.GroupName": {
+      "uid": "ZDEV_FUNC_F72F044F",
+      "path": "ZDEV.WEAP.GroupName",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 87,
+      "type": "function"
+    },
+    "ZDEV.WEAP.IsHoldTypeValid": {
+      "uid": "ZDEV_FUNC_920BBF64",
+      "path": "ZDEV.WEAP.IsHoldTypeValid",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 123,
+      "type": "function"
+    },
+    "ZDEV.WEAP.NewID": {
+      "uid": "ZDEV_FUNC_1DC756F0",
+      "path": "ZDEV.WEAP.NewID",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 131,
+      "type": "function"
+    },
+    "ZDEV.WEAP.GetID": {
+      "uid": "ZDEV_FUNC_FB6ECFF3",
+      "path": "ZDEV.WEAP.GetID",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 143,
+      "type": "function"
+    },
+    "ZDEV.WEAP.IDFromClass": {
+      "uid": "ZDEV_FUNC_EAD411E7",
+      "path": "ZDEV.WEAP.IDFromClass",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 161,
+      "type": "function"
+    },
+    "ZDEV.WEAP.FindByID": {
+      "uid": "ZDEV_FUNC_7B9F3D31",
+      "path": "ZDEV.WEAP.FindByID",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 169,
+      "type": "function"
+    },
+    "ZDEV.WEAP.InitializeWeapon": {
+      "uid": "ZDEV_FUNC_437E7FD0",
+      "path": "ZDEV.WEAP.InitializeWeapon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 181,
+      "type": "function"
+    },
+    "ZDEV.WEAP.WeaponInitialized": {
+      "uid": "ZDEV_FUNC_C04CF33C",
+      "path": "ZDEV.WEAP.WeaponInitialized",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 185,
+      "type": "function"
+    },
+    "ZDEV.WEAP.StoredSWEPTable": {
+      "uid": "ZDEV_FUNC_2C99E9F5",
+      "path": "ZDEV.WEAP.StoredSWEPTable",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 189,
+      "type": "function"
+    },
+    "ZDEV.WEAP.SWEPTable": {
+      "uid": "ZDEV_FUNC_CAF7B3DA",
+      "path": "ZDEV.WEAP.SWEPTable",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 193,
+      "type": "function"
+    },
+    "ZDEV.WEAP.MergedSWEPTable": {
+      "uid": "ZDEV_FUNC_C225C613",
+      "path": "ZDEV.WEAP.MergedSWEPTable",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 197,
+      "type": "function"
+    },
+    "ZDEV.WEAP.SaveFile": {
+      "uid": "ZDEV_FUNC_9A3DFD71",
+      "path": "ZDEV.WEAP.SaveFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 220,
+      "type": "function"
+    },
+    "ZDEV.WEAP.LoadFile": {
+      "uid": "ZDEV_FUNC_E3109661",
+      "path": "ZDEV.WEAP.LoadFile",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 232,
+      "type": "function"
+    },
+    "ZDEV.WEAP.SaveIndex": {
+      "uid": "ZDEV_FUNC_3F60E11D",
+      "path": "ZDEV.WEAP.SaveIndex",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 255,
+      "type": "function"
+    },
+    "ZDEV.WEAP.LoadIndex": {
+      "uid": "ZDEV_FUNC_93330FE0",
+      "path": "ZDEV.WEAP.LoadIndex",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 265,
+      "type": "function"
+    },
+    "ZDEV.WEAP.RegisterWeapon": {
+      "uid": "ZDEV_FUNC_2168AABB",
+      "path": "ZDEV.WEAP.RegisterWeapon",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 276,
+      "type": "function"
+    },
+    "ZDEV.WEAP.RegisterWeapons": {
+      "uid": "ZDEV_FUNC_3E310734",
+      "path": "ZDEV.WEAP.RegisterWeapons",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 290,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ScanDir": {
+      "uid": "ZDEV_FUNC_6990D2BF",
+      "path": "ZDEV.UTIL.ScanDir",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_util.lua",
+      "line": 20,
+      "type": "function"
+    },
+    "ZDEV.UTIL.EntityKeyValue": {
+      "uid": "ZDEV_FUNC_7F66A25A",
+      "path": "ZDEV.UTIL.EntityKeyValue",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_util.lua",
+      "line": 121,
+      "type": "function"
+    },
+    "ZDEV.PLYR.SearchByIP": {
+      "uid": "ZDEV_FUNC_A4F336B0",
+      "path": "ZDEV.PLYR.SearchByIP",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 17,
+      "type": "function"
+    },
+    "ZDEV.PLYR.DataFileExists": {
+      "uid": "ZDEV_FUNC_07B428D9",
+      "path": "ZDEV.PLYR.DataFileExists",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 29,
+      "type": "function"
+    },
+    "ZDEV.PLYR.QueryAllPlayers": {
+      "uid": "ZDEV_FUNC_836CE245",
+      "path": "ZDEV.PLYR.QueryAllPlayers",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 35,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Authed": {
+      "uid": "ZDEV_FUNC_F7940C74",
+      "path": "ZDEV.PLYR.Authed",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 57,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Connected": {
+      "uid": "ZDEV_FUNC_B0A60EB2",
+      "path": "ZDEV.PLYR.Connected",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 80,
+      "type": "function"
+    },
+    "ZDEV.PLYR.InitialSpawn": {
+      "uid": "ZDEV_FUNC_66AC69A0",
+      "path": "ZDEV.PLYR.InitialSpawn",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 96,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Spawn": {
+      "uid": "ZDEV_FUNC_B6185974",
+      "path": "ZDEV.PLYR.Spawn",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 203,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Disconnected": {
+      "uid": "ZDEV_FUNC_3B1B0DA2",
+      "path": "ZDEV.PLYR.Disconnected",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 214,
+      "type": "function"
+    },
+    "ZDEV.PLYR.DoDeath": {
+      "uid": "ZDEV_FUNC_BDED8D1F",
+      "path": "ZDEV.PLYR.DoDeath",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 221,
+      "type": "function"
+    },
+    "ZDEV.PLYR.Death": {
+      "uid": "ZDEV_FUNC_2419EB5F",
+      "path": "ZDEV.PLYR.Death",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 225,
+      "type": "function"
+    },
+    "ZDEV.PLYR.TakeDamage": {
+      "uid": "ZDEV_FUNC_1F4C50DF",
+      "path": "ZDEV.PLYR.TakeDamage",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 239,
+      "type": "function"
+    },
+    "ZDEV.PLYR.PlayerShouldTakeDamage": {
+      "uid": "ZDEV_FUNC_7BCF1633",
+      "path": "ZDEV.PLYR.PlayerShouldTakeDamage",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 243,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GetTextSize": {
+      "uid": "ZDEV_FUNC_70977092",
+      "path": "ZDEV.UTIL.GetTextSize",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 14,
+      "type": "function"
+    },
+    "ZDEV.UTIL.PosToScreen": {
+      "uid": "ZDEV_FUNC_575F8B7A",
+      "path": "ZDEV.UTIL.PosToScreen",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 25,
+      "type": "function"
+    },
+    "ZDEV.UTIL.EntPosToScreen": {
+      "uid": "ZDEV_FUNC_16B79C1B",
+      "path": "ZDEV.UTIL.EntPosToScreen",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 31,
+      "type": "function"
+    },
+    "ZDEV.UTIL.TraceHitPosScreen": {
+      "uid": "ZDEV_FUNC_D32A9CF3",
+      "path": "ZDEV.UTIL.TraceHitPosScreen",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 39,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GetVMAttPos": {
+      "uid": "ZDEV_FUNC_A9C10807",
+      "path": "ZDEV.UTIL.GetVMAttPos",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 49,
+      "type": "function"
+    },
+    "ZDEV.UTIL.GetBonePos": {
+      "uid": "ZDEV_FUNC_35B176D0",
+      "path": "ZDEV.UTIL.GetBonePos",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 66,
+      "type": "function"
+    },
+    "ZDEV.UTIL.ParticleEmitter": {
+      "uid": "ZDEV_FUNC_349E70C3",
+      "path": "ZDEV.UTIL.ParticleEmitter",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 82,
+      "type": "function"
+    },
+    "ZDEV.UTIL.Particle": {
+      "uid": "ZDEV_FUNC_330C1771",
+      "path": "ZDEV.UTIL.Particle",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 96,
+      "type": "function"
+    },
+    "ZDEV.UTIL.TimedCos": {
+      "uid": "ZDEV_FUNC_9B65F091",
+      "path": "ZDEV.UTIL.TimedCos",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 108,
+      "type": "function"
+    },
+    "ZDEV.UTIL.TimedSin": {
+      "uid": "ZDEV_FUNC_9A92A4AC",
+      "path": "ZDEV.UTIL.TimedSin",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 114,
+      "type": "function"
+    },
+    "ZDEV.VGUI.CreateFrame": {
+      "uid": "ZDEV_FUNC_1C9A4181",
+      "path": "ZDEV.VGUI.CreateFrame",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 19,
+      "type": "function"
+    },
+    "ZDEV.VGUI.CreateButton": {
+      "uid": "ZDEV_FUNC_D6CD0327",
+      "path": "ZDEV.VGUI.CreateButton",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 40,
+      "type": "function"
+    },
+    "ZDEV.VGUI.CreateTextEntry": {
+      "uid": "ZDEV_FUNC_2C850790",
+      "path": "ZDEV.VGUI.CreateTextEntry",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 73,
+      "type": "function"
+    },
+    "ZDEV.VGUI.CreateNodeTree": {
+      "uid": "ZDEV_FUNC_6DD2DDB8",
+      "path": "ZDEV.VGUI.CreateNodeTree",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 117,
+      "type": "function"
+    },
+    "ZDEV.VGUI.AddToMainMenu": {
+      "uid": "ZDEV_FUNC_624000A0",
+      "path": "ZDEV.VGUI.AddToMainMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 133,
+      "type": "function"
+    },
+    "ZDEV.VGUI.MainMenu": {
+      "uid": "ZDEV_FUNC_FADA9C18",
+      "path": "ZDEV.VGUI.MainMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 140,
+      "type": "function"
+    },
+    "ZDEV.VGUI.ModelSelect": {
+      "uid": "ZDEV_FUNC_867B4D3E",
+      "path": "ZDEV.VGUI.ModelSelect",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 178,
+      "type": "function"
+    },
+    "ZDEV.VGUI.PlayerInfo": {
+      "uid": "ZDEV_FUNC_7E952CF3",
+      "path": "ZDEV.VGUI.PlayerInfo",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 203,
+      "type": "function"
+    },
+    "ZDEV.VGUI.MaterialBrowser": {
+      "uid": "ZDEV_FUNC_54BEF803",
+      "path": "ZDEV.VGUI.MaterialBrowser",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 215,
+      "type": "function"
+    },
+    "ZDEV.VGUI.FileManager": {
+      "uid": "ZDEV_FUNC_1BEE50A7",
+      "path": "ZDEV.VGUI.FileManager",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 222,
+      "type": "function"
+    },
+    "ZDEV.CHUD.Paint": {
+      "uid": "ZDEV_FUNC_B542172E",
+      "path": "ZDEV.CHUD.Paint",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_hud.lua",
+      "line": 719,
+      "type": "function"
+    },
+    "ZDEV.CHUD.HideDefault": {
+      "uid": "ZDEV_FUNC_0D9AD868",
+      "path": "ZDEV.CHUD.HideDefault",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_hud.lua",
+      "line": 780,
+      "type": "function"
+    },
+    "ZDEV.REND.EnvironmentEditor": {
+      "uid": "ZDEV_FUNC_F3487FBD",
+      "path": "ZDEV.REND.EnvironmentEditor",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_render.lua",
+      "line": 67,
+      "type": "function"
+    },
+    "ZDEV.REND.ParticleEditor": {
+      "uid": "ZDEV_FUNC_D053681B",
+      "path": "ZDEV.REND.ParticleEditor",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_render.lua",
+      "line": 221,
+      "type": "function"
+    },
+    "ZDEV.REND.LightEditor": {
+      "uid": "ZDEV_FUNC_B3E50E40",
+      "path": "ZDEV.REND.LightEditor",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_render.lua",
+      "line": 310,
+      "type": "function"
+    },
+    "ZDEV.DRAW.TexturedRect": {
+      "uid": "ZDEV_FUNC_27094932",
+      "path": "ZDEV.DRAW.TexturedRect",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 28,
+      "type": "function"
+    },
+    "ZDEV.DRAW.UVTexturedRect": {
+      "uid": "ZDEV_FUNC_5D7393AE",
+      "path": "ZDEV.DRAW.UVTexturedRect",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 37,
+      "type": "function"
+    },
+    "ZDEV.DRAW.TexturedRectRot": {
+      "uid": "ZDEV_FUNC_87ABA76B",
+      "path": "ZDEV.DRAW.TexturedRectRot",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 44,
+      "type": "function"
+    },
+    "ZDEV.DRAW.TexturedRectRotPoint": {
+      "uid": "ZDEV_FUNC_5B016BFE",
+      "path": "ZDEV.DRAW.TexturedRectRotPoint",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 51,
+      "type": "function"
+    },
+    "ZDEV.DRAW.OutlinedBox": {
+      "uid": "ZDEV_FUNC_1A55F943",
+      "path": "ZDEV.DRAW.OutlinedBox",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 62,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Circle": {
+      "uid": "ZDEV_FUNC_62D9A0EC",
+      "path": "ZDEV.DRAW.Circle",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 70,
+      "type": "function"
+    },
+    "ZDEV.DRAW.DottedCircle": {
+      "uid": "ZDEV_FUNC_DCD5CAB5",
+      "path": "ZDEV.DRAW.DottedCircle",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 121,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Sector": {
+      "uid": "ZDEV_FUNC_57C5CA0B",
+      "path": "ZDEV.DRAW.Sector",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 142,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Diamond": {
+      "uid": "ZDEV_FUNC_3CFDFA45",
+      "path": "ZDEV.DRAW.Diamond",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 166,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Box": {
+      "uid": "ZDEV_FUNC_98BF9DA8",
+      "path": "ZDEV.DRAW.Box",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 222,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Star": {
+      "uid": "ZDEV_FUNC_E367B3D9",
+      "path": "ZDEV.DRAW.Star",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 282,
+      "type": "function"
+    },
+    "ZDEV.DRAW.TextRotated": {
+      "uid": "ZDEV_FUNC_37E9DBAF",
+      "path": "ZDEV.DRAW.TextRotated",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 308,
+      "type": "function"
+    },
+    "ZDEV.DRAW.TextRotatedBox": {
+      "uid": "ZDEV_FUNC_CF993C96",
+      "path": "ZDEV.DRAW.TextRotatedBox",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 324,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Grid": {
+      "uid": "ZDEV_FUNC_75729027",
+      "path": "ZDEV.DRAW.Grid",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 342,
+      "type": "function"
+    },
+    "ZDEV.DRAW.CircleFilled": {
+      "uid": "ZDEV_FUNC_940C0322",
+      "path": "ZDEV.DRAW.CircleFilled",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 378,
+      "type": "function"
+    },
+    "ZDEV.DRAW.Trapezoid": {
+      "uid": "ZDEV_FUNC_66F4DC59",
+      "path": "ZDEV.DRAW.Trapezoid",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_draw.lua",
+      "line": 392,
+      "type": "function"
+    },
+    "ZDEV.VGUI.DevMenu": {
+      "uid": "ZDEV_FUNC_BCF5B694",
+      "path": "ZDEV.VGUI.DevMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev.lua",
+      "line": 118,
+      "type": "function"
+    },
+    "ZDEV.VGUI.DevConsole": {
+      "uid": "ZDEV_FUNC_B82A89AD",
+      "path": "ZDEV.VGUI.DevConsole",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev.lua",
+      "line": 333,
+      "type": "function"
+    },
+    "ZDEV.VGUI.DevConsole_Close": {
+      "uid": "ZDEV_FUNC_592FDFA6",
+      "path": "ZDEV.VGUI.DevConsole_Close",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev.lua",
+      "line": 398,
+      "type": "function"
+    },
+    "ZDEV.VGUI.Editor_Materials": {
+      "uid": "ZDEV_FUNC_4DA2FF67",
+      "path": "ZDEV.VGUI.Editor_Materials",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev_mat.lua",
+      "line": 101,
+      "type": "function"
+    },
+    "ZDEV.VGUI.AdminMenu": {
+      "uid": "ZDEV_FUNC_FCC5C1B0",
+      "path": "ZDEV.VGUI.AdminMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_admin.lua",
+      "line": 60,
+      "type": "function"
+    },
+    "ZDEV.VGUI.OptionsMenu": {
+      "uid": "ZDEV_FUNC_09E26C99",
+      "path": "ZDEV.VGUI.OptionsMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_options.lua",
+      "line": 71,
+      "type": "function"
+    },
+    "ZDEV.VGUI.FontMenu": {
+      "uid": "ZDEV_FUNC_BD728EC3",
+      "path": "ZDEV.VGUI.FontMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_fonts.lua",
+      "line": 23,
+      "type": "function"
+    },
+    "ZDEV.VGUI.NPCMenu": {
+      "uid": "ZDEV_FUNC_14BB66A2",
+      "path": "ZDEV.VGUI.NPCMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_npcs.lua",
+      "line": 49,
+      "type": "function"
+    },
+    "ZDEV.VGUI.ParticleMenu": {
+      "uid": "ZDEV_FUNC_513CD781",
+      "path": "ZDEV.VGUI.ParticleMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev_part.lua",
+      "line": 199,
+      "type": "function"
+    },
+    "ZDEV.VGUI.WeaponsMenu": {
+      "uid": "ZDEV_FUNC_C6391935",
+      "path": "ZDEV.VGUI.WeaponsMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_weapons.lua",
+      "line": 246,
+      "type": "function"
+    },
+    "ZDEV.VGUI.EffectsMenu": {
+      "uid": "ZDEV_FUNC_CDFA21EE",
+      "path": "ZDEV.VGUI.EffectsMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev_efx.lua",
+      "line": 190,
+      "type": "function"
+    },
+    "ZDEV.VGUI.ParticleEditor": {
+      "uid": "ZDEV_FUNC_600762EB",
+      "path": "ZDEV.VGUI.ParticleEditor",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_editor_particle.lua",
+      "line": 63,
+      "type": "function"
+    },
+    "ZDEV.VGUI.TestMenu": {
+      "uid": "ZDEV_FUNC_0BAB4F2D",
+      "path": "ZDEV.VGUI.TestMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_test.lua",
+      "line": 157,
+      "type": "function"
+    },
+    "ZDEV.VGUI.EnvironmentMenu": {
+      "uid": "ZDEV_FUNC_D14BF9F9",
+      "path": "ZDEV.VGUI.EnvironmentMenu",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_dev_env.lua",
+      "line": 138,
+      "type": "function"
+    },
+    "ZDEV.CHUD.DrawMessages": {
+      "uid": "ZDEV_FUNC_2E1DF3A6",
+      "path": "ZDEV.CHUD.DrawMessages",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/hud/zd_cl_hud_msg.lua",
+      "line": 124,
+      "type": "function"
+    },
+    "ZDEV.CHUD.DrawMarkers": {
+      "uid": "ZDEV_FUNC_2018274D",
+      "path": "ZDEV.CHUD.DrawMarkers",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/hud/zd_cl_hud_msg.lua",
+      "line": 198,
+      "type": "function"
+    },
+    "ZDEV.CHUD.DrawEffects": {
+      "uid": "ZDEV_FUNC_4E9ADCF4",
+      "path": "ZDEV.CHUD.DrawEffects",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/hud/zd_cl_hud_dev_effects.lua",
+      "line": 13,
+      "type": "function"
+    }
+  },
+  "tables": {
+    "ZDEV.ADON": {
+      "uid": "ZDEV_TBL_E646B871",
+      "path": "ZDEV.ADON",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 49,
+      "type": "table"
+    },
+    "ZDEV.HOOK": {
+      "uid": "ZDEV_TBL_B594C47D",
+      "path": "ZDEV.HOOK",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 50,
+      "type": "table"
+    },
+    "ZDEV.DBUG": {
+      "uid": "ZDEV_TBL_178E6998",
+      "path": "ZDEV.DBUG",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 51,
+      "type": "table"
+    },
+    "ZDEV.DBUG.LOG": {
+      "uid": "ZDEV_TBL_63B23E5D",
+      "path": "ZDEV.DBUG.LOG",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 52,
+      "type": "table"
+    },
+    "ZDEV.UTIL": {
+      "uid": "ZDEV_TBL_9026BEA1",
+      "path": "ZDEV.UTIL",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_util.lua",
+      "line": 7,
+      "type": "table"
+    },
+    "ZDEV.MATH": {
+      "uid": "ZDEV_TBL_16757926",
+      "path": "ZDEV.MATH",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 54,
+      "type": "table"
+    },
+    "ZDEV.MATH.CALC": {
+      "uid": "ZDEV_TBL_941C2D77",
+      "path": "ZDEV.MATH.CALC",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 55,
+      "type": "table"
+    },
+    "ZDEV.DATA": {
+      "uid": "ZDEV_TBL_A4990271",
+      "path": "ZDEV.DATA",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 56,
+      "type": "table"
+    },
+    "ZDEV.VARS": {
+      "uid": "ZDEV_TBL_5E34C4FE",
+      "path": "ZDEV.VARS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 57,
+      "type": "table"
+    },
+    "ZDEV.FILE": {
+      "uid": "ZDEV_TBL_8BD95722",
+      "path": "ZDEV.FILE",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 58,
+      "type": "table"
+    },
+    "ZDEV.FILE.INDEX": {
+      "uid": "ZDEV_TBL_6AF9262C",
+      "path": "ZDEV.FILE.INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 59,
+      "type": "table"
+    },
+    "ZDEV.FILE.DIR": {
+      "uid": "ZDEV_TBL_79C7D1B5",
+      "path": "ZDEV.FILE.DIR",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 60,
+      "type": "table"
+    },
+    "ZDEV.CONV": {
+      "uid": "ZDEV_TBL_49C446FA",
+      "path": "ZDEV.CONV",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 61,
+      "type": "table"
+    },
+    "ZDEV.CMDS": {
+      "uid": "ZDEV_TBL_1442A8FA",
+      "path": "ZDEV.CMDS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 62,
+      "type": "table"
+    },
+    "ZDEV.CMDS.DEV": {
+      "uid": "ZDEV_TBL_43EED22D",
+      "path": "ZDEV.CMDS.DEV",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 63,
+      "type": "table"
+    },
+    "ZDEV.MAPS": {
+      "uid": "ZDEV_TBL_4D753DA3",
+      "path": "ZDEV.MAPS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 64,
+      "type": "table"
+    },
+    "ZDEV.NPCS": {
+      "uid": "ZDEV_TBL_417BBD44",
+      "path": "ZDEV.NPCS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 65,
+      "type": "table"
+    },
+    "ZDEV.WEAP": {
+      "uid": "ZDEV_TBL_59CDE780",
+      "path": "ZDEV.WEAP",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 66,
+      "type": "table"
+    },
+    "ZDEV.AMMO": {
+      "uid": "ZDEV_TBL_942AD7DB",
+      "path": "ZDEV.AMMO",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 67,
+      "type": "table"
+    },
+    "ZDEV.ENTS": {
+      "uid": "ZDEV_TBL_443102C0",
+      "path": "ZDEV.ENTS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 68,
+      "type": "table"
+    },
+    "ZDEV.MDLS": {
+      "uid": "ZDEV_TBL_9DF9A2DC",
+      "path": "ZDEV.MDLS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 69,
+      "type": "table"
+    },
+    "ZDEV.BOTS": {
+      "uid": "ZDEV_TBL_678D1166",
+      "path": "ZDEV.BOTS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 70,
+      "type": "table"
+    },
+    "ZDEV.TIMR": {
+      "uid": "ZDEV_TBL_323B2B76",
+      "path": "ZDEV.TIMR",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 71,
+      "type": "table"
+    },
+    "ZDEV.GAME": {
+      "uid": "ZDEV_TBL_D5F97DEB",
+      "path": "ZDEV.GAME",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 9,
+      "type": "table"
+    },
+    "ZDEV.PLYR": {
+      "uid": "ZDEV_TBL_84F4F1BF",
+      "path": "ZDEV.PLYR",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 10,
+      "type": "table"
+    },
+    "ZDEV.MATS": {
+      "uid": "ZDEV_TBL_55C89B1B",
+      "path": "ZDEV.MATS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 74,
+      "type": "table"
+    },
+    "ZDEV.SEFX": {
+      "uid": "ZDEV_TBL_D5AC2454",
+      "path": "ZDEV.SEFX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 19,
+      "type": "table"
+    },
+    "ZDEV.REND": {
+      "uid": "ZDEV_TBL_9B0B464D",
+      "path": "ZDEV.REND",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 18,
+      "type": "table"
+    },
+    "ZDEV.EDIT": {
+      "uid": "ZDEV_TBL_70ABB8F2",
+      "path": "ZDEV.EDIT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 25,
+      "type": "table"
+    },
+    "ZDEV.CONT": {
+      "uid": "ZDEV_TBL_8782F384",
+      "path": "ZDEV.CONT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 88,
+      "type": "table"
+    },
+    "ZDEV.CONT.SEFX": {
+      "uid": "ZDEV_TBL_626BD8F0",
+      "path": "ZDEV.CONT.SEFX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 89,
+      "type": "table"
+    },
+    "ZDEV.CONT.SOUN": {
+      "uid": "ZDEV_TBL_E2DA4FCF",
+      "path": "ZDEV.CONT.SOUN",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 90,
+      "type": "table"
+    },
+    "ZDEV.CONT.MODL": {
+      "uid": "ZDEV_TBL_A068D5E1",
+      "path": "ZDEV.CONT.MODL",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 91,
+      "type": "table"
+    },
+    "ZDEV.CONT.MATS": {
+      "uid": "ZDEV_TBL_5FB02A8B",
+      "path": "ZDEV.CONT.MATS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 92,
+      "type": "table"
+    },
+    "ZDEV.CONT.FONT": {
+      "uid": "ZDEV_TBL_E5C6E3F5",
+      "path": "ZDEV.CONT.FONT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 93,
+      "type": "table"
+    },
+    "ZDEV.CONT.MAPS": {
+      "uid": "ZDEV_TBL_522E303C",
+      "path": "ZDEV.CONT.MAPS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 94,
+      "type": "table"
+    },
+    "ZDEV.CONT.PRTL": {
+      "uid": "ZDEV_TBL_D16A9E1C",
+      "path": "ZDEV.CONT.PRTL",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/zd_autorun.lua",
+      "line": 95,
+      "type": "table"
+    },
+    "ZDEV.PLYR._INDEX": {
+      "uid": "ZDEV_TBL_EA89E067",
+      "path": "ZDEV.PLYR._INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 11,
+      "type": "table"
+    },
+    "ZDEV.INDX": {
+      "uid": "ZDEV_TBL_50FB1715",
+      "path": "ZDEV.INDX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 12,
+      "type": "table"
+    },
+    "ZDEV.REGS": {
+      "uid": "ZDEV_TBL_55F805C3",
+      "path": "ZDEV.REGS",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 13,
+      "type": "table"
+    },
+    "ZDEV.MSQL": {
+      "uid": "ZDEV_TBL_3A38405A",
+      "path": "ZDEV.MSQL",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/server/zd_sv_autorun.lua",
+      "line": 14,
+      "type": "table"
+    },
+    "ZDEV.LPLY": {
+      "uid": "ZDEV_TBL_C4E595F8",
+      "path": "ZDEV.LPLY",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 11,
+      "type": "table"
+    },
+    "ZDEV.VGUI": {
+      "uid": "ZDEV_TBL_C3D9FC25",
+      "path": "ZDEV.VGUI",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/vgui/zd_cl_menu_fonts.lua",
+      "line": 5,
+      "type": "table"
+    },
+    "ZDEV.VGUI.MENU": {
+      "uid": "ZDEV_TBL_BDE74D07",
+      "path": "ZDEV.VGUI.MENU",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/zd_cl_vgui.lua",
+      "line": 8,
+      "type": "table"
+    },
+    "ZDEV.VGUI.DERM": {
+      "uid": "ZDEV_TBL_E7E8952A",
+      "path": "ZDEV.VGUI.DERM",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 14,
+      "type": "table"
+    },
+    "ZDEV.VGUI.SKIN": {
+      "uid": "ZDEV_TBL_6466BC75",
+      "path": "ZDEV.VGUI.SKIN",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 15,
+      "type": "table"
+    },
+    "ZDEV.VGUI.HTTP": {
+      "uid": "ZDEV_TBL_3EADFB85",
+      "path": "ZDEV.VGUI.HTTP",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 16,
+      "type": "table"
+    },
+    "ZDEV.CHUD": {
+      "uid": "ZDEV_TBL_F03C9563",
+      "path": "ZDEV.CHUD",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/client/hud/zd_cl_hud_msg.lua",
+      "line": 5,
+      "type": "table"
+    },
+    "ZDEV.DRAW": {
+      "uid": "ZDEV_TBL_342436E2",
+      "path": "ZDEV.DRAW",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 20,
+      "type": "table"
+    },
+    "ZDEV.TEXT": {
+      "uid": "ZDEV_TBL_E3839627",
+      "path": "ZDEV.TEXT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 21,
+      "type": "table"
+    },
+    "ZDEV.CHAT": {
+      "uid": "ZDEV_TBL_B3C60788",
+      "path": "ZDEV.CHAT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 22,
+      "type": "table"
+    },
+    "ZDEV.VIEW": {
+      "uid": "ZDEV_TBL_A311B51D",
+      "path": "ZDEV.VIEW",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 23,
+      "type": "table"
+    },
+    "ZDEV.FONT": {
+      "uid": "ZDEV_TBL_4F634CE9",
+      "path": "ZDEV.FONT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 24,
+      "type": "table"
+    },
+    "ZDEV.EDIT.PART": {
+      "uid": "ZDEV_TBL_05F6CB13",
+      "path": "ZDEV.EDIT.PART",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 26,
+      "type": "table"
+    },
+    "ZDEV.EDIT.EMIT": {
+      "uid": "ZDEV_TBL_A21677A4",
+      "path": "ZDEV.EDIT.EMIT",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_editor.lua",
+      "line": 206,
+      "type": "table"
+    },
+    "ZDEV.FONT._INDEX": {
+      "uid": "ZDEV_TBL_AA106D29",
+      "path": "ZDEV.FONT._INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/autorun/client/zd_cl_autorun.lua",
+      "line": 212,
+      "type": "table"
+    },
+    "ZDEV.MATS.INDEX": {
+      "uid": "ZDEV_TBL_40AA8888",
+      "path": "ZDEV.MATS.INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/cl_init.lua",
+      "line": 82,
+      "type": "table"
+    },
+    "ZDEV.SEFX.INDEX": {
+      "uid": "ZDEV_TBL_DDD92B82",
+      "path": "ZDEV.SEFX.INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_effect.lua",
+      "line": 7,
+      "type": "table"
+    },
+    "ZDEV.EDIT.ENVM": {
+      "uid": "ZDEV_TBL_CCCDEB78",
+      "path": "ZDEV.EDIT.ENVM",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_editor.lua",
+      "line": 34,
+      "type": "table"
+    },
+    "ZDEV.WEAP.AMMO": {
+      "uid": "ZDEV_TBL_2C639A81",
+      "path": "ZDEV.WEAP.AMMO",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 19,
+      "type": "table"
+    },
+    "ZDEV.WEAP.HOLDTYPE": {
+      "uid": "ZDEV_TBL_64B58267",
+      "path": "ZDEV.WEAP.HOLDTYPE",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 69,
+      "type": "table"
+    },
+    "ZDEV.WEAP.GROUP": {
+      "uid": "ZDEV_TBL_21D4A1B2",
+      "path": "ZDEV.WEAP.GROUP",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 72,
+      "type": "table"
+    },
+    "ZDEV.WEAP.PROJECTILES": {
+      "uid": "ZDEV_TBL_A8EFAE37",
+      "path": "ZDEV.WEAP.PROJECTILES",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/shared/zd_sh_weapon.lua",
+      "line": 92,
+      "type": "table"
+    },
+    "ZDEV.PLYR.__INDEX": {
+      "uid": "ZDEV_TBL_42FD4117",
+      "path": "ZDEV.PLYR.__INDEX",
+      "file": "/home/runner/work/zdev_core/zdev_core/zdev/lua/zdev/server/zd_sv_player.lua",
+      "line": 10,
+      "type": "table"
+    }
+  }
+}
