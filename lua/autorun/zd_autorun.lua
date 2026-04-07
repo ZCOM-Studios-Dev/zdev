@@ -6,8 +6,13 @@ local _f = 'zd_autorun.lua';  Msg("■ ") MsgC(Color(255,255,50),'ZDEV File: ',c
 	By Adrian 'ZCOM' L. at ZCOM Studios
 	Copyright (c) 2020 by ZCOM Studios, All rights reserved.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
-require( "zdev" )
-require( "znnet" )
+if SERVER then
+	require( "zdev" )
+	require( "znnet" )
+end
+-- Client stub: shared/client files reference zdev.log() etc. from the binary module.
+-- If the client binary (gmcl_zdev) is not present, provide a safe no-op table.
+zdev = zdev or { log = function() end }
 --[[═════════════════════════════════════════════════════════════════════════
   ZDEV CORE: FILE - Users
 ═════════════════════════════════════════════════════════════════════════ ]] 

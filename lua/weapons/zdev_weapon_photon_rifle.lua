@@ -1,4 +1,4 @@
-if !ZDEV then MsgC( Color(255,50,50,255)"" ) end
+if !ZDEV then MsgC( Color(255,50,50,255), "[ZDEV] photon_rifle loaded before ZDEV namespace\n" ) end
 
 AddCSLuaFile()
 

@@ -1,7 +1,7 @@
 local _f = 'autorun/zd_autorun_util.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',color_white,_f .. '\n')
 --
 if ZDEV.FILE.Loaded( _f ) then return end
-require "glon"
+if SERVER then pcall( require, "glon" ) end  -- glon is a server-side binary; skip silently if absent
 
 if SERVER then
 	AddCSLuaFile()
