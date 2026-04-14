@@ -1,0 +1,1258 @@
+num|uid|filepath|filename|line-start|line-end|name|parameters|returns|description
+1||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|52|54|ui3d2d.isPressing|||
+2||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|56|58|ui3d2d.isPressed|||
+3||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|75|83|isObstructed|eyePos, hitPos, ignoredEntity||
+4||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|95|137|ui3d2d.startDraw|pos, angles, scale, ignoredEntity||
+5||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|141|145|ui3d2d.endDraw|||
+6||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|148|150|ui3d2d.getCursorPos|||
+7||lua/autorun/client/cl_ui3d2d.lua|cl_ui3d2d.lua|152|155|ui3d2d.isHovering|x, y, w, h||
+8||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|23|136|getParents|panel||
+9||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|37|136|absolutePanelPos|panel||
+10||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|50|55|pointInsidePanel|panel, x, y||
+11||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|60|136|checkHover|panel, x, y, found, hoveredPanel||
+12||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|112|135|ui3d2d.drawVgui|panel, pos, angles, scale, ignoredEntity||
+13||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|119|121|gui.MouseX|||
+14||lua/autorun/client/cl_ui3d2d_extras.lua|cl_ui3d2d_extras.lua|123|125|gui.MouseY|||
+15||lua/autorun/zd_autorun.lua|zd_autorun.lua|87|502|timer_zdev|t||
+16|ZDEV_FUNC_B625D863|lua/autorun/zd_autorun.lua|zd_autorun.lua|115|117|ZDEV.FILE.GetAllLoaded|||
+17|ZDEV_FUNC_FA280C27|lua/autorun/zd_autorun.lua|zd_autorun.lua|120|122|ZDEV.FILE.Loaded|s_file||
+18|ZDEV_FUNC_A7C35901|lua/autorun/zd_autorun.lua|zd_autorun.lua|125|127|ZDEV.FILE.SetLoaded|s_file||
+19|ZDEV_FUNC_8E90F53A|lua/autorun/zd_autorun.lua|zd_autorun.lua|170|502|ZDEV.FILE.InitDataDirs|||
+20|ZDEV_FUNC_DA5A67C6|lua/autorun/zd_autorun.lua|zd_autorun.lua|199|207|ZDEV.CONV.Create|var, val, flags, help||
+21||lua/autorun/zd_autorun.lua|zd_autorun.lua|257|288|ZDEV.MSQL.Connect:onConnected|||
+22||lua/autorun/zd_autorun.lua|zd_autorun.lua|272|275|q:onSuccess|data||
+23||lua/autorun/zd_autorun.lua|zd_autorun.lua|276|280|q:onError|err, sql||
+24||lua/autorun/zd_autorun.lua|zd_autorun.lua|283|286|MYSQL_DB:onConnectionFailed|err||
+25|ZDEV_FUNC_6F602247|lua/autorun/zd_autorun.lua|zd_autorun.lua|418|427|ZDEV.CONV.EditorCallback|convar_name, value_old, value_new||
+26|ZDEV_FUNC_30DE908D|lua/autorun/zd_autorun.lua|zd_autorun.lua|438|442|ZDEV.FONT.GetFontFiles|||
+27|ZDEV_FUNC_29501EC9|lua/autorun/zd_autorun.lua|zd_autorun.lua|446|471|ZDEV.FONT.Register|newname, fontdata||function ZDEV.FONT.Register( newname, name, extended, size, weight, blur, scan, antialias, u, i, s, symbol, rotary, shadow, additive, outline )
+28||lua/autorun/zd_autorun.lua|zd_autorun.lua|480|487|ZDEV.CONT.MATS.GetFiles|||
+29||lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|20|154|RandomNumericString|num||
+30|ZDEV_FUNC_A3D44342|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|29|49|ZDEV.FILE.NewLog|dir||
+31|ZDEV_FUNC_432AB938|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|56|66|ZDEV.DBUG.RegisterClientEntity|ent, time||
+32|ZDEV_FUNC_95AA6D4D|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|68|78|ZDEV.DBUG.RegisterClientModel|mdl, time||
+33|ZDEV_FUNC_41230FBD|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|80|81|ZDEV.MDLS.Get|id||
+34|ZDEV_FUNC_2E64B823|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|86|90|ZDEV.DBUG.PrecacheModel|mdl||
+35|ZDEV_FUNC_D166EBEB|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|93|99|ZDEV.DBUG.CSModel|mdl||
+36|ZDEV_FUNC_CB67566F|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|102|109|ZDEV.DBUG.CSEntity|mdl||
+37|ZDEV_FUNC_AFD1B86B|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|112|114|ZDEV.DBUG.PrintAllEnts|||
+38|ZDEV_FUNC_51C6E54A|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|136|152|ZDEV.DBUG.GetRandomBone|ent||
+39|ZDEV_FUNC_BBE4C00F|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|158|174|ZDEV.DBUG.GetBoneInfo|ent, id||
+40|ZDEV_FUNC_7B78150D|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|177|309|ZDEV.DBUG.GetHitBoxes|ent||
+41|ZDEV_FUNC_904E324B|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|213|229|ZDEV.DBUG.RandomHitBoxPos|ent||
+42|ZDEV_FUNC_2B7AD064|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|232|309|ZDEV.DBUG.GetBones|ent, index||
+43|ZDEV_FUNC_86F3D99C|lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|260|309|ZDEV.DBUG.FreezeBones|ent, type, amount, scale, time||
+44||lua/autorun/zd_autorun_debug.lua|zd_autorun_debug.lua|296|300|ZDEV.DBUG.SetModelScale|ent, scale, deltatime||
+45|ZDEV_FUNC_426DAFF8|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|25|30|ZDEV.UTIL.VectorizeString|str||
+46|ZDEV_FUNC_DC482759|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|33|38|ZDEV.UTIL.AngleizeString|str||
+47|ZDEV_FUNC_B113D67A|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|41|47|ZDEV.UTIL.ColorizeString|str||
+48||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|53|59|GetTextSize|x||------------------------------]]--
+49||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|65|72|PrintType|x||
+50||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|78|1294|FixTabs|x, width||
+51||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|158|168|DebugFixToStringColored|obj, iscom||
+52||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|170|1294|DebugFixToString|obj, iscom||
+53||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|185|1294|DebugPrintTable|tbl, spaces, done||
+54||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|272|276|CharToHexa|c||Converts an ASCII character in to a Hexa Character
+55||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|281|285|HexaToChar|h||Converts a Hexa character in to an ASCII character
+56||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|291|295|Is7BitString|str||Returns true if the string can be represented in 7-Bit ASCII Null bytes are not allowed as they are used for termination
+57||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|300|304|IsHexaString|str||Returns true if the string can be represented in Hexa
+58||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|309|311|IsNaN|x||Returns true if the argument is NaN ( can also be interpreted as 0/0 )
+59||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|322|325|IndexSafe|x||This exists because you can't make a table index NaN We need to do this so we can cache it in our references table
+60||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|335|383|SendType|x||Gets the type of way we are going to send the data Not all of these exist in reality We are only going to add 16 types ( 0-15 ) since that's the max we can fit into 4 bits
+61||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|429|431|TypeToString|n||
+62||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|433|435|StringToType|s||
+63||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|633|1294|array_len|x||We need this since #table returns undefined values by the lua spec if it doesn't have incremental keys we use pairs since it's backwards compatible
+64|ZDEV_FUNC_51C15DA0|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|900|1294|ZDEV.UTIL.GenerateUID|len||
+65|ZDEV_FUNC_A885DCD4|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|917|1294|ZDEV.UTIL.PrintFuncParam|func, lvl, count||
+66|ZDEV_FUNC_BA2C9B40|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|944|960|ZDEV.UTIL.DumpEntityMeta|ent||
+67|ZDEV_FUNC_DF56C450|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|970|974|ZDEV.UTIL.GetTraceEnt|ply||
+68|ZDEV_FUNC_FC0F4855|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|977|983|ZDEV.UTIL.DropPrimaryWeapon|ply||
+69|ZDEV_FUNC_7D4B2DA5|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|988|990|ZDEV.UTIL.DataFileExists|s_file||
+70|ZDEV_FUNC_BDB6F026|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|993|1294|ZDEV.UTIL.AnalyzeTable|tbl||
+71|ZDEV_FUNC_C775AAEF|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1010|1294|ZDEV.DATA.ExportToJSON|t_data, s_filename||
+72|ZDEV_FUNC_C3E93CC0|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1029|1294|ZDEV.UTIL.ReIterateTable|tbl||
+73||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1063|1065|META:__index|key||
+74||lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1067|1087|META:__newindex|key, value||
+75|ZDEV_FUNC_553B7A53|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1094|1099|ZDEV.UTIL.ReceiveSliderVar|umr||
+76|ZDEV_FUNC_553B7A53|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1106|1113|ZDEV.UTIL.ReceiveSliderVar|ply, _, args||
+77|ZDEV_FUNC_8399ED7A|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1123|1294|ZDEV.UTIL.ArgsToString|...||
+78|ZDEV_FUNC_0A3E59B1|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1143|1294|ZDEV.UTIL.GarbageCollect|||
+79|ZDEV_FUNC_D0D3D1A1|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1152|1165|ZDEV.UTIL.Print|id, pos, ...||
+80|ZDEV_FUNC_7FB6B668|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1172|1294|ZDEV.UTIL.HUDPaint|||[[
+81|ZDEV_FUNC_3CB36C46|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1206|1220|ZDEV.UTIL.ReceiveServerMessage|umr||
+82|ZDEV_FUNC_D0D3D1A1|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1226|1245|ZDEV.UTIL.Print|id, pos, ...||
+83|ZDEV_FUNC_47EFF7B2|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1249|1255|ZDEV.UTIL.DirectionFromTo|v0, v1||
+84|ZDEV_FUNC_8060B92F|lua/autorun/zd_autorun_util.lua|zd_autorun_util.lua|1259|1285|ZDEV.UTIL.NoCollideWorld|ply||
+85||lua/effects/zdev_fx_attachment_laser.lua|zdev_fx_attachment_laser.lua|17|35|EFFECT:Init|data||
+86||lua/effects/zdev_fx_attachment_laser.lua|zdev_fx_attachment_laser.lua|37|54|EFFECT:Think|||
+87||lua/effects/zdev_fx_attachment_laser.lua|zdev_fx_attachment_laser.lua|56|70|EFFECT:Render|||
+88||lua/effects/zdev_fx_tracer_laser.lua|zdev_fx_tracer_laser.lua|16|135|EFFECT:Init|data||
+89||lua/effects/zdev_fx_tracer_laser.lua|zdev_fx_tracer_laser.lua|79|96|EFFECT:Think|||
+90||lua/effects/zdev_fx_tracer_laser.lua|zdev_fx_tracer_laser.lua|98|135|EFFECT:Render|||
+91||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|34|36|ENT:SetupDataTables|||
+92||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|42|63|ENT:Initialize|||
+93||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|69|77|ENT:Think|||
+94||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|83|95|ENT:PhysicsCollide|colData, collider||
+95||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|101|142|ENT:Detonate|||
+96||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|148|152|ENT:OnTakeDamage|dmginfo||
+97||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|158|182|ENT:Draw|||
+98||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|32|47|ENT:Initialize|||CLIENT-SIDE INITIALIZATION
+99||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|50|65|ENT:SetupTrail|||Set up trail effect
+100||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|70|78|ENT:Draw|flags||RENDERING
+101||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|80|85|ENT:DrawTranslucent|flags||
+102||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|88|103|ENT:DrawGlow|||Draw glow sprite effect
+103||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|108|205|ENT:Think|||CLIENT THINK
+104||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|142|155|ENT:BeingLookedAtByLocalPlayer|||Check if local player is looking at this entity
+105||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|158|197|ENT:DrawWorldHUD|||Draw world HUD info when looking at entity
+106||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|202|205|ENT:OnRemove|||CLEANUP
+107||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|29|72|ENT:Initialize|||SERVER-SIDE INITIALIZATION
+108||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|82|141|ENT:SetupPhysics|||Configure physics based on projectile type @note Based on PhysObj wiki: https:--wiki.facepunch.com/gmod/PhysObj - SetDragCoefficient: controls air resistance (valid) - SetDamping: controls linear/angular velocity decay (valid) - SetMass: sets mass in kg (valid) - EnableGravity: only enables/disables, cannot set custom gravity vector - Elasticity: use Entity:SetElasticity(), NOT PhysObj method - Friction: controlled via PhysObj:SetMaterial() surface properties
+109||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|146|159|ENT:SpawnFunction|ply, tr, ClassName||SPAWN FUNCTION
+110||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|169|205|ENT:Throw|thrower, velocity, angVelocity||Throw the projectile with the given velocity
+111||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|215|260|ENT:Think|||
+112||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|263|286|ENT:UpdateEnergyMovement|||Update position for energy-type projectiles
+113||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|291|347|ENT:PhysicsCollide|colData, collider||PHYSICS COLLISION HANDLING
+114||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|352|369|ENT:OnTakeDamage|dmginfo||DAMAGE HANDLING
+115||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|378|414|ENT:Deploy|hitPos, hitNormal||Deploy the entity (make it static on a surface)
+116||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|424|465|ENT:AttachTo|target, hitPos, hitNormal||Attach the entity to another entity
+117||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|468|486|ENT:Detach|||Detach from parent entity
+118||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|493|509|ENT:Arm|||Arm the projectile (start activation countdown)
+119||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|512|517|ENT:RemoteActivate|||Trigger remote activation (for ZDEV_TRIGGER_REMOTE type)
+120||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|520|550|ENT:Activate|||Main activation handler - triggers the entity's effect
+121||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|553|555|ENT:OnDeactivate|||Called when active duration expires
+122||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|562|680|ENT:Explode|||Handle explosion
+123||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|630|644|ENT:OnDestroyed|attacker, inflictor||Called when entity is destroyed by damage
+124||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|647|653|ENT:OnRemove|||Cleanup on removal
+125||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|658|673|ENT:AcceptInput|inputName, activator, caller, param||INPUT HANDLING (for Hammer I/O)
+126||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|678|680|ENT:UpdateTransmitState|||TRANSMIT STATE
+127||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|127|145|ENT:SetupDataTables|||NETWORKED DATA TABLES
+128||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|161|403|ENT:CanAttachToClass|entClass|boolean True if the entity can be attached to|Check if an entity class matches our attachable list (supports wildcards)
+129||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|183|197|ENT:ShouldActivate||boolean True if activation conditions are met|Check if this projectile should activate based on its trigger type
+130||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|201|403|ENT:CheckProximityTrigger||boolean True if a valid target is in range|Check if any valid targets are within proximity radius
+131||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|229|231|ENT:GetEffectiveProjectileType||number The projectile type enum value|Get the effective projectile type
+132||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|235|237|ENT:GetEffectiveActivationTrigger||number The activation trigger enum value|Get the effective activation trigger type
+133||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|241|244|ENT:GetTimeUntilActivation||number Seconds until activation (0 if already activated or not armed)|Calculate remaining time until activation
+134||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|248|254|ENT:HasAttachExpired||boolean True if should detach|Check if this projectile has expired its attach duration
+135||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|261|266|ENT:PhysgunPickup|ply||Prevent physics gun manipulation when deployed/attached
+136||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|269|274|ENT:GravGunPickupAllowed|ply||Prevent gravity gun pickup when armed
+137||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|277|282|ENT:GravGunPunt|ply||Prevent gravity gun punt when deployed
+138||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|285|290|ENT:CanTool|ply, tr, toolname, tool, button||Restrict tool usage on active projectiles
+139||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|307|309|ENT:OnThrow|thrower, velocity||
+140||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|320|322|ENT:OnDeploy|hitPos, hitNormal||
+141||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|334|336|ENT:OnAttach|target, hitPos, hitNormal||
+142||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|346|348|ENT:OnDetach|previousParent||
+143||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|356|358|ENT:OnArm|||
+144||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|370|372|ENT:OnActivate|||
+145||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|387|389|ENT:OnImpact|hitEntity, colData||
+146||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|401|403|ENT:OnExplode|pos, radius, damage||
+147||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+148||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|83|95|ENT:Initialize|||
+149||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|97|122|ENT:OnActivate|||
+150||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|124|213|ENT:ApplyFlashEffect|||
+151||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|142|211|ENT:FlashTarget|target, flashPos||
+152||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|281|293|ENT:Initialize|||
+153||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|295|300|ENT:Draw|||
+154||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|302|325|ENT:DrawArmedIndicator|||
+155||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+156||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|83|95|ENT:Initialize|||
+157||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|97|122|ENT:OnActivate|||
+158||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|124|213|ENT:ApplyFlashEffect|||
+159||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|142|211|ENT:FlashTarget|target, flashPos||
+160||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|281|293|ENT:Initialize|||
+161||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|295|300|ENT:Draw|||
+162||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|302|325|ENT:DrawArmedIndicator|||
+163||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+164||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|83|95|ENT:Initialize|||
+165||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|97|122|ENT:OnActivate|||
+166||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|124|213|ENT:ApplyFlashEffect|||
+167||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|142|211|ENT:FlashTarget|target, flashPos||
+168||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|281|293|ENT:Initialize|||
+169||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|295|300|ENT:Draw|||
+170||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|302|325|ENT:DrawArmedIndicator|||
+171||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|6|13|ENT:Initialize|||
+172||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|19|21|ENT:SetEnemy|ent||------------------------------------------------- ENT:Get/SetEnemy() Simple functions used in keeping our enemy saved -------------------------------------------------
+173||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|22|24|ENT:GetEnemy|||
+174||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|30|48|ENT:HaveEnemy|||------------------------------------------------- ENT:HaveEnemy() Returns true if we have a enemy -------------------------------------------------
+175||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|54|154|ENT:FindEnemy|||------------------------------------------------- ENT:FindEnemy() Returns true and sets our enemy if we find one -------------------------------------------------
+176||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|76|154|ENT:RunBehaviour|||------------------------------------------------- ENT:RunBehaviour() This is where the meat of our AI is -------------------------------------------------
+177||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|118|154|ENT:ChaseEnemy|options||------------------------------------------------- ENT:ChaseEnemy() Works similarly to Garry's MoveToPos function except it will constantly follow the position of the enemy until there no longer is one. -------------------------------------------------
+178||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|30|44|ENT:SetupDataTables|||
+179||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|46|71|ENT:Initialize|||
+180||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|74|86|ENT:Use|activator, caller||
+181||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|88|113|ENT:StartHacking|player||
+182||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|115|140|ENT:StopHacking|success||
+183||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|142|213|ENT:AlertNearbyPlayers|hacker||
+184||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|160|199|ENT:Think|||
+185||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|201|204|ENT:OnTakeDamage|dmg||
+186||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|207|212|ENT:Reset|||Reset terminal (for gamemodes)
+187||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|216|268|ENT:Draw|||
+188||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|270|352|ENT:DrawInterface|||
+189||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|354|366|ENT:Think|||
+190||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|32|43|ENT:Initialize|||CLIENT-SIDE INITIALIZATION
+191||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|48|56|ENT:Draw|flags||RENDERING
+192||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|59|81|ENT:DrawArmedIndicator|||Draw blinking red light when armed
+193||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|86|92|ENT:Think|||CLIENT THINK
+194||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|99|135|ENT:DrawWorldHUD|||Draw world HUD info when looking at grenade
+195||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|26|44|ENT:Initialize|||SERVER-SIDE INITIALIZATION
+196||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|51|67|ENT:OnThrow|thrower, velocity||Called when the grenade is thrown
+197||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|70|85|ENT:OnArm|||Called when the grenade is armed
+198||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|88|107|ENT:OnImpact|hitEntity, colData||Called when the grenade impacts something
+199||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|110|122|ENT:OnActivate|||Called just before explosion
+200||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|131|160|ENT:Think|||
+201||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|163|182|ENT:UpdateBeeping|||Update beeping sound with accelerating frequency
+202||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|190|195|ENT:SetFuseTime|fuseTime||Set a custom fuse time (for cooking)
+203||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|199|201|ENT:GetFuseTime||number Seconds until explosion|Get remaining fuse time
+204||lua/entities/zdev_projectile_base_grenade/shared.lua|shared.lua|79|85|ENT:SetupDataTables|||NETWORKED DATA TABLES
+205||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|14|21|ENT:Draw|||
+206||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|23|73|ENT:DrawStatusIndicator|||
+207||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|75|85|ENT:GetStateColor|state||
+208||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|87|98|ENT:Think|||
+209||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|100|102|ENT:GetMaxHealth|||
+210||lua/entities/zdev_snpc_test/init.lua|init.lua|14|53|ENT:Initialize|||
+211||lua/entities/zdev_snpc_test/init.lua|init.lua|55|80|ENT:Think|||
+212||lua/entities/zdev_snpc_test/init.lua|init.lua|82|85|ENT:StartSearching|||
+213||lua/entities/zdev_snpc_test/init.lua|init.lua|87|104|ENT:DoSearch|||
+214||lua/entities/zdev_snpc_test/init.lua|init.lua|106|330|ENT:FindNearestChair|||
+215||lua/entities/zdev_snpc_test/init.lua|init.lua|124|330|ENT:IsChair|ent||
+216||lua/entities/zdev_snpc_test/init.lua|init.lua|144|330|ENT:CanSitInChair|chair||
+217||lua/entities/zdev_snpc_test/init.lua|init.lua|168|171|ENT:GetChairSitPos|chair||
+218||lua/entities/zdev_snpc_test/init.lua|init.lua|173|191|ENT:DoWalkToChair|||
+219||lua/entities/zdev_snpc_test/init.lua|init.lua|193|214|ENT:SitInChair|chair||
+220||lua/entities/zdev_snpc_test/init.lua|init.lua|216|220|ENT:DoSitting|||
+221||lua/entities/zdev_snpc_test/init.lua|init.lua|222|233|ENT:StandUp|||
+222||lua/entities/zdev_snpc_test/init.lua|init.lua|235|258|ENT:StartWandering|||
+223||lua/entities/zdev_snpc_test/init.lua|init.lua|260|272|ENT:DoWander|||
+224||lua/entities/zdev_snpc_test/init.lua|init.lua|274|277|ENT:StartLookingAround|||
+225||lua/entities/zdev_snpc_test/init.lua|init.lua|279|289|ENT:DoLookAround|||
+226||lua/entities/zdev_snpc_test/init.lua|init.lua|291|302|ENT:OnTakeDamage|dmg||
+227||lua/entities/zdev_snpc_test/init.lua|init.lua|304|307|ENT:OnKilled|dmg||
+228||lua/entities/zdev_snpc_test/init.lua|init.lua|309|315|ENT:AcceptInput|name, activator, caller, data||
+229||lua/entities/zdev_snpc_test/init.lua|init.lua|317|329|ENT:OnUse|activator||
+230||lua/entities/zdev_snpc_test/shared.lua|shared.lua|65|69|ENT:SetupDataTables|||
+231||lua/entities/zdev_snpc_test/shared.lua|shared.lua|71|82|ENT:GetStateName|||
+232||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|31|36|ENT:SetupDataTables|||
+233||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|38|43|ENT:SetFruitState|state||
+234||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|45|48|ENT:SetLifeTime|time||
+235||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|50|52|ENT:GetLifeTime|||
+236||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|54|80|ENT:OnSpawn|||
+237||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|82|94|ENT:Initialize|||
+238||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|96|111|ENT:Use|activator, caller||
+239||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|113|116|ENT:Think|||
+240||lua/entities/zdev_test_food_apple.lua|zdev_test_food_apple.lua|119|123|ENT:Draw|||
+241||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|31|36|ENT:SetupDataTables|||
+242||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|38|43|ENT:SetVegetableState|state||
+243||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|45|48|ENT:SetLifeTime|time||
+244||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|50|52|ENT:GetLifeTime|||
+245||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|54|79|ENT:OnSpawn|||
+246||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|83|95|ENT:Initialize|||
+247||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|97|112|ENT:Use|activator, caller||
+248||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|114|117|ENT:Think|||
+249||lua/entities/zdev_test_food_tomato.lua|zdev_test_food_tomato.lua|120|124|ENT:Draw|||
+250||lua/entities/zdev_test_plant-tomato.lua|zdev_test_plant-tomato.lua|24|33|ENT:Initialize|||
+251||lua/entities/zdev_test_plant-tomato.lua|zdev_test_plant-tomato.lua|35|71|ENT:SpawnVegetable|count||
+252||lua/entities/zdev_test_plant-tomato.lua|zdev_test_plant-tomato.lua|68|70|ENT:Draw|||
+253||lua/entities/zdev_test_rock-granite.lua|zdev_test_rock-granite.lua|26|35|ENT:Initialize|||
+254||lua/entities/zdev_test_rock-granite.lua|zdev_test_rock-granite.lua|37|39|ENT:OnSpawn|pos||
+255||lua/entities/zdev_test_rock-granite.lua|zdev_test_rock-granite.lua|41|77|ENT:SpawnResource|count||
+256||lua/entities/zdev_test_rock-granite.lua|zdev_test_rock-granite.lua|74|76|ENT:Draw|||
+257||lua/entities/zdev_test_tree-apple.lua|zdev_test_tree-apple.lua|25|34|ENT:Initialize|||
+258||lua/entities/zdev_test_tree-apple.lua|zdev_test_tree-apple.lua|36|72|ENT:SpawnFruit|count||
+259||lua/entities/zdev_test_tree-apple.lua|zdev_test_tree-apple.lua|69|71|ENT:Draw|||
+260||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|24|32|ENT:SetupDataTables|||
+261||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|37|49|ENT:Initialize|||
+262||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|51|61|ENT:Use|activator, caller, useType, value||
+263||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|63|73|ENT:SpawnFunction|ply, tr, ClassName||
+264||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|75|77|ENT:OnTakeDamage|dmg||
+265||lua/entities/zdev_workbench_base.lua|zdev_workbench_base.lua|84|111|ENT:Draw|||
+266||lua/skins/dark-kit.lua|dark-kit.lua|84|86|DrawRounded|radius, x, y, w, h, col||Helper function for rounded boxes
+267||lua/skins/dark-kit.lua|dark-kit.lua|92|104|SKIN:PaintFrame|panel, w, h||--------------------------------------------------------]]
+268||lua/skins/dark-kit.lua|dark-kit.lua|110|134|SKIN:PaintButton|panel, w, h||--------------------------------------------------------]]
+269||lua/skins/dark-kit.lua|dark-kit.lua|140|154|SKIN:PaintTextEntry|panel, w, h||--------------------------------------------------------]]
+270||lua/skins/dark-kit.lua|dark-kit.lua|160|163|SKIN:PaintVScrollBar|panel, w, h||--------------------------------------------------------]]
+271||lua/skins/dark-kit.lua|dark-kit.lua|166|173|SKIN:PaintScrollBarGrip|panel, w, h||
+272||lua/skins/dark-kit.lua|dark-kit.lua|177|243|SKIN:PaintButtonDown|panel, w, h||Disable buttons on scrollbar (modern look usually hides them)
+273||lua/skins/dark-kit.lua|dark-kit.lua|178|243|SKIN:PaintButtonUp|panel, w, h||
+274||lua/skins/dark-kit.lua|dark-kit.lua|184|191|SKIN:PaintPropertySheet|panel, w, h||--------------------------------------------------------]]
+275||lua/skins/dark-kit.lua|dark-kit.lua|194|201|SKIN:PaintTab|panel, w, h||
+276||lua/skins/dark-kit.lua|dark-kit.lua|204|211|SKIN:PaintActiveTab|panel, w, h||
+277||lua/skins/dark-kit.lua|dark-kit.lua|217|220|SKIN:PaintTree|panel, w, h||--------------------------------------------------------]]
+278||lua/skins/dark-kit.lua|dark-kit.lua|223|227|SKIN:PaintTreeNode|panel, w, h||
+279||lua/skins/dark-kit.lua|dark-kit.lua|230|233|SKIN:PaintSelection|panel, w, h||
+280||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|54|58|SWEP:HUDShouldDraw|||
+281||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|67|83|SWEP:DoDrawCrosshair|x, y||
+282||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|85|92|SWEP:DrawHUD|||
+283||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|94|96|SWEP:DrawHUDBackground|||
+284||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|98|100|SWEP:RenderScreen|||
+285||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|102|112|SWEP:CreateMenu|||
+286||lua/weapons/zdev_editor_effect/cl_init.lua|cl_init.lua|115|182|SWEP:EditorMenu|||
+287||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|92|301|SWEP:GetClientConVars|||
+288||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|117|142|SWEP:SetupDataTables|||
+289||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|144|148|SWEP:Initialize|||
+290||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|150|154|SWEP:Deploy|||
+291||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|156|160|SWEP:Holster|||
+292||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|162|171|SWEP:Reload|||
+293||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|173|175|SWEP:PrimaryAttack|||
+294||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|177|194|SWEP:SecondaryAttack|||
+295||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|196|199|SWEP:Think|||
+296||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|201|216|SWEP:GetTrace|||
+297||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|219|247|SWEP:CreateSprite|parent, pos, ang||
+298||lua/weapons/zdev_editor_effect/shared.lua|shared.lua|249|301|SWEP:CreateEmitter|parent, pos, ang||
+299||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|108|111|SWEP:SetupDataTables|||
+300||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|117|127|SWEP:Initialize|||
+301||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|133|139|SWEP:Deploy|||
+302||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|141|147|SWEP:Holster|||
+303||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|149|152|SWEP:OnRemove|||
+304||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|158|169|SWEP:Think|||
+305||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|171|197|SWEP:HandleGrapplePull|||
+306||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|203|221|SWEP:PrimaryAttack|||
+307||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|223|249|SWEP:DoPrimaryAction|||
+308||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|255|272|SWEP:SecondaryAttack|||
+309||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|274|277|SWEP:DoSecondaryAction|||
+310||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|279|287|SWEP:ReleaseGrapple|||
+311||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|293|296|SWEP:Reload|||
+312||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|307|313|SWEP:DrawHUD|||
+313||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|315|322|SWEP:DoDrawCrosshair|x, y||
+314||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|324|327|SWEP:DrawWorldModel|||
+315||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|343|362|SWEP:GetHandPosition|||
+316||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|364|383|SWEP:DrawGrappleCable|||
+317||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|391|398|SWEP:GetTargetEntity|||
+318||lua/weapons/zdev_gadget_grapple.lua|zdev_gadget_grapple.lua|400|407|SWEP:GetTargetPosition|||
+319||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|86|92|SWEP:SetupDataTables|||
+320||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|98|143|SWEP:Initialize|||
+321||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|145|154|SWEP:Deploy|||
+322||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|156|169|SWEP:Holster|||
+323||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|171|173|SWEP:Reload|||
+324||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|179|182|SWEP:PrimaryAttack|||
+325||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|184|188|SWEP:SecondaryAttack|||
+326||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|190|210|SWEP:PullPin|isDropThrow||
+327||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|219|230|SWEP:GetCurrentThrowForce||number force The calculated throw force; number fraction The charge fraction (0-1)|Calculates the current throw force based on charge time
+328||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|236|268|SWEP:Think|||
+329||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|274|276|SWEP:BeginThrow|||
+330||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|278|350|SWEP:ReleaseProjectile|||
+331||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|354|363|SWEP:CalculateThrowPitch|pitch||Converts raw pitch into an arced throw pitch. Looking level (0°) throws slightly upward; looking down throws downward.
+332||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|369|384|SWEP:DetonateInHand|||
+333||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|387|391|SWEP:PreDrop|||Called if the weapon is dropped while the pin is pulled (e.g., owner dies)
+334||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|397|429|SWEP:SpawnProjectile|pos, ang, velocity, angImpulse, thrower||
+335||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|439|1100|SWEP:CalculateTrajectory|startPos, velocity|table Array of Vector points along the trajectory|Calculates trajectory points for the grenade throw
+336||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|474|502|SWEP:GetThrowPrediction||Vector startPos, Vector velocity|Gets the predicted throw parameters (position, velocity) for trajectory
+337||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|511|518|SWEP:Holster|||
+338||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|520|1100|SWEP:ViewModelDrawn|||
+339||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|628|1100|SWEP:DrawWorldModel|||
+340||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|744|784|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+341||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|786|1100|SWEP:CreateModels|tab||
+342||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|833|1100|SWEP:UpdateBonePositions|vm||
+343||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|897|1100|SWEP:ResetBonePositions|vm||
+344||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|915|1100|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+345||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|941|1014|SWEP:DrawHUD|||
+346||lua/weapons/zdev_grenade_base.lua|zdev_grenade_base.lua|1017|1100|SWEP:DrawTrajectory|||Draws the 3D trajectory arc
+347||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|41|43|SWEP:Initialize|||
+348||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|45|47|SWEP:Deploy|||
+349||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|49|77|SWEP:PrimaryAttack|||
+350||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|79|82|SWEP:SecondaryAttack|||
+351||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|84|85|SWEP:Think|||
+352||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|87|89|SWEP:CanPrimaryAttack|||
+353||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|91|93|SWEP:CanSecondaryAttack|||
+354||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|95|97|SWEP:Reload|||
+355||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|99|101|SWEP:Holster|||
+356||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|103|104|SWEP:OnRemove|||
+357||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|106|107|SWEP:OnRestore|||
+358||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|109|110|SWEP:OnDrop|owner||
+359||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|112|113|SWEP:OwnerChanged|||
+360||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|115|117|SWEP:AcceptInput|inputName, activator, caller, data||
+361||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|119|121|SWEP:KeyValue|key, value||
+362||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|123|125|SWEP:FireAnimationEvent|pos, ang, event, options, source||
+363||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|127|129|SWEP:TranslateActivity|act||
+364||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|131|133|SWEP:SetWeaponHoldType|name||
+365||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|135|136|SWEP:Equip|newOwner||
+366||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|138|139|SWEP:EquipAmmo|ply||
+367||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|141|143|SWEP:ShouldDropOnDie|||
+368||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|145|147|SWEP:CanBePickedUpByNPCs|||
+369||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|149|151|SWEP:GetCapabilities|||
+370||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|153|155|SWEP:GetNPCBulletSpread|proficiency||
+371||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|157|159|SWEP:GetNPCBurstSettings|||
+372||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|161|163|SWEP:GetNPCRestTimes|||
+373||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|165|167|SWEP:NPCShoot_Primary|shootPos, shootDir||
+374||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|169|171|SWEP:NPCShoot_Secondary|shootPos, shootDir||
+375||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|173|175|SWEP:DoImpactEffect|traceResult, damageType||
+376||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|177|179|SWEP:GetTracerOrigin|||
+377||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|182|183|SWEP:DrawHUD|||
+378||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|185|186|SWEP:DrawHUDBackground|||
+379||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|188|190|SWEP:DoDrawCrosshair|x, y||
+380||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|192|194|SWEP:DrawWeaponSelection|x, y, width, height, alpha||
+381||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|196|197|SWEP:PrintWeaponInfo|x, y, alpha||
+382||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|199|201|SWEP:DrawWorldModel|flags||
+383||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|203|205|SWEP:DrawWorldModelTranslucent|flags||
+384||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|207|208|SWEP:ViewModelDrawn|viewModel, flags||
+385||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|210|212|SWEP:PreDrawViewModel|vm, weapon, ply, flags||
+386||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|214|215|SWEP:PostDrawViewModel|vm, weapon, ply, flags||
+387||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|217|219|SWEP:ShouldDrawViewModel|||
+388||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|221|223|SWEP:GetViewModelPosition|eyePos, eyeAng||
+389||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|225|227|SWEP:CalcViewModelView|viewModel, oldEyePos, oldEyeAng, eyePos, eyeAng||
+390||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|229|231|SWEP:CalcView|ply, pos, ang, fov||
+391||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|233|235|SWEP:TranslateFOV|currentFOV||
+392||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|237|239|SWEP:AdjustMouseSensitivity|||
+393||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|241|243|SWEP:FreezeMovement|||
+394||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|245|247|SWEP:HUDShouldDraw|element||
+395||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|249|250|SWEP:CustomAmmoDisplay|||
+396||lua/weapons/zdev_tool_axe.lua|zdev_tool_axe.lua|252|253|SWEP:RenderScreen|||
+397||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|5|484|SWEP:ViewModelDrawn|||
+398||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|113|484|SWEP:DrawWorldModel|||
+399||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|229|269|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+400||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|271|484|SWEP:CreateModels|tab||
+401||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|318|484|SWEP:UpdateBonePositions|vm||
+402||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|382|484|SWEP:ResetBonePositions|vm||
+403||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|400|484|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+404||lua/weapons/zdev_weapon_base_grenade/cl_init.lua|cl_init.lua|421|484|SWEP:DrawHUD|||
+405||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|77|114|SWEP:Initialize|||
+406||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|116|126|SWEP:Holster|||
+407||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|128|130|SWEP:OnRemove|||
+408||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|132|136|SWEP:Deploy|||
+409||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|138|143|SWEP:CanPrimaryAttack|||
+410||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|145|157|SWEP:PrimaryAttack|||
+411||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|159|197|SWEP:Think|||
+412||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|200|203|SWEP:GetThrowForce|chargeTime||Calculate throw force based on charge time
+413||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|206|210|SWEP:GetChargeFraction|||Get current charge fraction for HUD (0 to 1)
+414||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|212|247|SWEP:ThrowGrenade|throwForce||
+415||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|249|274|SWEP:CreateGrenadeEntity|pos, angles, velocity||
+416||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|276|305|SWEP:ExplodeInHand|||
+417||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|307|310|SWEP:SecondaryAttack|||
+418||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|312|316|SWEP:Reload|||
+419||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|318|349|SWEP:CheckAutoReload|||
+420||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|351|353|SWEP:CanBePickedUpByNPCs|||
+421||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|355|357|SWEP:GetPrintName|||
+422||lua/weapons/zdev_weapon_base_grenade/shared.lua|shared.lua|360|362|SWEP:SetupDataTables|||Prediction setup
+423||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|42|91|SWEP:GetViewModelPosition|pos, ang||
+424||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|98|103|SWEP:TranslateFOV|fov||
+425||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|136|165|EnsureFonts|||
+426||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|186|241|CalcHUDBobSway|owner, adsLerp||
+427||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|255|783|DrawCircleArc|x, y, radius, segments, startAngle, endAngle||
+428||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|280|292|DrawCornerBracket|x, y, size, thick, corner||
+429||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|301|783|DrawProgressArc|x, y, innerR, outerR, startAngle, endAngle, segments||
+430||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|328|783|DrawCircleTicks|x, y, radius, count, tickLen, rotation||
+431||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|347|783|SWEP:DrawSciFiReticle|cx, cy, adsLerp, spread||
+432||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|453|783|SWEP:DrawSciFiHUD|bobOffsetX, bobOffsetY||
+433||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|626|646|SWEP:DoDrawCrosshair|x, y||
+434||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|651|662|SWEP:DrawHUD|||
+435||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|671|676|SWEP:CalcViewModelView|vm, oldPos, oldAng, pos, ang||
+436||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|681|684|SWEP:CalcView|ply, origin, angles, fov||
+437||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|693|726|SWEP:FireAnimationEvent|pos, ang, event, options||
+438||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|735|737|SWEP:RenderScreen|||
+439||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|746|752|SWEP:StartCommand|cmd||
+440||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|757|762|SWEP:GetHoldType|||
+441||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|771|773|SWEP:IsInIronsights|||
+442||lua/weapons/zdev_weapon_base_pistol/cl_init.lua|cl_init.lua|778|782|SWEP:GetSpreadPercent|||
+443||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|25|54|SWEP:BulletCallback|attacker, tr, dmginfo||
+444||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|62|111|SWEP:HandlePenetration|attacker, tr, dmginfo||
+445||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|120|124|SWEP:SetupDataTables|||
+446||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|134|139|SWEP:Equip|ply||
+447||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|144|146|SWEP:OnDrop|||
+448||lua/weapons/zdev_weapon_base_pistol/init.lua|init.lua|151|154|SWEP:ValidateOwnership|||
+449||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|165|458|SWEP:Initialize|||
+450||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|181|197|SWEP:Deploy|||
+451||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|202|208|SWEP:Holster|wep||
+452||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|213|247|SWEP:Think|||
+453||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|253|278|SWEP:GetCurrentSpread|||
+454||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|285|295|SWEP:GetDamageAtDistance|distance||
+455||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|301|332|SWEP:ApplyRecoil|||
+456||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|337|400|SWEP:PrimaryAttack|||
+457||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|405|412|SWEP:SecondaryAttack|||
+458||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|417|446|SWEP:Reload|||
+459||lua/weapons/zdev_weapon_base_pistol/shared.lua|shared.lua|451|458|SWEP:CanPrimaryAttack|||
+460||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|5|6|SWEP:DrawHUD|||
+461||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|8|10|SWEP:DrawHUDBackground|||
+462||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|12|14|SWEP:DoDrawCrosshair|x, y||
+463||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|16|18|SWEP:DrawWeaponSelection|x, y, width, height, alpha||
+464||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|20|21|SWEP:PrintWeaponInfo|x, y, alpha||
+465||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|23|25|SWEP:DrawWorldModel|flags||
+466||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|27|29|SWEP:DrawWorldModelTranslucent|flags||
+467||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|31|32|SWEP:ViewModelDrawn|viewModel, flags||
+468||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|34|36|SWEP:PreDrawViewModel|vm, weapon, ply, flags||
+469||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|38|39|SWEP:PostDrawViewModel|vm, weapon, ply, flags||
+470||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|41|43|SWEP:ShouldDrawViewModel|||
+471||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|45|47|SWEP:GetViewModelPosition|eyePos, eyeAng||
+472||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|49|51|SWEP:CalcViewModelView|viewModel, oldEyePos, oldEyeAng, eyePos, eyeAng||
+473||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|53|55|SWEP:CalcView|ply, pos, ang, fov||
+474||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|57|59|SWEP:TranslateFOV|currentFOV||
+475||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|61|63|SWEP:AdjustMouseSensitivity|||
+476||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|65|67|SWEP:FreezeMovement|||
+477||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|69|71|SWEP:HUDShouldDraw|element||
+478||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|73|75|SWEP:CustomAmmoDisplay|||
+479||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|77|78|SWEP:RenderScreen|||
+480||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|80|84|SWEP:Initialize|||
+481||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|86|93|SWEP:Holster|||
+482||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|95|509|SWEP:ViewModelDrawn|||
+483||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|203|509|SWEP:DrawWorldModel|||
+484||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|319|359|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+485||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|361|509|SWEP:CreateModels|tab||
+486||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|408|509|SWEP:UpdateBonePositions|vm||
+487||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|472|509|SWEP:ResetBonePositions|vm||
+488||lua/weapons/zdev_weapon_base_throwable/cl_init.lua|cl_init.lua|490|509|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+489||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|91|95|SWEP:SetupDataTables|||
+490||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|97|99|SWEP:Initialize|||
+491||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|101|102|SWEP:Think|||
+492||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|104|105|SWEP:Tick|||
+493||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|107|109|SWEP:Deploy|||
+494||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|111|113|SWEP:Holster|||
+495||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|115|117|SWEP:OnRemove|||
+496||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|119|120|SWEP:OnReloaded|||
+497||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|122|123|SWEP:OnRestore|||
+498||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|125|126|SWEP:Equip|newOwner||
+499||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|128|129|SWEP:EquipAmmo|ply||
+500||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|131|132|SWEP:OnDrop|owner||
+501||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|134|135|SWEP:OwnerChanged|||
+502||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|137|139|SWEP:TranslateActivity|act||
+503||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|141|143|SWEP:SetWeaponHoldType|name||
+504||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|145|147|SWEP:AcceptInput|inputName, activator, caller, data||
+505||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|149|151|SWEP:KeyValue|key, value||
+506||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|153|155|SWEP:FireAnimationEvent|pos, ang, event, options, source||
+507||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|157|165|SWEP:PrimaryAttack|||
+508||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|167|175|SWEP:SecondaryAttack|||
+509||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|177|179|SWEP:Reload|||
+510||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|181|183|SWEP:CanPrimaryAttack|||
+511||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|185|187|SWEP:CanSecondaryAttack|||
+512||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|189|191|SWEP:TakePrimaryAmmo|amount||
+513||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|193|195|SWEP:TakeSecondaryAmmo|amount||
+514||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|197|202|SWEP:Ammo1|||
+515||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|204|209|SWEP:Ammo2|||
+516||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|211|213|SWEP:GetCapabilities|||
+517||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|215|217|SWEP:ShouldDropOnDie|||
+518||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|219|221|SWEP:DoImpactEffect|traceResult, damageType||
+519||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|223|225|SWEP:GetTracerOrigin|||
+520||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|205|216|GenerateIP|ent||FAKE DATA GENERATORS
+521||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|218|1377|GenerateMAC|ent||
+522||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|234|239|GeneratePort|ent||
+523||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|248|1377|ScanForTargets|ply, wep||
+524||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|351|398|UpdateLockOn|wep, targets||
+525||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|403|427|ApplyAimAssist|ply, wep||AIM ASSIST (Lock-on centering)
+526||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|433|437|DrawScanLine|x, y, w, h, rt||
+527||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|439|453|DrawCornerBrackets|x, y, w, h, size, color||
+528||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|455|1377|DrawSignalBars|x, y, signal, maxBars||
+529||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|484|499|DrawThreatIndicator|x, y, threat||
+530||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|504|1377|DrawTargetReticle|target, isLocked, rt||TARGET RETICLE DRAWING
+531||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|579|1377|DrawTargetInfoPanel|target, isLocked, rt||TARGET INFO PANEL
+532||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|672|1377|DrawScanOverlay|rt||SCAN OVERLAY (Edge frame & ambient effects)
+533||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|739|1377|DrawScanEffect|target, progress, rt||Draw scan animation over target
+534||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|781|808|DrawHackedEffect|target, rt, intensity||"Draw ""HACKED"" glitch effect over target"
+535||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|811|842|DrawOverloadEffect|target, rt, elapsed||Draw overload effect (damage/explosion warning)
+536||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|845|857|DrawConvertedIndicator|target, rt||Draw converted ally indicator
+537||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|862|1377|DrawHackerHUD|wep||MAIN HUD DRAW FUNCTION
+538||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|990|1029|HandleLockInput|wep||INPUT HANDLING FOR LOCK-ON
+539||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1037|1377|DrawScreenHUD|weapon, w, h, rt||
+540||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1160|1377|DrawScanEffect|target, progress, rt||Draw scan animation over target
+541||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1202|1229|DrawHackedEffect|target, rt, intensity||"Draw ""HACKED"" glitch effect over target"
+542||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1232|1263|DrawOverloadEffect|target, rt, elapsed||Draw overload effect (damage/explosion warning)
+543||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1266|1278|DrawConvertedIndicator|target, rt||Draw converted ally indicator
+544||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1350|1375|SWEP:DoDrawCrosshair|x, y||Example: Custom crosshair
+545||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|22|27|DrawMaterial|x, y, w, h, mat, clr||
+546||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|29|58|SWEP:Initialize|||
+547||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|61|476|SWEP:ViewModelDrawn|||
+548||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|169|476|SWEP:DrawWorldModel|||
+549||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|285|325|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+550||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|327|476|SWEP:CreateModels|tab||
+551||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|374|476|SWEP:UpdateBonePositions|vm||
+552||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|438|476|SWEP:ResetBonePositions|vm||
+553||lua/weapons/zdev_weapon_hacker/cl_init.lua|cl_init.lua|456|476|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+554||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|265|268|SWEP:IsTargetScanned|ent||
+555||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|270|273|SWEP:IsTargetExploited|ent||
+556||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|275|286|SWEP:MarkTargetScanned|ent, data||
+557||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|288|291|SWEP:MarkTargetExploited|ent||
+558||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|293|1425|SWEP:GetTargetLog|||
+559||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|311|320|SWEP:StartAnimation|animId, duration||Start an animation
+560||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|323|326|SWEP:IsAnimationPlaying|||Check if animation is playing
+561||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|329|333|SWEP:GetAnimationProgress|||Get animation progress (0 to 1)
+562||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|336|350|SWEP:EndAnimation|||End animation
+563||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|353|407|SWEP:OnTargetCommandComplete|animId, targetEnt||Handle target command completion (CLIENT)
+564||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|416|418|RandomIP|||Generate random IP address
+565||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|421|1425|RandomMAC|||Generate random MAC address
+566||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|432|1425|RandomHex|length||Generate random hex string
+567||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|442|1425|DrawScanAnimation|weapon, w, h, progress, rt||Animation: Network Scan (scaled for viewmodel screen)
+568||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|516|1425|DrawDecryptAnimation|weapon, w, h, progress, rt||Animation: Decrypt Data (scaled for viewmodel screen)
+569||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|573|1425|DrawExploitAnimation|weapon, w, h, progress, rt||Animation: Run Exploit (scaled for viewmodel screen)
+570||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|643|1425|DrawBackdoorAnimation|weapon, w, h, progress, rt||Animation: Install Backdoor (scaled for viewmodel screen)
+571||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|710|1425|DrawLogsAnimation|weapon, w, h, progress, rt||Animation: Clear Logs (scaled for viewmodel screen)
+572||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|800|1425|DrawDisconnectAnimation|weapon, w, h, progress, rt||Animation: Disconnect (scaled for viewmodel screen)
+573||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|896|904|SWEP:DrawHUD|||DrawHUD hook - only used to detect animation completion
+574||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1152|1425|SWEP:GetFilteredMenu|menu||Get filtered menu (handles dynamic items like TARGET COMMANDS)
+575||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1168|1179|SWEP:MenuNavigateUp|||Menu navigation: Move selection up
+576||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1182|1193|SWEP:MenuNavigateDown|||Menu navigation: Move selection down
+577||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1196|1220|SWEP:MenuSelect|||Menu navigation: Select current item
+578||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1223|1237|SWEP:MenuBack|||Menu navigation: Go back / Cancel
+579||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1243|1270|SWEP:Think|||
+580||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1276|1283|SWEP:PrimaryAttack|||
+581||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1289|1302|SWEP:SecondaryAttack|||
+582||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1308|1311|SWEP:Reload|||
+583||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1317|1329|SWEP:Deploy|||
+584||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1331|1337|SWEP:Holster|||
+585||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1339|1341|SWEP:OnRemove|||
+586||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1362|1402|SWEP:Initialize|||
+587||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1404|1420|SWEP:Holster|||
+588||lua/weapons/zdev_weapon_hacker/shared.lua|shared.lua|1422|1424|SWEP:OnRemove|||
+589||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|164|993|DrawGrid|x, y, w, h, Dw, DH, line_color, vertex_color||
+590||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|209|218|SWEP:ToggleAimLaser|force_state||
+591||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|226|262|SWEP:Initialize|||
+592||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|267|277|SWEP:Holster|||
+593||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|282|284|SWEP:OnRemove|||
+594||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|291|330|SWEP:PrimaryAttack|||
+595||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|335|344|SWEP:SecondaryAttack|||
+596||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|352|365|SWEP:Reload|||
+597||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|367|369|SWEP:Think|||
+598||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|390|422|SWEP:GetTracerShootPos|Position, Ent, Attachment||--------------------------------------------------------]]
+599||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|424|463|SWEP:PostDrawViewModel|vm, weapon, ply||
+600||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|469|474|SWEP:DrawHUD|||FUNC DrawHUD()
+601||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|481|526|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||FUNC FormatViewModelAttachment() FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
+602||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|532|993|SWEP:ViewModelDrawn|||
+603||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|671|993|SWEP:DrawWorldModel|||
+604||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|790|830|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+605||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|835|993|SWEP:CreateModels|tab||
+606||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|884|993|SWEP:UpdateBonePositions|vm||
+607||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|951|993|SWEP:ResetBonePositions|vm||
+608||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|969|991|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+609||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|82|119|SWEP:Initialize|||
+610||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|124|134|SWEP:Holster|||
+611||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|139|141|SWEP:OnRemove|||
+612||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|147|149|SWEP:Deploy|||
+613||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|156|186|SWEP:PrimaryAttack|||Define the primary attack function
+614||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|193|212|SWEP:Think|||Think function to handle rope rendering
+615||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|219|236|SWEP:SecondaryAttack|||Define the secondary attack function
+616||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|242|247|SWEP:DrawHUD|||
+617||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|254|299|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||FUNC FormatViewModelAttachment() FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
+618||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|305|759|SWEP:ViewModelDrawn|||
+619||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|437|759|SWEP:DrawWorldModel|||
+620||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|556|596|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
+621||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|601|759|SWEP:CreateModels|tab||
+622||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|650|759|SWEP:UpdateBonePositions|vm||
+623||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|717|759|SWEP:ResetBonePositions|vm||
+624||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|735|757|table.FullCopy|tab||Fully copies the table, meaning all tables inside this table are copied too and so on (normal table.Copy copies only their reference). Does not copy entities of course, only copies their reference. WARNING: do not use on tables that contain themselves somewhere down the line or you'll get an infinite loop
+625||lua/weapons/zdev_weapon_template_firearm.lua|zdev_weapon_template_firearm.lua|42|60|SWEP:PrimaryAttack|||
+626||lua/weapons/zdev_weapon_template_firearm.lua|zdev_weapon_template_firearm.lua|63|72|SWEP:SecondaryAttack|||
+627|ZDEV_FUNC_C14336FD|lua/zdev/cl_init.lua|cl_init.lua|97|146|ZDEV.MATS.CreateAll|||
+628|ZDEV_FUNC_4E9ADCF4|lua/zdev/client/hud/zd_cl_hud_dev_effects.lua|zd_cl_hud_dev_effects.lua|14|16|ZDEV.CHUD.DrawEffects|||
+629||lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|19|251|CONV_HUD_CLR_PRI|||
+630||lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|20|251|CONV_HUD_CLR_SEC|||
+631||lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|77|251|PaintMessages|||
+632|ZDEV_FUNC_2E1DF3A6|lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|125|136|ZDEV.CHUD.DrawMessages|||
+633||lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|165|251|PaintMarkers|||
+634|ZDEV_FUNC_2018274D|lua/zdev/client/hud/zd_cl_hud_msg.lua|zd_cl_hud_msg.lua|200|211|ZDEV.CHUD.DrawMarkers|||
+635|ZDEV_FUNC_FCC5C1B0|lua/zdev/client/menu/zd_cl_menu_admin.lua|zd_cl_menu_admin.lua|61|221|ZDEV.VGUI.AdminMenu|ply, cmd, arg||
+636||lua/zdev/client/menu/zd_cl_menu_base.lua|zd_cl_menu_base.lua|10|32|PANEL:Init|||
+637||lua/zdev/client/menu/zd_cl_menu_base.lua|zd_cl_menu_base.lua|34|37|PANEL:SetMenuTitle|title||
+638||lua/zdev/client/menu/zd_cl_menu_base.lua|zd_cl_menu_base.lua|39|43|PANEL:AddToContent|panel||
+639||lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|86|413|PopulateRows|pr, tbl||
+640|ZDEV_FUNC_BCF5B694|lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|119|413|ZDEV.VGUI.DevMenu|ply, cmd, arg||
+641||lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|318|323|SendZDevConCmd|cmd||
+642||lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|325|327|inQuad|fraction, beginning, change||
+643|ZDEV_FUNC_B82A89AD|lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|336|398|ZDEV.VGUI.DevConsole|ply, cnd, arg||[[
+644|ZDEV_FUNC_592FDFA6|lua/zdev/client/menu/zd_cl_menu_dev.lua|zd_cl_menu_dev.lua|402|407|ZDEV.VGUI.DevConsole_Close|ply, cnd, arg||
+645||lua/zdev/client/menu/zd_cl_menu_dev_efx.lua|zd_cl_menu_dev_efx.lua|77|372|PopulateRows|pr, tbl||
+646||lua/zdev/client/menu/zd_cl_menu_dev_efx.lua|zd_cl_menu_dev_efx.lua|123|372|CacheEffects|menu||FUNC-CL Store local Cache of All registered scripted effects and store a copy in the passed menu
+647||lua/zdev/client/menu/zd_cl_menu_dev_efx.lua|zd_cl_menu_dev_efx.lua|174|372|LoadMetaFuncs|pnl||
+648|ZDEV_FUNC_CDFA21EE|lua/zdev/client/menu/zd_cl_menu_dev_efx.lua|zd_cl_menu_dev_efx.lua|191|372|ZDEV.VGUI.EffectsMenu|ply, cmd, arg||
+649||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|74|87|SaveFile|pnl||
+650||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|89|91|FileOpen|pnl||
+651||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|93|101|NewFile|name, shouldsave||
+652||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|103|112|LoadFile|name||
+653||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|114|116|NewEmitter|||
+654||lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|118|230|PaintTimeGraph|||
+655|ZDEV_FUNC_D14BF9F9|lua/zdev/client/menu/zd_cl_menu_dev_env.lua|zd_cl_menu_dev_env.lua|139|226|ZDEV.VGUI.EnvironmentMenu|||
+656||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|34|36|IsTextureParam|key||
+657||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|39|933|ParseVMT|text||─── VMT parser  (text → {shader, properties[]}) ────────────────────────────
+658||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|105|933|GenerateVMT|shader, properties||─── VMT generator  ({shader, properties[]} → text) ─────────────────────────
+659||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|117|130|AddExpandPlaceholder|node||─── Helper: add a dummy child so the DTree shows an expand arrow ────────────
+660||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|133|933|RemovePlaceholders|node||─── Helper: remove all dummy children before real population ────────────────
+661||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|145|933|PopulateTreeNode|node, folder, searchPath||─── File tree builder (lazy, .vmt + .png only) ─────────────────────────────
+662||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|206|288|OpenTextureReplacer|current_vtf_path, onReplace||───────────────────────────────────────────────────────────────────────────── Texture Replacement Popup ─────────────────────────────────────────────────────────────────────────────
+663|ZDEV_FUNC_4DA2FF67|lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|294|933|ZDEV.VGUI.Editor_Materials|cmd, ply, arg||───────────────────────────────────────────────────────────────────────────── ─────────────────────────────────────────────────────────────────────────────
+664||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|321|326|UpdateTitle|||── Helpers ──────────────────────────────────────────────────────────────
+665||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|331|933|RebuildPropertyTable|||
+666||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|347|351|hdr_lbl|text, dock, wide||
+667||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|420|449|SyncFromVMT|vmt_text||Full update: parse VMT text → update shader, properties, preview, table
+668||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|452|510|LoadFromTree|filepath, searchPath, ext||Load a material from the file tree
+669||lua/zdev/client/menu/zd_cl_menu_dev_mat.lua|zd_cl_menu_dev_mat.lua|513|521|SaveAsTxt|filename||Save current VMT text as .txt in data/zdev/materials/
+670||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|84|97|SaveFile|pnl||
+671||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|99|101|FileOpen|pnl||
+672||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|103|116|NewFile|name, shouldsave||
+673||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|118|127|LoadFile|name||
+674||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|129|140|NewEmitter|id, name, filename||
+675||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|142|145|NewParticle|id, name, emitter||
+676||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|147|761|PaintTimeGraph|||
+677||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|167|197|GetCurrentConVars|||
+678|ZDEV_FUNC_513CD781|lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|200|761|ZDEV.VGUI.ParticleMenu|||
+679||lua/zdev/client/menu/zd_cl_menu_dev_part.lua|zd_cl_menu_dev_part.lua|689|691|menu.p_c.pl_C.mv:LayoutEntity|ent||
+680||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|98|104|ZDEV.SNPC.OpenEditor|||
+681||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|106|122|EDITOR:CreateMainInterface|||
+682||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|124|155|EDITOR:CreateMenuBar|||
+683||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|157|185|EDITOR:NewSNPC|||
+684||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|187|2113|EDITOR:ShowTemplateSelector|||
+685||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|251|284|EDITOR:SaveSNPC|||
+686||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|286|321|EDITOR:ExportSNPC|||
+687||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|323|332|EDITOR:ResetToDefault|||
+688||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|334|352|EDITOR:DuplicateSNPC|||
+689||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|354|423|EDITOR:ValidateSNPC|||
+690||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|425|451|EDITOR:SpawnTestNPC|||
+691||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|453|469|EDITOR:RemoveTestNPCs|||
+692||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|471|2113|EDITOR:ShowQuickSpawnMenu|||
+693||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|532|2113|EDITOR:ShowDocumentation|||
+694||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|600|2113|EDITOR:ShowExamples|||
+695||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|672|2113|EDITOR:ShowAbout|||
+696||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|733|2113|EDITOR:CreateCompactMainPanels|||
+697||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|794|1089|EDITOR:CreateCompactPropertySections|||
+698||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|795|813|CreateSection|title||
+699||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|815|836|AddCompactControl|parent, label, control, height||
+700||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|838|857|AddCheckboxControl|parent, label, checkbox||
+701||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|907|944|AddModelControl|parent, label||
+702||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1091|1100|EDITOR:CreatePropertySheets|||
+703||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1102|1172|EDITOR:CreateBasicPropertiesPanel|||
+704||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1106|1116|AddControl|label, control||
+705||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1174|2113|EDITOR:CreateAppearancePanel|||
+706||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1178|1188|AddControl|label, control||
+707||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1239|1324|EDITOR:CreateBehaviorPanel|||
+708||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1243|1253|AddControl|label, control||
+709||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1326|2113|EDITOR:CreateCombatPanel|||
+710||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1330|1340|AddControl|label, control||
+711||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1397|2113|EDITOR:CreateSoundsPanel|||
+712||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1427|2113|EDITOR:CreateAdvancedPanel|||
+713||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1431|1441|AddControl|label, control||
+714||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1509|1535|EDITOR:CreatePreviewPanel|||
+715||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1538|2113|EDITOR:PopulateModels|category||Utility functions
+716||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1548|2113|EDITOR:PopulateWeapons|comboBox, category||
+717||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1558|1568|EDITOR:LoadTemplate|className||
+718||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1570|1581|EDITOR:UpdatePreview|||
+719||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1584|2113|EDITOR:GetCurrentSettings|||Supporting Functions
+720||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1623|2113|EDITOR:ApplySettings|settings||
+721||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1657|2113|EDITOR:LoadTemplateByName|templateName||
+722||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1668|2113|EDITOR:GenerateSNPCLua|npcData||
+723||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1680|1697|ENT:Initialize|||
+724||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1699|2113|ENT:RunBehaviour|||
+725||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1721|1727|ENT:OnTakeDamage|dmg||
+726||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1729|1738|ENT:OnKilled|dmg||
+727||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1740|1777|ENT:GetNearestPlayer|||
+728||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1779|2113|EDITOR:GenerateRelationshipCode|relationships||
+729||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1801|1866|EDITOR:LoadExampleConfiguration|exampleName||
+730||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1868|1930|EDITOR:ShowRelationshipDialog|||
+731||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1932|2113|EDITOR:ShowModelBrowser|||
+732||lua/zdev/client/menu/zd_cl_menu_dev_snpc.lua|zd_cl_menu_dev_snpc.lua|1995|2105|PopulateModels|searchTerm, categoryPath||Populate models function
+733||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|16|2625|GenerateNeuralNetwork|ply, layers, neuronsPerLayer, activationFunction||Function to generate a neural network
+734||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|159|2625|IsNeuralEntity|ent||Check if an entity is a neural SNPC or NextBot
+735||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|179|202|GetNeuralEntityType|ent||Get neural entity architecture type
+736||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|205|2625|CollectNPCNetworkData|||Collect network data from NPC
+737||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|415|447|SaveNetworkToFile|filename||Save network to JSON file
+738||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|450|486|LoadNetworkFromFile|filename||Load network from JSON file
+739||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|489|2625|GetSavedNetworks|||Get list of saved neural network files
+740||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|500|2625|LoadNetworkFromEntity|ent||Load network from a neural entity into the editor
+741||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|626|655|SaveEntityWeightsToFile|ent, filename||Save entity network weights to a JSON file
+742||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|658|2625|GetSavedEntityWeights|||Get list of saved entity weight files
+743||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|669|680|DistToLine|px, py, x1, y1, x2, y2||Helper function: Calculate distance from point to line segment
+744||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|683|685|sigmoid|x||Activation functions
+745||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|687|689|dsigmoid|y||
+746||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|691|693|relu|x||
+747||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|695|697|drelu|x||
+748||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|699|701|tanh_act|x||
+749||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|703|705|dtanh|y||
+750||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|708|712|getActivationFunc|name||Get activation function by name
+751||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|715|2625|ForwardPass|network, inputs||Forward pass through network
+752||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|763|2625|CalculateLoss|outputs, targets||Calculate loss (MSE)
+753||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|773|2625|TrainStep|network, inputs, targets, learningRate||Backpropagation training step
+754||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|854|856|GenerateNeuronId|layerIdx, neuronIdx||Generate unique neuron ID
+755||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|859|2625|RebuildConnections|network||Rebuild connections after structure change
+756||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|875|2625|AutoLayoutNetwork|network, canvasWidth, canvasHeight||Auto-layout network nodes
+757||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|894|902|GetActivationColor|activation||Get color based on activation value
+758||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|905|912|GetWeightColor|weight||Get color based on weight value
+759||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|915|2625|CreateNeuralNetworkEditor|||Create the main frame
+760||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|1436|2625|DoTrainingStep|||Training step function
+761||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|1778|1787|AddToolbarButton|icon, tooltip, callback||
+762||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|1915|2625|DrawNetworkGraph|w, h||Visualization drawing functions
+763||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|1981|2625|DrawLossChart|w, h||
+764||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2024|2625|DrawAccuracyChart|w, h||
+765||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2059|2625|DrawWeightHeatmap|w, h||
+766||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2091|2625|DrawRealTimeVisualization|w, h||
+767||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2321|2338|networkCanvas:Paint|w, h||Network canvas painting function
+768||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2341|2625|networkCanvas:OnMousePressed|mcode||Network canvas mouse handling
+769||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2431|2436|networkCanvas:OnMouseReleased|mcode||
+770||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2438|2449|networkCanvas:OnCursorMoved|x, y||
+771||lua/zdev/client/menu/zd_cl_menu_editor_neuralnetwork.lua|zd_cl_menu_editor_neuralnetwork.lua|2451|2459|networkCanvas:OnMouseWheeled|delta||
+772||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|125|134|ZEDIT.FX.NewProject|name||
+773||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|137|201|ZEDIT.FX.GetConVars|||─── ConVar accessors ────────────────────────────────────────────────────────
+774||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|203|1070|ZEDIT.FX.SetConVars|data||
+775||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|218|223|ZEDIT.FX.NewParticle|menu, id, data||─── Particle list management ────────────────────────────────────────────────
+776||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|225|231|ZEDIT.FX.RemoveParticle|index||
+777||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|233|241|ZEDIT.FX.DuplicateParticle|index||
+778||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|244|248|ZEDIT.FX.EnsureDirectory|||─── File operations ─────────────────────────────────────────────────────────
+779||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|250|268|ZEDIT.FX.SaveProject|filename||
+780||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|270|291|ZEDIT.FX.LoadProject|filename||
+781||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|293|297|ZEDIT.FX.GetSavedFiles|||
+782||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|299|306|ZEDIT.FX.DeleteProject|filename||
+783||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|308|312|ZEDIT.FX.ExportToClipboard|||
+784||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|314|329|ZEDIT.FX.ImportFromText|text||
+785||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|334|339|rv|vmin, vmax, legacy||Helper: return a random value in [vmin, vmax]; fall back to `legacy` if both nil.
+786||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|341|1070|ZEDIT.FX.SpawnParticle|pos, data||
+787||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|394|418|ZEDIT.FX.StartPreview|||
+788||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|420|424|ZEDIT.FX.StopPreview|||
+789||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|426|431|ZEDIT.FX.SpawnOnce|||
+790||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|433|1070|ZEDIT.FX.SpawnAll|||
+791||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|449|663|CreateRangeSlider|parent_form, label, cvar_min_name, cvar_max_name, range_min, range_max, decimals||───────────────────────────────────────────────────────────────────────────── ZD_RangeSlider  —  dual-handle range slider for DForm CreateRangeSlider( parent_form, label, cvar_min, cvar_max, range_min, range_max, decimals ) Returns a DPanel sized 62px tall; add it with form:AddItem(pnl). ─────────────────────────────────────────────────────────────────────────────
+792||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|473|663|fmt|v||Helpers
+793||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|475|478|val_to_x|v, w||
+794||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|480|485|x_to_val|x, w||
+795||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|487|493|set_min|v||
+796||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|495|501|set_max|v||
+797|ZDEV_FUNC_600762EB|lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|669|1070|ZDEV.VGUI.ParticleEditor|ply, cmd, arg||───────────────────────────────────────────────────────────────────────────── ─────────────────────────────────────────────────────────────────────────────
+798||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|677|1070|RefreshParticleList|||
+799||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|773|777|tb_btn|text, clr, fn||
+800||lua/zdev/client/menu/zd_cl_menu_editor_particle.lua|zd_cl_menu_editor_particle.lua|867|1070|RefreshMaterials|||
+801||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|82|97|AddStatLine|parent, label, value, color||
+802||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|92|94|line:SetValue|v||
+803||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|103|375|ZDEV.VGUI.EquipmentMenu|ply, cmd, arg||
+804||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|287|375|menu:RefreshStats|||
+805||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|314|370|menu:RefreshEquipList|||
+806||lua/zdev/client/menu/zd_cl_menu_equipment.lua|zd_cl_menu_equipment.lua|361|363|menu:GetSlot|region||Get a specific equipment slot by region name
+807|ZDEV_FUNC_BD728EC3|lua/zdev/client/menu/zd_cl_menu_fonts.lua|zd_cl_menu_fonts.lua|24|71|ZDEV.VGUI.FontMenu|||
+808||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|32|48|EnsureInventoryData|||
+809||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|55|108|CreateInfoPanel|parent||
+810||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|95|105|info:SetItemInfo|item||
+811||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|115|145|CreateWeightBar|parent||
+812||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|139|142|bar:SetWeight|current, max||
+813||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|151|288|ZDEV.VGUI.InventoryMenu|ply, cmd, arg||
+814||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|205|235|menu:AddContainer|name, cols, rows, slotType||Add a new container grid (e.g. from equipping pants with pockets)
+815||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|238|245|menu:RemoveContainer|name||Remove a container by name (e.g. when unequipping pants)
+816||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|248|283|menu:RecalcContainerArea|||Recalculate the container area's total height
+817||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|267|269|menu:UpdateWeight|current, max||Refresh the weight display
+818||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|272|274|menu:ShowItemInfo|item||Show item info in the bottom panel
+819||lua/zdev/client/menu/zd_cl_menu_inventory.lua|zd_cl_menu_inventory.lua|277|279|menu:GetBackpackGrid|||Get the main backpack grid
+820||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|69|109|NeuralViz.CollectNetworkData|||[[ Network data collection from NPCs ]]
+821||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|112|1989|NeuralViz.CollectSimpleNetworkData|npc, data||[[ Collect data from simple/compressed networks ]]
+822||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|168|1989|NeuralViz.CollectAdvancedNetworkData|npc, data||[[ Collect data from advanced networks ]]
+823||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|215|245|NeuralViz.SaveNetworkToFile|filename||[[ Save network state to JSON file ]]
+824||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|248|276|NeuralViz.LoadNetworkFromFile|filename||[[ Load network state from JSON file ]]
+825||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|279|1989|NeuralViz.GetSavedNetworks|||[[ Get list of saved neural network files ]]
+826||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|292|300|NeuralViz.Update|||[[ Real-time update logic ]]
+827||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|310|1989|ZDEV.VGUI.NeuralNetworkEditor|||"[[ ZDEV_UID: ZDEV_FUNC_NN_TESTER | Path: ZDEV.VGUI.NeuralNetworkEditor ]]"
+828||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|732|1989|CreateNetwork|||Function implementations
+829||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|760|1989|InitializeNetworkWeights|||
+830||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|783|1989|GenerateTrainingData|||
+831||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|813|829|ToggleTraining|||
+832||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|831|835|StopTraining|||
+833||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|837|1989|TrainingLoop|||
+834||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|885|1989|ForwardPass|input||
+835||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|910|1989|CalculateLoss|output, target||
+836||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|919|1989|IsCorrectPrediction|output, target||
+837||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|928|1989|BackwardPass|input, target, output, learningRate||
+838||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|943|1989|DrawNetworkVisualization|panel, w, h||
+839||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1022|1989|DrawLossChart|panel, w, h||
+840||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1056|1989|DrawAccuracyChart|panel, w, h||
+841||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1088|1989|DrawWeightHeatmap|panel, w, h||
+842||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1129|1989|ImportNetwork|||
+843||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1222|1229|LoadNetworkFromFile|filename||Helper function to load network from file
+844||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1232|1265|LoadNetworkFromJSON|jsonString, filename||Helper function to load network from JSON string
+845||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1268|1989|ValidateNetworkStructure|network||Validate network structure
+846||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1286|1429|ExportNetwork|||
+847||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1432|1989|CalculateParameterCount|||Helper function to calculate parameter count
+848||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1455|1484|PrepareNetworkExport|includeTraining, includeHistories||Helper function to prepare network export data
+849||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1487|1495|SaveNetworkToFile|filename, includeTraining, includeHistories, prettyPrint||Helper function to save network to file
+850||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1498|1516|ShowNetworkPreview|includeTraining, includeHistories, prettyPrint||Helper function to show network preview
+851||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1518|1989|TestNetwork|||
+852||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1547|1989|LoadTrainingData|||
+853||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1653|1675|LoadTrainingDataFromFile|filename||Helper function to load training data from file
+854||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1678|1714|ExportTrainingData|||Function to export training data
+855||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1716|1721|UpdateVisualization|||
+856||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1723|1989|GetNetworkInfo|||
+857||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1736|1989|DrawRealTimeNetworkVisualization|panel, w, h||[[ Real-time neural network visualization ]]
+858||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1800|1989|DrawSimpleNetworkVisualization|data, w, h, startY||[[ Draw simple neural network visualization ]]
+859||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1877|1989|DrawAdvancedNetworkVisualization|data, w, h, startY||[[ Draw advanced neural network visualization ]]
+860||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1923|1989|DrawWeightHistoryGraph|x, y, w, h||[[ Draw weight history graph ]]
+861||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1964|1985|PopulateNPCList|||[[ Populate NPC dropdown with learning NPCs ]]
+862||lua/zdev/client/menu/zd_cl_menu_neuralnetwork.lua|zd_cl_menu_neuralnetwork.lua|1980|1984|RefreshVisualization|||[[ Refresh visualization and NPC list ]]
+863|ZDEV_FUNC_14BB66A2|lua/zdev/client/menu/zd_cl_menu_npcs.lua|zd_cl_menu_npcs.lua|50|167|ZDEV.VGUI.NPCMenu|ply, cmd, arg||
+864||lua/zdev/client/menu/zd_cl_menu_npcs.lua|zd_cl_menu_npcs.lua|84|167|drawNNGraph3D|nn, pos, ang, scale||Use ui3d2d for 3D2D neural network visualization
+865|ZDEV_FUNC_09E26C99|lua/zdev/client/menu/zd_cl_menu_options.lua|zd_cl_menu_options.lua|72|163|ZDEV.VGUI.OptionsMenu|||
+866||lua/zdev/client/menu/zd_cl_menu_options.lua|zd_cl_menu_options.lua|123|127|cm:ValueChanged|col||When the picked color is changed...
+867||lua/zdev/client/menu/zd_cl_menu_options.lua|zd_cl_menu_options.lua|146|150|cm:ValueChanged|col||When the picked color is changed...
+868|ZDEV_FUNC_0BAB4F2D|lua/zdev/client/menu/zd_cl_menu_test.lua|zd_cl_menu_test.lua|159|360|ZDEV.VGUI.TestMenu|ply, cmd, arg||
+869||lua/zdev/client/menu/zd_cl_menu_test2.lua|zd_cl_menu_test2.lua|38|117|ZDEV.VGUI.TestMenu|||
+870||lua/zdev/client/menu/zd_cl_menu_weapons.lua|zd_cl_menu_weapons.lua|156|158|GetWeapon|s_class||
+871||lua/zdev/client/menu/zd_cl_menu_weapons.lua|zd_cl_menu_weapons.lua|160|501|SetupProperties|menu, tbl||
+872||lua/zdev/client/menu/zd_cl_menu_weapons.lua|zd_cl_menu_weapons.lua|235|238|SetupModelPreview|panel, mdl||
+873|ZDEV_FUNC_C6391935|lua/zdev/client/menu/zd_cl_menu_weapons.lua|zd_cl_menu_weapons.lua|246|501|ZDEV.VGUI.WeaponsMenu|ply, cmd, arg||
+874||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|27|109|PANEL:Init|||
+875||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|40|42|PANEL:SetState|state||
+876||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|44|46|PANEL:GetState|||
+877||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|48|51|PANEL:OnCursorEntered|||
+878||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|53|56|PANEL:OnCursorExited|||
+879||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|58|61|PANEL:OnMousePressed|mc||
+880||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|63|66|PANEL:OnMouseReleased|mc||
+881||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|68|75|PANEL:SetDisabled|bDisabled||
+882||lua/zdev/client/vgui/zd_cl_button.lua|zd_cl_button.lua|77|105|PANEL:Paint|w, h||
+883||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|42|76|PANEL:Init|||
+884||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|79|90|PANEL:CanEquip|item||Check if the item can be equipped in this slot's region
+885||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|93|112|PANEL:Equip|itemPanel||Equip an item panel into this slot
+886||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|115|128|PANEL:Unequip|||Unequip the current item, returning it or dropping it
+887||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|130|132|PANEL:OnCursorEntered|||
+888||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|134|136|PANEL:OnCursorExited|||
+889||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|138|149|PANEL:OnMousePressed|mc||
+890||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|151|182|PANEL:Paint|w, h||
+891||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|184|197|PANEL:PaintOver|w, h||
+892||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|200|204|PANEL:OnEquip|item||Callback stubs - override these in the menu
+893||lua/zdev/client/vgui/zd_cl_equipslot.lua|zd_cl_equipslot.lua|201|204|PANEL:OnUnequip|item||
+894||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|22|28|PANEL:Init|||
+895||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|31|35|PANEL:SetGridSize|cols, rows||Build or rebuild the grid with the given dimensions
+896||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|38|198|PANEL:BuildGrid|||Create all slot panels for the grid
+897||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|80|85|PANEL:GetSlot|col, row||Get the slot at grid coordinates (col, row)
+898||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|89|198|PANEL:CanFitItem|col, row, w, h, ignorePanel||Check if an item of size (w, h) can fit at position (col, row) Optionally ignores a specific item panel (for re-placing the same item)
+899||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|104|198|PANEL:PlaceItem|col, row, w, h, itemPanel||Place an item panel at position (col, row) spanning (w, h) cells
+900||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|135|198|PANEL:RemoveItemPanel|itemPanel||Remove an item panel from the grid, clearing all slots it occupied
+901||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|156|198|PANEL:FindRoomFor|item||Auto-place: find the first available position for an item
+902||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|175|189|PANEL:AddItem|item||Create and auto-place a new item in the grid Returns the ZD_InvItem panel, or nil if no room
+903||lua/zdev/client/vgui/zd_cl_invgrid.lua|zd_cl_invgrid.lua|191|195|PANEL:Paint|w, h||
+904||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|20|28|PANEL:Init|||
+905||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|31|37|PANEL:SetItemData|item||Set the item and resize the panel to match item dimensions
+906||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|40|46|PANEL:SnapToSlot|slot||Snap this item panel to a slot's position
+907||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|49|56|PANEL:OnMousePressed|mc||Called when the item is right-clicked (context menu)
+908||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|58|75|PANEL:OpenContextMenu|||
+909||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|78|84|PANEL:DropFromInventory|||Remove this item from its current grid and clean up
+910||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|86|96|PANEL:Paint|w, h||
+911||lua/zdev/client/vgui/zd_cl_invitem.lua|zd_cl_invitem.lua|98|119|PANEL:PaintOver|w, h||
+912||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|38|96|PANEL:Init|||
+913||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|98|101|PANEL:SetCoords|x, y||
+914||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|103|105|PANEL:GetCoords|||
+915||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|108|120|PANEL:CanAcceptItem|item||Check if this slot type can accept the given item
+916||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|122|126|PANEL:OnCursorEntered|||
+917||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|128|134|PANEL:OnCursorExited|||
+918||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|136|139|PANEL:ClearItem|||
+919||lua/zdev/client/vgui/zd_cl_invslot.lua|zd_cl_invslot.lua|141|178|PANEL:Paint|w, h||
+920|ZDEV_FUNC_27094932|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|30|35|ZDEV.DRAW.TexturedRect|x, y, w, h, mat, clr||
+921|ZDEV_FUNC_5D7393AE|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|40|45|ZDEV.DRAW.UVTexturedRect|x, y, w, h, u, v, u0, v0, mat, clr||
+922|ZDEV_FUNC_87ABA76B|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|48|53|ZDEV.DRAW.TexturedRectRot|x, y, w, h, ang, mat, clr||
+923|ZDEV_FUNC_5B016BFE|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|56|65|ZDEV.DRAW.TexturedRectRotPoint|x, y, w, h, rot, x0, y0, mat, clr||
+924|ZDEV_FUNC_1A55F943|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|68|839|ZDEV.DRAW.OutlinedBox|x, y, w, h, thickness, clr||
+925|ZDEV_FUNC_62D9A0EC|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|77|839|ZDEV.DRAW.Circle|x,y,r,r2,startang,endang,iter,col,col2||
+926|ZDEV_FUNC_DCD5CAB5|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|130|839|ZDEV.DRAW.DottedCircle|x, y, w, h, radius, seg, col||
+927|ZDEV_FUNC_57C5CA0B|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|155|296|ZDEV.DRAW.Sector|x, y, r, ang, rot, col||
+928|ZDEV_FUNC_3CFDFA45|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|181|235|ZDEV.DRAW.Diamond|x,y,w,h,col,col2||
+929|ZDEV_FUNC_98BF9DA8|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|238|293|ZDEV.DRAW.Box|x,y,w,h,col,col2||
+930|ZDEV_FUNC_E367B3D9|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|299|839|ZDEV.DRAW.Star|x,y,r1,r2,col,ang||
+931|ZDEV_FUNC_37E9DBAF|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|326|340|ZDEV.DRAW.TextRotated|text, font, x, y, Tcol, ang||
+932|ZDEV_FUNC_CF993C96|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|343|358|ZDEV.DRAW.TextRotatedBox|text, font, x, y, w, h, Tcol, ang, col, col2||
+933|ZDEV_FUNC_75729027|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|362|839|ZDEV.DRAW.Grid|x, y, w, h, color||
+934|ZDEV_FUNC_940C0322|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|399|839|ZDEV.DRAW.CircleFilled|x, y, radius, quality||
+935|ZDEV_FUNC_66F4DC59|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|414|424|ZDEV.DRAW.Trapezoid|x, y, w, h, z, color||
+936||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|432|444|m_AlignText|text, font, x, y, xalign, yalign||
+937||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|448|453|DrawShadowedText|shadow, text, font, x, y, color, xalign, yalign||
+938||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|458|463|GlowColor|col1, col2, mod||
+939||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|468|839|DrawEnchantedText|speed, text, font, x, y, color, glow_color, xalign, yalign||
+940||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|487|492|DrawFadingText|speed, text, font, x, y, color, fading_color, xalign, yalign||
+941||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|499|509|DrawRainbowText|speed, text, font, x, y, xalign, yalign||
+942||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|514|839|DrawGlowingText|static, text, font, x, y, color, xalign, yalign||
+943||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|531|839|DrawBouncingText|style, intesity, text, font, x, y, color, xalign, yalign||
+944||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|561|839|DrawElecticText|intensity, text, font, x, y, color, xalign, yalign||
+945||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|591|839|DrawFireText|intensity, text, font, x, y, color, xalign, yalign, glow, shadow||
+946||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|618|839|DrawSnowingText|intensity, text, font, x, y, color, color2, xalign, yalign||
+947||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|639|660|moat_DrawEffectExamples|||
+948|ZDEV_FUNC_A1B2C3D4|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|665|679|ZDEV.DRAW.Anim_TargetLock|x, y, size, entity, progress, color||
+949|ZDEV_FUNC_E5F6A7B8|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|682|718|ZDEV.TWEEN.Tween|startValue, endValue, duration, easeFunc||
+950||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|692|705|tween:Update|||
+951||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|707|709|tween:IsActive|||
+952||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|711|714|tween:Reset|||
+953||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|722|724|ZDEV.TWEEN.EaseLinear|t||Easing functions Linear interpolation
+954||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|727|729|ZDEV.TWEEN.EaseInQuad|t||Ease in quadratic
+955||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|732|734|ZDEV.TWEEN.EaseOutQuad|t||Ease out quadratic
+956||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|737|743|ZDEV.TWEEN.EaseInOutQuad|t||Ease in-out quadratic
+957||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|746|748|ZDEV.TWEEN.EaseInCubic|t||Ease in cubic
+958||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|751|754|ZDEV.TWEEN.EaseOutCubic|t||Ease out cubic
+959||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|757|764|ZDEV.TWEEN.EaseInOutCubic|t||Ease in-out cubic
+960||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|767|772|ZDEV.TWEEN.EaseOutElastic|t||Ease out elastic
+961||lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|775|791|ZDEV.TWEEN.EaseOutBounce|t||Ease out bounce
+962|ZDEV_FUNC_C9D8E7F6|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|794|839|ZDEV.TWEEN.UpdateAll|||
+963|ZDEV_FUNC_B4A5C6D7|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|813|819|ZDEV.TWEEN.Add|tween||
+964|ZDEV_FUNC_F3E2D1C0|lua/zdev/client/zd_cl_draw.lua|zd_cl_draw.lua|822|826|ZDEV.TWEEN.ClearAll|||
+965||lua/zdev/client/zd_cl_effect.lua|zd_cl_effect.lua|14|28|meta:SetRenderColor|tbl_clr||
+966||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|57|945|DebugSineGraph|||
+967||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|79|945|CONV_HUD_CLR_PRI|||
+968||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|80|945|CONV_HUD_CLR_SEC|||
+969||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|128|945|GetNPCFaction|npc||
+970||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|141|945|PaintCrosshair|||
+971||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|258|945|PaintVitals|||
+972||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|347|423|PaintArsenal|||
+973||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|431|945|PaintPlayerInfo|||
+974||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|553|945|PaintDevelopment|||
+975||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|676|694|PaintEditor_Environment|||
+976||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|696|945|PaintEditor_Particle|||
+977||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|757|945|PaintTargetLocking|||
+978||lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|815|858|PaintVisorOverlay|||
+979|ZDEV_FUNC_B542172E|lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|864|908|ZDEV.CHUD.Paint|||
+980|ZDEV_FUNC_0D9AD868|lua/zdev/client/zd_cl_hud.lua|zd_cl_hud.lua|931|945|ZDEV.CHUD.HideDefault|name||
+981||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|17|19|imgui.IsDeveloperMode|||
+982||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|23|26|imgui.Hook|name, id, callback||
+983||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|31|43|shouldAcceptInput|||
+984||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|67|90|isObstructed|eyePos, hitPos, ignoredEntity, ignoreParent||
+985||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|92|202|imgui.Start3D2D|pos, angles, scale, distanceHide, distanceFadeStart||
+986||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|204|213|imgui.ScreenToVector|x, y||
+987||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|215|222|imgui.Weapon3D2D|weapon, pos, ang, scale, ...||
+988||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|224|231|imgui.Entity3D2D|ent, lpos, lang, scale, ...||
+989||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|233|251|calculateRenderBounds|x, y, w, h||
+990||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|253|278|imgui.ExpandRenderBoundsFromRect|x, y, w, h||
+991||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|295|299|developerText|str, x, y, clr||
+992||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|301|370|drawDeveloperInfo|||
+993||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|372|397|imgui.End3D2D|||
+994||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|399|402|imgui.CursorPos|||
+995||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|404|407|imgui.IsHovering|x, y, w, h||
+996||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|408|410|imgui.IsPressing|||
+997||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|411|413|imgui.IsPressed|||
+998||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|422|453|imgui.xFont|font, defaultSize||
+999||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|455|477|imgui.xButton|x, y, w, h, borderWidth, borderClr, hoverClr, pressColor||
+1000||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|479|492|imgui.xCursor|x, y, w, h||
+1001||lua/zdev/client/zd_cl_imgui.lua|zd_cl_imgui.lua|494|506|imgui.xTextButton|text, font, x, y, w, h, borderWidth, color, hoverClr, pressColor||
+1002||lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|8|376|RenderGroundBrush|tr, radius, color||
+1003||lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|30|39|RenderHelperLines|||
+1004||lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|41|47|draw_circle|x, y, radius, color, percent||
+1005|ZDEV_FUNC_F3487FBD|lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|68|89|ZDEV.REND.EnvironmentEditor|||
+1006||lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|207|217|ColorizeString|str||
+1007|ZDEV_FUNC_D053681B|lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|223|376|ZDEV.REND.ParticleEditor|||
+1008|ZDEV_FUNC_B3E50E40|lua/zdev/client/zd_cl_render.lua|zd_cl_render.lua|313|328|ZDEV.REND.LightEditor|||
+1009||lua/zdev/client/zd_cl_ui3d2d.lua|zd_cl_ui3d2d.lua|15|17|ui3d2d.Start|pos, ang, scale||
+1010||lua/zdev/client/zd_cl_ui3d2d.lua|zd_cl_ui3d2d.lua|19|21|ui3d2d.End|||
+1011||lua/zdev/client/zd_cl_ui3d2d.lua|zd_cl_ui3d2d.lua|24|26|ui3d2d.DrawPanel|x, y, w, h, color||Optionally, add helpers for drawing panels, backgrounds, etc.
+1012||lua/zdev/client/zd_cl_ui3d2d.lua|zd_cl_ui3d2d.lua|29|31|ui3d2d.DrawText|text, font, x, y, color, alignX, alignY||Example: ui3d2d.DrawText(text, font, x, y, color)
+1013|ZDEV_FUNC_70977092|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|15|25|ZDEV.UTIL.GetTextSize|txt, font||
+1014|ZDEV_FUNC_575F8B7A|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|28|32|ZDEV.UTIL.PosToScreen|pos||
+1015|ZDEV_FUNC_16B79C1B|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|35|41|ZDEV.UTIL.EntPosToScreen|ent||
+1016|ZDEV_FUNC_D32A9CF3|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|44|49|ZDEV.UTIL.TraceHitPosScreen|ply||
+1017|ZDEV_FUNC_A9C10807|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|55|66|ZDEV.UTIL.GetVMAttPos|e_Ply, i_Att||
+1018|ZDEV_FUNC_35B176D0|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|72|85|ZDEV.UTIL.GetBonePos|bone||
+1019|ZDEV_FUNC_349E70C3|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|88|99|ZDEV.UTIL.ParticleEmitter|data||
+1020|ZDEV_FUNC_330C1771|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|102|111|ZDEV.UTIL.Particle|data||
+1021|ZDEV_FUNC_9B65F091|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|114|116|ZDEV.UTIL.TimedCos|freq, rate||
+1022|ZDEV_FUNC_9A92A4AC|lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|121|123|ZDEV.UTIL.TimedSin|freq, rate||
+1023||lua/zdev/client/zd_cl_util.lua|zd_cl_util.lua|134|177|deepskin|children, skin||
+1024|ZDEV_FUNC_1C9A4181|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|29|48|ZDEV.VGUI.CreateFrame|w, h, title||
+1025|ZDEV_FUNC_3D2D|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|59|87|ZDEV.VGUI.Render3DFrame|opts||
+1026|ZDEV_FUNC_D6CD0327|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|94|123|ZDEV.VGUI.CreateButton|parent, w, h, text, fnt, clr, click||
+1027|ZDEV_FUNC_2C850790|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|126|140|ZDEV.VGUI.CreateTextEntry|parent, w, h, text, font, multi, dock, dm_L, dm_T, dm_R, dm_D||
+1028||lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|144|361|ProcessNodeData|node, data||
+1029|ZDEV_FUNC_6DD2DDB8|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|171|183|ZDEV.VGUI.CreateNodeTree|parent, x, y, w, h, nodedata||
+1030|ZDEV_FUNC_624000A0|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|188|193|ZDEV.VGUI.AddToMainMenu|cmd||
+1031|ZDEV_FUNC_FADA9C18|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|196|361|ZDEV.VGUI.MainMenu|||
+1032|ZDEV_FUNC_867B4D3E|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|235|258|ZDEV.VGUI.ModelSelect|||
+1033||lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|253|256|browser:OnSelect|path, pnl||
+1034|ZDEV_FUNC_7E952CF3|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|261|271|ZDEV.VGUI.PlayerInfo|||
+1035|ZDEV_FUNC_54BEF803|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|274|278|ZDEV.VGUI.MaterialBrowser|||
+1036|ZDEV_FUNC_1BEE50A7|lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|282|356|ZDEV.VGUI.FileManager|cmd, ply, arg||
+1037||lua/zdev/client/zd_cl_vgui.lua|zd_cl_vgui.lua|312|317|menu.dFB:OnSelect|path, pnl||
+1038||lua/zdev/server/meta/zd_sv_meta_ent.lua|zd_sv_meta_ent.lua|15|27|meta:NetworkKeyValues|||
+1039||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|18|284|meta:GenerateZID|||
+1040||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|37|62|meta:InitZData|||
+1041||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|67|69|meta:ZID|||
+1042||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|75|77|meta:ZRank|||
+1043||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|79|81|meta:ZGold|||
+1044||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|86|92|meta:ZDataExists|||
+1045||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|98|102|meta:SaveZData|||
+1046||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|108|284|meta:LoadZData|||
+1047||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|121|131|meta:SetZData|data, val||
+1048||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|132|284|meta:SendAllZData|data||
+1049||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|141|155|meta:InsertIntoPlayersTbl|||
+1050||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|161|163|meta:RegisterToDatabase|||
+1051||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|169|171|meta:UploadData|||
+1052||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|179|212|meta:SendHUDMessage|msgtype, txt, time, args||
+1053||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|219|246|meta:AddEntMarker|id, ent, pos, material, clr, time||
+1054||lua/zdev/server/meta/zd_sv_meta_ply.lua|zd_sv_meta_ply.lua|252|284|meta:RemoveEntMarker|id, ent, send||
+1055|ZDEV_FUNC_3400F54D|lua/zdev/server/zd_sv_core.lua|zd_sv_core.lua|17|48|ZDEV.GAME.Think|||
+1056||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|33|39|LoadDatabaseConfig|||Load configuration from autorun or use defaults
+1057||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|42|67|InitDatabaseSystem|||Initialize the database system
+1058||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|70|147|ConnectToDatabase|||Connect to database with retry mechanism
+1059||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|77|144|attemptConnect|||
+1060||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|150|158|GetConnection|||Get a connection from the pool (round-robin or least busy)
+1061||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|161|355|ExecuteQuery|query_string, callback_success, callback_error, params||Execute a query with automatic connection handling
+1062||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|203|218|SafeQuery|query_string, callback_success, callback_error, params||Safe query execution with error handling
+1063||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|204|208|safe_success|data||
+1064||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|210|215|safe_error|err, sql||
+1065||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|221|248|BeginTransaction|callback_success, callback_error||Transaction support
+1066||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|251|258|EscapeString|str||Helper function to escape strings for safety
+1067||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|261|263|GetStatus|||Helper function to check database status
+1068||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|266|268|GetConnectionCount|||Helper function to get connection count
+1069||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|271|355|GetConnectionInfo|||Helper function to get connection info
+1070||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|301|355|RegisterCommands|||Register database commands
+1071||lua/zdev/server/zd_sv_database.lua|zd_sv_database.lua|336|355|CleanupDatabase|||Cleanup function
+1072|ZDEV_FUNC_A4F336B0|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|18|257|ZDEV.PLYR.SearchByIP|ip||
+1073|ZDEV_FUNC_07B428D9|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|31|35|ZDEV.PLYR.DataFileExists|ply||
+1074|ZDEV_FUNC_836CE245|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|38|257|ZDEV.PLYR.QueryAllPlayers|||
+1075||lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|44|57|query:onSuccess|data||
+1076||lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|51|53|query:onError|err||
+1077|ZDEV_FUNC_F7940C74|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|61|80|ZDEV.PLYR.Authed|ply, sid, uid||HOOKS =============================================
+1078|ZDEV_FUNC_B0A60EB2|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|85|97|ZDEV.PLYR.Connected|name, ip||
+1079|ZDEV_FUNC_66AC69A0|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|102|205|ZDEV.PLYR.InitialSpawn|ply||
+1080|ZDEV_FUNC_B6185974|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|210|218|ZDEV.PLYR.Spawn|ply||
+1081|ZDEV_FUNC_3B1B0DA2|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|222|225|ZDEV.PLYR.Disconnected|ply||
+1082|ZDEV_FUNC_BDED8D1F|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|230|231|ZDEV.PLYR.DoDeath|ply, atk, dmg||
+1083|ZDEV_FUNC_2419EB5F|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|235|246|ZDEV.PLYR.Death|ply, atk, dmg||
+1084|ZDEV_FUNC_1F4C50DF|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|250|251|ZDEV.PLYR.TakeDamage|ply, dmg||
+1085|ZDEV_FUNC_7BCF1633|lua/zdev/server/zd_sv_player.lua|zd_sv_player.lua|255|257|ZDEV.PLYR.PlayerShouldTakeDamage|pl, atk||
+1086||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|50|56|SNPC.RegisterTemplate|class, data||Register an SNPC template
+1087||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|59|61|SNPC.GetTemplates|||Get all available templates
+1088||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|64|114|SNPC.SpawnNPC|class, pos, ang, data||Spawn an SNPC
+1089||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|117|453|SNPC.ApplyCustomData|npc, data||Apply custom configuration data to an NPC
+1090||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|176|190|SNPC.RemoveNPC|npcID||Remove an SNPC
+1091||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|193|195|SNPC.GetNPC|npcID||Get SNPC by ID
+1092||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|198|453|SNPC.GetAllNPCs|||Get all active SNPCs
+1093||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|211|453|SNPC.CleanupNPCs|||Clean up invalid NPCs
+1094||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|226|453|SNPC.SpawnTestNPC|player, class, pos||Test NPC Management
+1095||lua/zdev/server/zd_sv_snpc_system.lua|zd_sv_snpc_system.lua|277|453|SNPC.RemoveTestNPCs|player||Remove all test NPCs for a player
+1096|ZDEV_FUNC_6990D2BF|lua/zdev/server/zd_sv_util.lua|zd_sv_util.lua|20|134|ZDEV.UTIL.ScanDir|root, dir||
+1097||lua/zdev/server/zd_sv_util.lua|zd_sv_util.lua|64|97|ZDEV.CMDS.DEV.EntCreate|ply, cmd, arg, args||
+1098||lua/zdev/server/zd_sv_util.lua|zd_sv_util.lua|101|106|ZDEV.CMDS.DEV.RunLua|ply, cmd||
+1099|ZDEV_FUNC_7F66A25A|lua/zdev/server/zd_sv_util.lua|zd_sv_util.lua|122|131|ZDEV.UTIL.EntityKeyValue|ent, key, value||
+1100||lua/zdev/shared.lua|shared.lua|5|9|FormatFolder|folder||
+1101|ZDEV_FUNC_CB2F5AEB|lua/zdev/shared.lua|shared.lua|15|33|ZDEV.FILE.InitDataDirectory|||
+1102|ZDEV_FUNC_EADB8134|lua/zdev/shared.lua|shared.lua|36|57|ZDEV.FILE.InitDataFiles|||
+1103|ZDEV_FUNC_AF202117|lua/zdev/shared.lua|shared.lua|64|274|ZDEV.CONT.LoadMaterials|subdir||
+1104|ZDEV_FUNC_0DDF5DAB|lua/zdev/shared.lua|shared.lua|89|91|ZDEV.CONT.GetMaterials|||
+1105||lua/zdev/shared.lua|shared.lua|117|209|ZDEV.CompressedInputs.CompressSensoryData|sensorData||Compresses all sensory data into 6 critical values
+1106||lua/zdev/shared.lua|shared.lua|212|237|ZDEV.CompressedInputs.CreateSensorDataFromGatherInputs|playerDist, playerHealth, hasLOS, visibleEnemyCount, lightingLevel, coverBetweenEnemy, heightAdvantage, weaponReady, myHealthFrac, exposedFraction, timeSinceEnemySeen, playerWeaponThreat, playerMovementThreat, recentDamageThreat, ammoStatusThreat, environmentalHazard, allySupport||Helper function to create sensor data structure
+1107||lua/zdev/shared.lua|shared.lua|240|274|ZDEV.CompressedInputs.ExplainCompressedInputs|compressedInputs||Debug function to explain compressed inputs
+1108||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|10|19|Name|||
+1109||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|21|31|TeslaZap|ent||
+1110||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|33|39|meta:CreateEffect|s_EffectName||
+1111||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|41|48|meta:IsDoor|||
+1112||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|50|57|meta:IsBreakable|||
+1113||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|59|66|meta:IsProp|||
+1114||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|68|70|meta:GetDownload|||
+1115||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|72|75|meta:GetStatus|||
+1116||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|77|79|meta:IsBeingHacked|||
+1117||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|86|134|meta:DoHack|activator||
+1118||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|136|138|meta:IsTerminal|||
+1119||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|140|147|meta:IsDoor|||
+1120||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|149|151|meta:CanHack|||
+1121||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|155|166|meta:NameFromClass|||
+1122||lua/zdev/shared/meta/zd_sh_meta_ent.lua|zd_sh_meta_ent.lua|174|176|meta:DoHack|activator||
+1123||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|12|20|meta:TraceHitPos|b_ScreenPos||
+1124||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|29|48|meta:GetTraceEnt|||
+1125||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|55|73|meta:InitZData|||
+1126||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|78|94|meta:GetZData|data, cached||
+1127||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|100|154|meta:GetAllZData|cached||
+1128||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|113|119|meta:GetCachedZData|data||
+1129||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|124|129|meta:CacheZData|data, val||
+1130||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|134|136|meta:ZRank|||
+1131||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|141|143|meta:ZID|||
+1132||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|148|150|meta:ZGold|||
+1133||lua/zdev/shared/meta/zd_sh_meta_ply.lua|zd_sh_meta_ply.lua|152|154|meta:ValidateCachedZData|||
+1134||lua/zdev/shared/sh_items.lua|sh_items.lua|33|58|ZDEV.RegisterItem|id, data||
+1135||lua/zdev/shared/sh_items.lua|sh_items.lua|61|63|ZDEV.GetItemDef|id||Look up a registered item definition by ID
+1136||lua/zdev/shared/sh_items.lua|sh_items.lua|75|103|ZD_ItemBase:new|data||Create a new item instance from scratch
+1137||lua/zdev/shared/sh_items.lua|sh_items.lua|106|113|ZD_ItemBase:FromDef|id||Create an instance from a registered definition ID
+1138||lua/zdev/shared/sh_items.lua|sh_items.lua|119|286|ZD_ItemBase:GetID|||
+1139||lua/zdev/shared/sh_items.lua|sh_items.lua|120|286|ZD_ItemBase:GetName|||
+1140||lua/zdev/shared/sh_items.lua|sh_items.lua|121|286|ZD_ItemBase:GetDescription|||
+1141||lua/zdev/shared/sh_items.lua|sh_items.lua|122|286|ZD_ItemBase:GetCategory|||
+1142||lua/zdev/shared/sh_items.lua|sh_items.lua|123|286|ZD_ItemBase:GetWeight|||
+1143||lua/zdev/shared/sh_items.lua|sh_items.lua|124|286|ZD_ItemBase:GetBaseWeight|||
+1144||lua/zdev/shared/sh_items.lua|sh_items.lua|125|286|ZD_ItemBase:GetRarity|||
+1145||lua/zdev/shared/sh_items.lua|sh_items.lua|128|130|ZD_ItemBase:GetSize|||Returns width, height in grid cells
+1146||lua/zdev/shared/sh_items.lua|sh_items.lua|133|135|ZD_ItemBase:GetIcon|||Returns the cached Material object for the item icon
+1147||lua/zdev/shared/sh_items.lua|sh_items.lua|138|140|ZD_ItemBase:GetType|||Returns the item type string (generic, small, weapon, armor, consumable)
+1148||lua/zdev/shared/sh_items.lua|sh_items.lua|143|145|ZD_ItemBase:GetEquipRegion|||Returns the body region this item equips to (nil if not equippable)
+1149||lua/zdev/shared/sh_items.lua|sh_items.lua|148|150|ZD_ItemBase:IsEquippable|||Returns true if this item can be equipped
+1150||lua/zdev/shared/sh_items.lua|sh_items.lua|153|155|ZD_ItemBase:GetDefense|||Returns defense value (for armor pieces)
+1151||lua/zdev/shared/sh_items.lua|sh_items.lua|162|167|ZD_ItemBase:GetStorageSize|||Returns cols, rows if this item grants storage (e.g. a backpack)
+1152||lua/zdev/shared/sh_items.lua|sh_items.lua|170|172|ZD_ItemBase:GetStorageSlotType|||Returns the slot type filter for the granted storage
+1153||lua/zdev/shared/sh_items.lua|sh_items.lua|178|286|ZD_ItemBase:GetStack|||
+1154||lua/zdev/shared/sh_items.lua|sh_items.lua|179|286|ZD_ItemBase:GetMaxStack|||
+1155||lua/zdev/shared/sh_items.lua|sh_items.lua|181|183|ZD_ItemBase:IsStackable|||
+1156||lua/zdev/shared/sh_items.lua|sh_items.lua|185|187|ZD_ItemBase:CanAddToStack|amount||
+1157||lua/zdev/shared/sh_items.lua|sh_items.lua|190|200|ZD_ItemBase:AddToStack|amount||Add to the stack. Returns the overflow (items that didn't fit).
+1158||lua/zdev/shared/sh_items.lua|sh_items.lua|203|207|ZD_ItemBase:RemoveFromStack|amount||Remove from the stack. Returns true if the stack is now empty.
+1159||lua/zdev/shared/sh_items.lua|sh_items.lua|214|218|ZD_ItemBase:Use|ply||Called when the player uses the item
+1160||lua/zdev/shared/sh_items.lua|sh_items.lua|221|225|ZD_ItemBase:OnEquip|ply||Called when the item is equipped to a slot
+1161||lua/zdev/shared/sh_items.lua|sh_items.lua|228|232|ZD_ItemBase:OnUnequip|ply||Called when the item is unequipped from a slot
+1162||lua/zdev/shared/sh_items.lua|sh_items.lua|246|248|ZD_ItemBase:GetRarityColor|||
+1163||lua/zdev/shared/sh_items.lua|sh_items.lua|255|260|ZD_ItemBase:Serialize|||Serialize this instance to a simple table
+1164||lua/zdev/shared/sh_items.lua|sh_items.lua|263|270|ZD_ItemBase.Deserialize|tbl||Deserialize: create an instance from a saved table
+1165||lua/zdev/shared/sh_items.lua|sh_items.lua|276|278|ZD_ItemBase:__tostring|||
+1166||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|12|14|relu|x||Activation functions for advanced network
+1167||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|16|18|tanh_activation|x||
+1168||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|20|443|softmax|outputs||
+1169||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|41|443|convolution2d|input, filter, stride, padding||Convolution operation for 2D input
+1170||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|73|443|maxPooling2d|input, poolSize, stride||Max pooling operation
+1171||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|103|443|flatten|input||Flatten 2D array to 1D
+1172||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|114|443|AdvancedNN:new|visualInputSize, visualChannels, vectorInputSize, lstmUnits, actionDim||Creates a new advanced neural network with CNN + LSTM architecture
+1173||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|233|443|convolution2d_multi_channel|input, filters, stride, padding||Convolution operation for 2D input with multiple channels
+1174||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|271|443|AdvancedNN:forward|visualInput, vectorInput||Forward pass through the entire network
+1175||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|371|443|AdvancedNN:resetState|||Reset LSTM state
+1176||lua/zdev/shared/zd_sh_advanced_nn.lua|zd_sh_advanced_nn.lua|379|443|AdvancedNN:createVisualInput|npc||Create visual input from NPC's field of view
+1177|ZDEV_FUNC_55E4476C|lua/zdev/shared/zd_sh_core.lua|zd_sh_core.lua|11|14|ZDEV.CONV.GetAll|||
+1178|ZDEV_FUNC_412EEADC|lua/zdev/shared/zd_sh_core.lua|zd_sh_core.lua|17|26|ZDEV.GAME.Init|||
+1179|ZDEV_FUNC_B61E1297|lua/zdev/shared/zd_sh_core.lua|zd_sh_core.lua|30|37|ZDEV.GAME.InitPostEntity|||
+1180|ZDEV_FUNC_3400F54D|lua/zdev/shared/zd_sh_core.lua|zd_sh_core.lua|41|42|ZDEV.GAME.Think|||
+1181|ZDEV_FUNC_816A6132|lua/zdev/shared/zd_sh_core.lua|zd_sh_core.lua|46|48|ZDEV.GAME.PostGamemodeLoaded|||
+1182||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|87|115|ZDEV.EDIT.ENVM.SpawnGrass|spawnpos, radius||
+1183||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|125|133|ZDEV.EDIT.ENVM.RemoveGrassByIndex|index||
+1184||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|135|137|ZDEV.EDIT.ENVM.ChangeTool|toolmode||
+1185||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|139|141|ZDEV.EDIT.ENVM.ChangeBrushMode|mode||
+1186||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|143|253|ZDEV.EDIT.ENVM.BrushErase|ply||
+1187||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|160|253|ZDEV.EDIT.ENVM.BrushPaint|ply||
+1188||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|176|178|ZDEV.EDIT.ENVM.RemoveHooks|||
+1189||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|180|188|ZDEV.EDIT.ENVM.AddHooks|||
+1190||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|190|192|ZDEV.EDIT.ENVM.Hook_Spawn|||
+1191||lua/zdev/shared/zd_sh_editor.lua|zd_sh_editor.lua|211|250|ZDEV.EDIT.EMIT.GetConVars|||
+1192|ZDEV_FUNC_0BDA9AE6|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|10|93|ZDEV.SEFX.RegisterFXType|type||
+1193|ZDEV_FUNC_72EB948D|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|20|23|ZDEV.SEFX.GetNameFromFolder|s_folder||
+1194|ZDEV_FUNC_B5F3ABB4|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|26|28|ZDEV.SEFX.GetAll|||
+1195|ZDEV_FUNC_1E97812A|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|31|45|ZDEV.SEFX.Register|fxtbl||
+1196|ZDEV_FUNC_142AE1E9|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|48|93|ZDEV.SEFX.GetByName|name||
+1197|ZDEV_FUNC_72A5A69F|lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|64|66|ZDEV.SEFX.Create|name, pos, ent||
+1198||lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|70|93|ZDEV.SEFX.Emitter.New|pos, min, max, const||
+1199||lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|83|85|ZDEV.SEFX.Emitter.GetParticles|emit||
+1200||lua/zdev/shared/zd_sh_effect.lua|zd_sh_effect.lua|87|91|ZDEV.SEFX.Emitter.AddParticle|emitter, count_min, count_max, data||
+1201|ZDEV_FUNC_D46D6728|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|15|109|ZDEV.PLYR.DataNWTranslate|data||
+1202|ZDEV_FUNC_87F96276|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|27|109|ZDEV.PLYR.LoadFile|||
+1203|ZDEV_FUNC_A0EF4E6C|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|58|60|ZDEV.RANK.Name|rank||
+1204|ZDEV_FUNC_D9EABF3D|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|63|65|ZDEV.RANK.Color|rank||
+1205|ZDEV_FUNC_C256F0DC|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|68|70|ZDEV.RANK.Symbol|rank||
+1206|ZDEV_FUNC_64328C5A|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|73|75|ZDEV.RANK.Icon|rank||
+1207|ZDEV_FUNC_6A123FB4|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|78|80|ZDEV.PLYR.GetRank|ply||
+1208|ZDEV_FUNC_41CAA333|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|83|87|ZDEV.PLYR.Tick|ply, mv||
+1209|ZDEV_FUNC_12B380A1|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|92|96|ZDEV.PLYR.PostThink|ply||
+1210|ZDEV_FUNC_3400F54D|lua/zdev/shared/zd_sh_player.lua|zd_sh_player.lua|103|105|ZDEV.GAME.Think|||
+1211||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|12|14|sigmoid|x||Activation function (Sigmoid)
+1212||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|17|22|dsigmoid|y||Derivative of sigmoid, for backpropagation with gradient clipping
+1213||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|25|961|SimpleNN:ensureOptimizationArrays|||Ensure all optimization arrays are properly sized and initialized
+1214||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|56|961|SimpleNN:new|input_nodes, hidden_nodes, output_nodes||Creates a new neural network
+1215||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|112|961|SimpleNN:resize|new_input_nodes, new_hidden_nodes, new_output_nodes||Resize network to handle different input sizes
+1216||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|185|961|SimpleNN:forward|inputs||
+1217||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|265|961|SimpleNN:train|targets||Backpropagation training algorithm
+1218||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|431|961|SimpleNN:trainPartial|target_indices, target_values||Helper function for partial training (train only specific outputs)
+1219||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|458|476|SimpleNN:adjustLearningParameters|performance_metric||Advanced learning rate scheduling and parameter adjustment
+1220||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|479|961|SimpleNN:attemptSelfOptimization|performance_history||Self-optimization through automatic architecture adjustment
+1221||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|512|543|SimpleNN:tryStructuralOptimization|||Attempt to optimize network structure dynamically
+1222||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|546|961|SimpleNN:reinitializeWeakConnections|||Reinitialize connections that aren't contributing much to learning
+1223||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|578|961|SimpleNN:applyRegularization|l2_strength||Weight regularization to prevent overfitting
+1224||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|596|961|SimpleNN:calculatePerformanceMetrics|recent_errors||Calculate network performance metrics
+1225||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|623|961|SimpleNN:mutate|rate||Mutate weights for evolution
+1226||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|624|961|mutate_weights|weights||
+1227||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|639|649|SimpleNN:enableMetaLearning|||Meta-learning: Learn how to learn better
+1228||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|652|685|SimpleNN:updateMetaLearning|performance_improvement, current_lr, current_momentum||Update meta-learning based on recent performance
+1229||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|688|961|SimpleNN:updateOptimalEstimates|||Update estimates of optimal learning parameters
+1230||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|717|734|SimpleNN:getMetaLearningAdjustment|||Use meta-learning to suggest better parameters
+1231||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|737|761|SimpleNN:adaptiveTrain|targets, performance_metric||Self-adaptive training that uses meta-learning
+1232||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|769|961|SimpleNN:addHiddenNeuron|||Add a new hidden neuron dynamically
+1233||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|816|961|SimpleNN:pruneHiddenNeurons|||Remove underperforming hidden neurons
+1234||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|862|961|SimpleNN:removeHiddenNeuron|neuron_idx||Remove a specific hidden neuron
+1235||lua/zdev/shared/zd_sh_simple_nn.lua|zd_sh_simple_nn.lua|917|961|SimpleNN:performSelfOptimization|performance_history, current_performance||Comprehensive self-optimization routine
+1236|ZDEV_FUNC_D7056E30|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|36|39|ZDEV.AMMO.GetID|s_ammo||
+1237|ZDEV_FUNC_075E6E4A|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|42|44|ZDEV.AMMO.GetIcon|ammo||
+1238|ZDEV_FUNC_AFD79260|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|47|49|ZDEV.AMMO.GetLabel|ammo||
+1239|ZDEV_FUNC_AA1BEFD2|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|52|54|ZDEV.AMMO.GetName|ammo||
+1240|ZDEV_FUNC_8E132CE0|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|57|331|ZDEV.AMMO.FindByName|s_name||
+1241|ZDEV_FUNC_F72F044F|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|94|97|ZDEV.WEAP.GroupName|id||
+1242|ZDEV_FUNC_920BBF64|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|131|133|ZDEV.WEAP.IsHoldTypeValid|htype||
+1243|ZDEV_FUNC_1DC756F0|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|140|331|ZDEV.WEAP.NewID|class||
+1244|ZDEV_FUNC_FB6ECFF3|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|153|331|ZDEV.WEAP.GetID|arg||
+1245|ZDEV_FUNC_EAD411E7|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|172|331|ZDEV.WEAP.IDFromClass|class||
+1246|ZDEV_FUNC_7B9F3D31|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|181|331|ZDEV.WEAP.FindByID|id||
+1247|ZDEV_FUNC_437E7FD0|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|194|196|ZDEV.WEAP.InitializeWeapon|data||
+1248|ZDEV_FUNC_C04CF33C|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|199|201|ZDEV.WEAP.WeaponInitialized|id||
+1249|ZDEV_FUNC_2C99E9F5|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|204|206|ZDEV.WEAP.StoredSWEPTable|s_class||
+1250|ZDEV_FUNC_CAF7B3DA|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|209|211|ZDEV.WEAP.SWEPTable|s_class||
+1251|ZDEV_FUNC_C225C613|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|214|232|ZDEV.WEAP.MergedSWEPTable|s_class||
+1252|ZDEV_FUNC_9A3DFD71|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|238|248|ZDEV.WEAP.SaveFile|s_file, t_data||
+1253|ZDEV_FUNC_E3109661|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|251|272|ZDEV.WEAP.LoadFile|weap||
+1254|ZDEV_FUNC_3F60E11D|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|275|283|ZDEV.WEAP.SaveIndex|||
+1255|ZDEV_FUNC_93330FE0|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|286|295|ZDEV.WEAP.LoadIndex|||
+1256|ZDEV_FUNC_2168AABB|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|298|310|ZDEV.WEAP.RegisterWeapon|class||
+1257|ZDEV_FUNC_3E310734|lua/zdev/shared/zd_sh_weapon.lua|zd_sh_weapon.lua|313|331|ZDEV.WEAP.RegisterWeapons|||
