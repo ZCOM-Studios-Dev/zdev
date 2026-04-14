@@ -117,7 +117,7 @@ def collect_preceding_comments(lines, func_idx):
             continue
 
         # Skip divider lines like ----- or ====
-        if re.match(r'^-{3,}$|^={3,}$', text.lstrip('-').strip()):
+        if re.match(r'^-{3,}$|^={3,}$', text.strip()):
             continue
 
         # Treat as description; strip leading -- and whitespace

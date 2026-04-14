@@ -96,23 +96,23 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 95||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|101|142|ENT:Detonate|||
 96||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|148|152|ENT:OnTakeDamage|dmginfo||
 97||lua/entities/ent_frag_grenade_proj.lua|ent_frag_grenade_proj.lua|158|182|ENT:Draw|||
-98||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|32|47|ENT:Initialize|||CLIENT-SIDE INITIALIZATION
+98||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|32|47|ENT:Initialize|||============================================================================ CLIENT-SIDE INITIALIZATION ============================================================================
 99||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|50|65|ENT:SetupTrail|||Set up trail effect
-100||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|70|78|ENT:Draw|flags||RENDERING
+100||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|70|78|ENT:Draw|flags||============================================================================ RENDERING ============================================================================
 101||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|80|85|ENT:DrawTranslucent|flags||
 102||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|88|103|ENT:DrawGlow|||Draw glow sprite effect
-103||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|108|205|ENT:Think|||CLIENT THINK
+103||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|108|205|ENT:Think|||============================================================================ CLIENT THINK ============================================================================
 104||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|142|155|ENT:BeingLookedAtByLocalPlayer|||Check if local player is looking at this entity
 105||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|158|197|ENT:DrawWorldHUD|||Draw world HUD info when looking at entity
-106||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|202|205|ENT:OnRemove|||CLEANUP
-107||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|29|72|ENT:Initialize|||SERVER-SIDE INITIALIZATION
+106||lua/entities/zdev_ent_base_projectile/cl_init.lua|cl_init.lua|202|205|ENT:OnRemove|||============================================================================ CLEANUP ============================================================================
+107||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|29|72|ENT:Initialize|||============================================================================ SERVER-SIDE INITIALIZATION ============================================================================
 108||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|82|141|ENT:SetupPhysics|||Configure physics based on projectile type @note Based on PhysObj wiki: https:--wiki.facepunch.com/gmod/PhysObj - SetDragCoefficient: controls air resistance (valid) - SetDamping: controls linear/angular velocity decay (valid) - SetMass: sets mass in kg (valid) - EnableGravity: only enables/disables, cannot set custom gravity vector - Elasticity: use Entity:SetElasticity(), NOT PhysObj method - Friction: controlled via PhysObj:SetMaterial() surface properties
-109||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|146|159|ENT:SpawnFunction|ply, tr, ClassName||SPAWN FUNCTION
+109||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|146|159|ENT:SpawnFunction|ply, tr, ClassName||============================================================================ SPAWN FUNCTION ============================================================================
 110||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|169|205|ENT:Throw|thrower, velocity, angVelocity||Throw the projectile with the given velocity
 111||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|215|260|ENT:Think|||
 112||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|263|286|ENT:UpdateEnergyMovement|||Update position for energy-type projectiles
-113||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|291|347|ENT:PhysicsCollide|colData, collider||PHYSICS COLLISION HANDLING
-114||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|352|369|ENT:OnTakeDamage|dmginfo||DAMAGE HANDLING
+113||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|291|347|ENT:PhysicsCollide|colData, collider||============================================================================ PHYSICS COLLISION HANDLING ============================================================================
+114||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|352|369|ENT:OnTakeDamage|dmginfo||============================================================================ DAMAGE HANDLING ============================================================================
 115||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|378|414|ENT:Deploy|hitPos, hitNormal||Deploy the entity (make it static on a surface)
 116||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|424|465|ENT:AttachTo|target, hitPos, hitNormal||Attach the entity to another entity
 117||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|468|486|ENT:Detach|||Detach from parent entity
@@ -123,9 +123,9 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 122||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|562|680|ENT:Explode|||Handle explosion
 123||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|630|644|ENT:OnDestroyed|attacker, inflictor||Called when entity is destroyed by damage
 124||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|647|653|ENT:OnRemove|||Cleanup on removal
-125||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|658|673|ENT:AcceptInput|inputName, activator, caller, param||INPUT HANDLING (for Hammer I/O)
-126||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|678|680|ENT:UpdateTransmitState|||TRANSMIT STATE
-127||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|127|145|ENT:SetupDataTables|||NETWORKED DATA TABLES
+125||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|658|673|ENT:AcceptInput|inputName, activator, caller, param||============================================================================ INPUT HANDLING (for Hammer I/O) ============================================================================
+126||lua/entities/zdev_ent_base_projectile/init.lua|init.lua|678|680|ENT:UpdateTransmitState|||============================================================================ TRANSMIT STATE ============================================================================
+127||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|127|145|ENT:SetupDataTables|||============================================================================ NETWORKED DATA TABLES ============================================================================
 128||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|161|403|ENT:CanAttachToClass|entClass|boolean True if the entity can be attached to|Check if an entity class matches our attachable list (supports wildcards)
 129||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|183|197|ENT:ShouldActivate||boolean True if activation conditions are met|Check if this projectile should activate based on its trigger type
 130||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|201|403|ENT:CheckProximityTrigger||boolean True if a valid target is in range|Check if any valid targets are within proximity radius
@@ -145,7 +145,7 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 144||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|370|372|ENT:OnActivate|||
 145||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|387|389|ENT:OnImpact|hitEntity, colData||
 146||lua/entities/zdev_ent_base_projectile/shared.lua|shared.lua|401|403|ENT:OnExplode|pos, radius, damage||
-147||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+147||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|61|68|ENT:SetupDataTables|||============================================================================ NETWORKED DATA TABLES ===========================================	=================================
 148||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|83|95|ENT:Initialize|||
 149||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|97|122|ENT:OnActivate|||
 150||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|124|213|ENT:ApplyFlashEffect|||
@@ -153,7 +153,7 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 152||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|281|293|ENT:Initialize|||
 153||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|295|300|ENT:Draw|||
 154||lua/entities/zdev_ent_grenade_emp.lua|zdev_ent_grenade_emp.lua|302|325|ENT:DrawArmedIndicator|||
-155||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+155||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|61|68|ENT:SetupDataTables|||============================================================================ NETWORKED DATA TABLES ===========================================	=================================
 156||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|83|95|ENT:Initialize|||
 157||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|97|122|ENT:OnActivate|||
 158||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|124|213|ENT:ApplyFlashEffect|||
@@ -161,7 +161,7 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 160||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|281|293|ENT:Initialize|||
 161||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|295|300|ENT:Draw|||
 162||lua/entities/zdev_ent_grenade_flashbang.lua|zdev_ent_grenade_flashbang.lua|302|325|ENT:DrawArmedIndicator|||
-163||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|61|68|ENT:SetupDataTables|||NETWORKED DATA TABLES ===========================================	=================================
+163||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|61|68|ENT:SetupDataTables|||============================================================================ NETWORKED DATA TABLES ===========================================	=================================
 164||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|83|95|ENT:Initialize|||
 165||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|97|122|ENT:OnActivate|||
 166||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|124|213|ENT:ApplyFlashEffect|||
@@ -170,12 +170,12 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 169||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|295|300|ENT:Draw|||
 170||lua/entities/zdev_ent_grenade_he.lua|zdev_ent_grenade_he.lua|302|325|ENT:DrawArmedIndicator|||
 171||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|6|13|ENT:Initialize|||
-172||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|19|21|ENT:SetEnemy|ent||------------------------------------------------- ENT:Get/SetEnemy() Simple functions used in keeping our enemy saved -------------------------------------------------
+172||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|19|21|ENT:SetEnemy|ent||ENT:Get/SetEnemy() Simple functions used in keeping our enemy saved
 173||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|22|24|ENT:GetEnemy|||
-174||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|30|48|ENT:HaveEnemy|||------------------------------------------------- ENT:HaveEnemy() Returns true if we have a enemy -------------------------------------------------
-175||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|54|154|ENT:FindEnemy|||------------------------------------------------- ENT:FindEnemy() Returns true and sets our enemy if we find one -------------------------------------------------
-176||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|76|154|ENT:RunBehaviour|||------------------------------------------------- ENT:RunBehaviour() This is where the meat of our AI is -------------------------------------------------
-177||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|118|154|ENT:ChaseEnemy|options||------------------------------------------------- ENT:ChaseEnemy() Works similarly to Garry's MoveToPos function except it will constantly follow the position of the enemy until there no longer is one. -------------------------------------------------
+174||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|30|48|ENT:HaveEnemy|||ENT:HaveEnemy() Returns true if we have a enemy
+175||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|54|154|ENT:FindEnemy|||ENT:FindEnemy() Returns true and sets our enemy if we find one
+176||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|76|154|ENT:RunBehaviour|||ENT:RunBehaviour() This is where the meat of our AI is
+177||lua/entities/zdev_nextbot.lua|zdev_nextbot.lua|118|154|ENT:ChaseEnemy|options||ENT:ChaseEnemy() Works similarly to Garry's MoveToPos function except it will constantly follow the position of the enemy until there no longer is one.
 178||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|30|44|ENT:SetupDataTables|||
 179||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|46|71|ENT:Initialize|||
 180||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|74|86|ENT:Use|activator, caller||
@@ -188,12 +188,12 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 187||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|216|268|ENT:Draw|||
 188||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|270|352|ENT:DrawInterface|||
 189||lua/entities/zdev_objective_terminal.lua|zdev_objective_terminal.lua|354|366|ENT:Think|||
-190||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|32|43|ENT:Initialize|||CLIENT-SIDE INITIALIZATION
-191||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|48|56|ENT:Draw|flags||RENDERING
+190||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|32|43|ENT:Initialize|||============================================================================ CLIENT-SIDE INITIALIZATION ============================================================================
+191||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|48|56|ENT:Draw|flags||============================================================================ RENDERING ============================================================================
 192||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|59|81|ENT:DrawArmedIndicator|||Draw blinking red light when armed
-193||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|86|92|ENT:Think|||CLIENT THINK
+193||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|86|92|ENT:Think|||============================================================================ CLIENT THINK ============================================================================
 194||lua/entities/zdev_projectile_base_grenade/cl_init.lua|cl_init.lua|99|135|ENT:DrawWorldHUD|||Draw world HUD info when looking at grenade
-195||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|26|44|ENT:Initialize|||SERVER-SIDE INITIALIZATION
+195||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|26|44|ENT:Initialize|||============================================================================ SERVER-SIDE INITIALIZATION ============================================================================
 196||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|51|67|ENT:OnThrow|thrower, velocity||Called when the grenade is thrown
 197||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|70|85|ENT:OnArm|||Called when the grenade is armed
 198||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|88|107|ENT:OnImpact|hitEntity, colData||Called when the grenade impacts something
@@ -202,7 +202,7 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 201||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|163|182|ENT:UpdateBeeping|||Update beeping sound with accelerating frequency
 202||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|190|195|ENT:SetFuseTime|fuseTime||Set a custom fuse time (for cooking)
 203||lua/entities/zdev_projectile_base_grenade/init.lua|init.lua|199|201|ENT:GetFuseTime||number Seconds until explosion|Get remaining fuse time
-204||lua/entities/zdev_projectile_base_grenade/shared.lua|shared.lua|79|85|ENT:SetupDataTables|||NETWORKED DATA TABLES
+204||lua/entities/zdev_projectile_base_grenade/shared.lua|shared.lua|79|85|ENT:SetupDataTables|||============================================================================ NETWORKED DATA TABLES ============================================================================
 205||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|14|21|ENT:Draw|||
 206||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|23|73|ENT:DrawStatusIndicator|||
 207||lua/entities/zdev_snpc_test/cl_init.lua|cl_init.lua|75|85|ENT:GetStateColor|state||
@@ -518,25 +518,25 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 517||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|215|217|SWEP:ShouldDropOnDie|||
 518||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|219|221|SWEP:DoImpactEffect|traceResult, damageType||
 519||lua/weapons/zdev_weapon_base_throwable/shared.lua|shared.lua|223|225|SWEP:GetTracerOrigin|||
-520||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|205|216|GenerateIP|ent||FAKE DATA GENERATORS
+520||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|205|216|GenerateIP|ent||============================================================================ FAKE DATA GENERATORS ============================================================================
 521||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|218|1377|GenerateMAC|ent||
 522||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|234|239|GeneratePort|ent||
 523||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|248|1377|ScanForTargets|ply, wep||
 524||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|351|398|UpdateLockOn|wep, targets||
-525||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|403|427|ApplyAimAssist|ply, wep||AIM ASSIST (Lock-on centering)
+525||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|403|427|ApplyAimAssist|ply, wep||============================================================================ AIM ASSIST (Lock-on centering) ============================================================================
 526||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|433|437|DrawScanLine|x, y, w, h, rt||
 527||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|439|453|DrawCornerBrackets|x, y, w, h, size, color||
 528||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|455|1377|DrawSignalBars|x, y, signal, maxBars||
 529||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|484|499|DrawThreatIndicator|x, y, threat||
-530||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|504|1377|DrawTargetReticle|target, isLocked, rt||TARGET RETICLE DRAWING
-531||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|579|1377|DrawTargetInfoPanel|target, isLocked, rt||TARGET INFO PANEL
-532||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|672|1377|DrawScanOverlay|rt||SCAN OVERLAY (Edge frame & ambient effects)
+530||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|504|1377|DrawTargetReticle|target, isLocked, rt||============================================================================ TARGET RETICLE DRAWING ============================================================================
+531||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|579|1377|DrawTargetInfoPanel|target, isLocked, rt||============================================================================ TARGET INFO PANEL ============================================================================
+532||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|672|1377|DrawScanOverlay|rt||============================================================================ SCAN OVERLAY (Edge frame & ambient effects) ============================================================================
 533||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|739|1377|DrawScanEffect|target, progress, rt||Draw scan animation over target
 534||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|781|808|DrawHackedEffect|target, rt, intensity||"Draw ""HACKED"" glitch effect over target"
 535||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|811|842|DrawOverloadEffect|target, rt, elapsed||Draw overload effect (damage/explosion warning)
 536||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|845|857|DrawConvertedIndicator|target, rt||Draw converted ally indicator
-537||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|862|1377|DrawHackerHUD|wep||MAIN HUD DRAW FUNCTION
-538||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|990|1029|HandleLockInput|wep||INPUT HANDLING FOR LOCK-ON
+537||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|862|1377|DrawHackerHUD|wep||============================================================================ MAIN HUD DRAW FUNCTION ============================================================================
+538||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|990|1029|HandleLockInput|wep||============================================================================ INPUT HANDLING FOR LOCK-ON ============================================================================
 539||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1037|1377|DrawScreenHUD|weapon, w, h, rt||
 540||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1160|1377|DrawScanEffect|target, progress, rt||Draw scan animation over target
 541||lua/weapons/zdev_weapon_hacker/cl_hud_targeting.lua|cl_hud_targeting.lua|1202|1229|DrawHackedEffect|target, rt, intensity||"Draw ""HACKED"" glitch effect over target"
@@ -598,8 +598,8 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 597||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|367|369|SWEP:Think|||
 598||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|390|422|SWEP:GetTracerShootPos|Position, Ent, Attachment||--------------------------------------------------------]]
 599||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|424|463|SWEP:PostDrawViewModel|vm, weapon, ply||
-600||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|469|474|SWEP:DrawHUD|||FUNC DrawHUD()
-601||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|481|526|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||FUNC FormatViewModelAttachment() FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
+600||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|469|474|SWEP:DrawHUD|||======================================================== FUNC DrawHUD() ========================================================
+601||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|481|526|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||======================================================== FUNC FormatViewModelAttachment() ======================================================== FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
 602||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|532|993|SWEP:ViewModelDrawn|||
 603||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|671|993|SWEP:DrawWorldModel|||
 604||lua/weapons/zdev_weapon_laser_rifle.lua|zdev_weapon_laser_rifle.lua|790|830|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
@@ -615,7 +615,7 @@ num|uid|filepath|filename|line-start|line-end|name|parameters|returns|descriptio
 614||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|193|212|SWEP:Think|||Think function to handle rope rendering
 615||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|219|236|SWEP:SecondaryAttack|||Define the secondary attack function
 616||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|242|247|SWEP:DrawHUD|||
-617||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|254|299|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||FUNC FormatViewModelAttachment() FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
+617||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|254|299|FormatViewModelAttachment|nFOV, vOrigin, bFrom --[[= false]]||======================================================== FUNC FormatViewModelAttachment() ======================================================== FIXME: The nFOV parameter should be replaced with ViewModelFOV() when it's binded
 618||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|305|759|SWEP:ViewModelDrawn|||
 619||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|437|759|SWEP:DrawWorldModel|||
 620||lua/weapons/zdev_weapon_photon_rifle.lua|zdev_weapon_photon_rifle.lua|556|596|SWEP:GetBoneOrientation|basetab, tab, ent, bone_override||
