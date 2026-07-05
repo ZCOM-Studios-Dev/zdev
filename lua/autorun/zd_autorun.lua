@@ -1,4 +1,4 @@
-local _f = 'zd_autorun.lua';  Msg("■ ") MsgC(Color(255,255,50),'ZDEV File: ',color_white,_f .. '\n')
+﻿local _f = 'autorun/zd_autorun.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',Color(150,255,150),"(AUTORUN)",color_white,_f .. '\n')
 --
 --[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	ZDEV - ZCOM's Development Addon
@@ -6,8 +6,19 @@ local _f = 'zd_autorun.lua';  Msg("■ ") MsgC(Color(255,255,50),'ZDEV File: ',c
 	By Adrian 'ZCOM' L. at ZCOM Studios
 	Copyright (c) 2020 by ZCOM Studios, All rights reserved.
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
-require( "zdev" )
-require( "znnet" )
+if SERVER then
+	AddCSLuaFile()
+end
+
+-- Both zdev and znnet are pure-Lua modules in lua/includes/modules/, so require
+-- on both realms. pcall guards against missing files / syntax errors; the stub
+-- below then provides a no-op fallback so call sites don't error.
+pcall( require, "zdev" )
+pcall( require, "znnet" )
+
+-- Defense-in-depth fallback if require above failed for any reason.
+-- The structured wrapper in zd_autorun_debug.lua decorates whatever lands here.
+zdev = zdev or { log = function() end }
 --[[═════════════════════════════════════════════════════════════════════════
   ZDEV CORE: FILE - Users
 ═════════════════════════════════════════════════════════════════════════ ]] 
@@ -21,32 +32,63 @@ ZDEV = ZDEV or {}	-- General Data-Table
 ZD = ZD or {}		-- Primary Hook-Table
 ZDEV_ADDONS = ZDEV_ADDONS or {}	-- All relevant addon data for dependencies and resource tracking
 
+-- Version is published as a comparable integer so child addons can gate on it.
+-- VERSION_NUM = major*100 + minor*10 + patch  (e.g. 0.7.2 -> 702). Keep both in sync.
+ZDEV.VERSION     = "0.7.2"
+ZDEV.VERSION_NUM = 702
+
+ZDEV.Settings = ZDEV.Settings or {}
+-- Master kill switch for the unfinished inventory + equipment systems.
+-- Flip to true to re-enable; all gated paths across the addon check this flag.
+ZDEV.Settings.InventoryEnabled = false
+
 --[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 -- SHARED
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
+-- Namespace cleanup 2026-07-02: removed never-referenced tables
+-- (HOOK, MATH, MAPS, NPCS, BOTS, TIMR — see ROADMAP.md "Namespace Cleanup")
 ZDEV.ADON = {}
-ZDEV.HOOK = {}
-ZDEV.DBUG = {}
+-- DBUG must PERSIST across autorun re-runs (zdev_reload / lua_refresh):
+-- it holds _Originals (pristine pre-intercept Msg/print/Error — wiping it
+-- makes zd_sv_debug_console re-capture our own wrappers = double-wrap) and
+-- MSG_TYPE, which surviving hooks/intercepts index between the wipe and the
+-- shared file re-running.
+ZDEV.DBUG = ZDEV.DBUG or {}
 ZDEV.DBUG.LOG = {}
 ZDEV.UTIL = {}
-ZDEV.MATH = {}
-ZDEV.MATH.CALC = {}
 ZDEV.DATA = {}
 ZDEV.VARS = {}
 ZDEV.FILE = {}
 ZDEV.FILE.INDEX = {}
 ZDEV.FILE.DIR = {}
+-- ── Load tracking (Sidekick Phase B1) ─────────────────────────────────────
+-- Rich per-file load metadata alongside the boolean INDEX. META is keyed by
+-- the same _f string files pass to SetLoaded; INDEX semantics are unchanged.
+ZDEV.FILE.META = {}          -- _f -> { order, systime, oclock, realm, include_path, parent, chain, duration_ms, include_count, generation }
+ZDEV.FILE._SEQ = 0           -- monotonic load-order counter (per realm)
+ZDEV.FILE.GENERATION = 1     -- bumped by ResetTracking() on zdev_reload
+ZDEV.FILE._STACK = {}        -- live include stack (frames: {path, t0, parent})
+ZDEV.FILE._ATTEMPTS = {}     -- include path -> attempt count (catches guard-skipped re-includes)
+
+-- Wrap the global include() to maintain the include stack. The pristine
+-- original lives in a top-level global so a zd_autorun re-run (lua_refresh)
+-- never double-wraps; a full Lua state reset restores the native include.
+ZDEV_ORIG_INCLUDE = ZDEV_ORIG_INCLUDE or include
+include = function( path )
+	local stack = ZDEV.FILE._STACK
+	stack[#stack + 1] = { path = path, t0 = SysTime(), parent = stack[#stack] }
+	local ret = { ZDEV_ORIG_INCLUDE( path ) }
+	stack[#stack] = nil
+	ZDEV.FILE._ATTEMPTS[path] = ( ZDEV.FILE._ATTEMPTS[path] or 0 ) + 1
+	return unpack( ret )
+end
 ZDEV.CONV = {}
 ZDEV.CMDS = {}
 ZDEV.CMDS.DEV = {}
-ZDEV.MAPS = {}
-ZDEV.NPCS = {}
 ZDEV.WEAP = {}
 ZDEV.AMMO = {}
 ZDEV.ENTS = {}
 ZDEV.MDLS = {}
-ZDEV.BOTS = {}
-ZDEV.TIMR = {}
 ZDEV.GAME = {}
 ZDEV.PLYR = {}
 ZDEV.MATS = {}
@@ -106,6 +148,56 @@ ZDEV.ADON.AddAddon = function( id, v )
 
 end
 
+--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    ADDON DEPENDENCY REGISTRAR
+    Called by child addons (ZDEV Weapons, ZDEV NPCs, ...) from their
+    self-contained dependency gate, AFTER the gate has confirmed that
+    ZDEV Core is present. Version-checks the child against this Core
+    build, records it in ZDEV_ADDONS, and returns the ZDEV namespace
+    so the child can localize it.
+
+    spec = {
+        id       = "zdev_weapons",   -- unique registry key
+        name     = "ZDEV Weapons",   -- human-readable
+        version  = "1.0.0",          -- child's own version (display only)
+        min_core = 702,              -- (optional) minimum ZDEV.VERSION_NUM required
+    }
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+-- ZDEV_UID: ZDEV_FUNC_REG10001 | Path: ZDEV.ADON.Register
+function ZDEV.ADON.Register( spec )
+	if not istable( spec ) or not spec.id then
+		MsgC( Color(255,80,80), "[ZDEV] ", color_white, "ZDEV.ADON.Register called with an invalid spec.\n" )
+		return ZDEV
+	end
+
+	local name = spec.name or spec.id
+
+	-- Soft version gate: warn but still load, so a stale child degrades rather than dies.
+	if spec.min_core and ZDEV.VERSION_NUM < spec.min_core then
+		MsgC( Color(255,80,80), "[ZDEV] ", color_white,
+			name .. " requests Core v" .. tostring(spec.min_core) ..
+			" but this is Core v" .. tostring(ZDEV.VERSION_NUM) ..
+			" — some features may not work.\n" )
+		spec.core_outdated = true
+	end
+
+	-- Load-tracking metadata (Sidekick Phase B1): when and where in the load
+	-- sequence this addon registered.
+	spec.registered_systime = SysTime()
+	spec.registered_at      = os.time()
+	spec.registered_order   = ZDEV.FILE._SEQ
+	ZDEV.ADON.EVENTS = ZDEV.ADON.EVENTS or {}
+	ZDEV.ADON.EVENTS[#ZDEV.ADON.EVENTS + 1] = { id = spec.id, systime = spec.registered_systime }
+
+	ZDEV.ADON.AddAddon( spec.id, spec )
+
+	return ZDEV   -- hand the namespace back so the child can do: local ZDEV = ZDEV.ADON.Register(...)
+end
+
+-- Core registers itself so the addon registry always has a root entry for
+-- children (and the Sidekick Addons view) to hang off.
+ZDEV.ADON.Register( { id = "zdev", name = "ZDEV Core", version = ZDEV.VERSION } )
+
 -- ZDEV_UID: ZDEV_FUNC_B625D863 | Path: ZDEV.FILE.GetAllLoaded
 function ZDEV.FILE.GetAllLoaded()
 	return table.GetKeys(ZDEV.FILE.INDEX)
@@ -117,8 +209,164 @@ function ZDEV.FILE.Loaded( s_file )
 end
 
 -- ZDEV_UID: ZDEV_FUNC_A7C35901 | Path: ZDEV.FILE.SetLoaded
+-- Records rich load metadata (Sidekick Phase B1). Called as the LAST
+-- statement of every ZDEV file, while that file is still the top frame of
+-- the include stack — which is what lets us correlate the inconsistent _f
+-- header strings with real include paths.
 function ZDEV.FILE.SetLoaded( s_file )
 	ZDEV.FILE.INDEX[s_file] = true
+
+	local meta = ZDEV.FILE.META[s_file]
+	if meta then
+		meta.include_count = meta.include_count + 1
+		return
+	end
+
+	ZDEV.FILE._SEQ = ZDEV.FILE._SEQ + 1
+	local stack = ZDEV.FILE._STACK
+	local top = stack[#stack]
+	local chain
+	if top then
+		chain = {}
+		for i = 1, #stack do chain[i] = stack[i].path end
+	end
+
+	meta = {
+		order         = ZDEV.FILE._SEQ,
+		systime       = SysTime(),
+		oclock        = os.time(),
+		realm         = SERVER and "SERVER" or "CLIENT",
+		include_path  = top and top.path or "(engine)",
+		parent        = top and top.parent and top.parent.path or nil,
+		chain         = chain,
+		duration_ms   = top and math.Round( ( SysTime() - top.t0 ) * 1000, 2 ) or nil,
+		include_count = 1,
+		generation    = ZDEV.FILE.GENERATION,
+	}
+	ZDEV.FILE.META[s_file] = meta
+
+	if ZDEV.Sidekick and ZDEV.Sidekick.OnFileLoaded then
+		ZDEV.Sidekick.OnFileLoaded( s_file, meta )
+	end
+end
+
+-- ZDEV_UID: ZDEV_FUNC_RESETTRK1 | Path: ZDEV.FILE.ResetTracking
+-- Called alongside INDEX = {} on zdev_reload so the next include pass
+-- records a fresh generation of load metadata.
+function ZDEV.FILE.ResetTracking()
+	ZDEV.FILE.META = {}
+	ZDEV.FILE._ATTEMPTS = {}
+	ZDEV.FILE._SEQ = 0
+	ZDEV.FILE.GENERATION = ZDEV.FILE.GENERATION + 1
+end
+
+-- ZDEV_UID: ZDEV_FUNC_FILERPT1 | Path: ZDEV.FILE.PrintReport
+-- Console tree of the load order: files sorted by order, indented by include
+-- depth, with source include path, per-file timing, and re-include flags.
+-- Shared command: run 'zdev_files_report' in the client console for the
+-- CLIENT realm; use 'lua_run ZDEV.FILE.PrintReport()' for SERVER on a listen host.
+function ZDEV.FILE.PrintReport()
+	local rows = {}
+	for f, m in pairs( ZDEV.FILE.META ) do
+		rows[#rows + 1] = { file = f, m = m }
+	end
+	table.sort( rows, function( a, b ) return a.m.order < b.m.order end )
+
+	MsgC( Color(255,255,50), "\n■ ZDEV load report — ", color_white,
+		( SERVER and "SERVER" or "CLIENT" ) .. " realm, generation " ..
+		ZDEV.FILE.GENERATION .. ", " .. #rows .. " files\n" )
+
+	for _, row in ipairs( rows ) do
+		local m = row.m
+		local depth = m.chain and #m.chain or 0
+		MsgC( Color(120,120,120), string.format( "%3d ", m.order ),
+			color_white, string.rep( "  ", depth ) .. row.file,
+			Color(120,180,255), "  [" .. ( m.include_path or "?" ) .. "]",
+			Color(120,255,120), m.duration_ms and string.format( "  %.2fms", m.duration_ms ) or "" )
+		if m.include_count > 1 then
+			MsgC( Color(255,180,50), "  (loaded " .. m.include_count .. "x)" )
+		end
+		Msg( "\n" )
+	end
+
+	local dupes = {}
+	for path, n in pairs( ZDEV.FILE._ATTEMPTS ) do
+		if n > 1 then dupes[#dupes + 1] = path .. " (" .. n .. "x)" end
+	end
+	if #dupes > 0 then
+		table.sort( dupes )
+		MsgC( Color(255,180,50), "\n■ Multiple include attempts (guard-skipped or re-run):\n" )
+		for _, s in ipairs( dupes ) do MsgC( Color(255,180,50), "   " .. s .. "\n" ) end
+	end
+	Msg( "\n" )
+end
+
+concommand.Add( "zdev_files_report", function() ZDEV.FILE.PrintReport() end )
+
+--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    COMMAND / CONVAR REGISTRATION (canonical + deprecated aliases)
+    Convention (docs/CONVENTIONS.md): zdev_<domain>_<action>. Old names stay
+    as aliases that warn once per session, then dispatch to the canonical
+    handler. Dispatch goes through _INDEX at call time so zdev_reload
+    hot-swaps handlers without re-registering aliases.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+ZDEV.CMDS._INDEX  = ZDEV.CMDS._INDEX  or {}   -- canonical name -> handler
+ZDEV.CMDS._WARNED = ZDEV.CMDS._WARNED or {}   -- deprecated name -> true (warned this session)
+
+-- ZDEV_UID: ZDEV_FUNC_CMDWARN1 | Path: ZDEV.CMDS.WarnDeprecated
+function ZDEV.CMDS.WarnDeprecated( old, new )
+	if ZDEV.CMDS._WARNED[old] then return end
+	ZDEV.CMDS._WARNED[old] = true
+	MsgC( Color(255,180,50), "[ZDEV] '", Color(255,255,255), old,
+		Color(255,180,50), "' is deprecated — use '", Color(255,255,255), new,
+		Color(255,180,50), "'.\n" )
+end
+
+-- ZDEV_UID: ZDEV_FUNC_CMDREG01 | Path: ZDEV.CMDS.Register
+-- opts = { aliases = {"old_name", ...}, help = "", flags = ..., autocomplete = fn }
+function ZDEV.CMDS.Register( name, fn, opts )
+	opts = opts or {}
+	ZDEV.CMDS._INDEX[name] = fn
+	concommand.Add( name, function( ... ) return ZDEV.CMDS._INDEX[name]( ... ) end,
+		opts.autocomplete, opts.help or "", opts.flags )
+	if opts.aliases then
+		for _, old in ipairs( opts.aliases ) do
+			concommand.Add( old, function( ... )
+				ZDEV.CMDS.WarnDeprecated( old, name )
+				return ZDEV.CMDS._INDEX[name]( ... )
+			end, opts.autocomplete, "DEPRECATED: use " .. name, opts.flags )
+		end
+	end
+end
+
+-- ZDEV_UID: ZDEV_FUNC_CONVLGCY | Path: ZDEV.CONV.LegacyAlias
+-- Registers a deprecated alias for an ALREADY-REGISTERED canonical convar:
+-- copies a customized legacy value into the canonical var once, then mirrors
+-- legacy writes to the canonical var with a one-time deprecation warning.
+-- Code must read the canonical name only.
+function ZDEV.CONV.LegacyAlias( name, old )
+	local cv = GetConVar( name )
+	if not cv then return end
+	local default = cv:GetDefault()
+	local ov = CreateClientConVar( old, default, true, false, "DEPRECATED: use " .. name )
+	if ov:GetString() ~= default and cv:GetString() == default then
+		cv:SetString( ov:GetString() )
+	end
+	cvars.AddChangeCallback( old, function( _, _, new )
+		ZDEV.CMDS.WarnDeprecated( old, name )
+		RunConsoleCommand( name, new )
+	end, "zdev_cvar_migrate" )
+end
+
+-- ZDEV_UID: ZDEV_FUNC_CONVCL01 | Path: ZDEV.CONV.ClientVar
+-- Client convar with optional legacy-name migration (Phase 4 of the sweep).
+-- opts = { legacy = "old_name", userinfo = bool }
+function ZDEV.CONV.ClientVar( name, default, help, opts )
+	local cv = CreateClientConVar( name, default, true, opts and opts.userinfo or false, help or "" )
+	if opts and opts.legacy then
+		ZDEV.CONV.LegacyAlias( name, opts.legacy )
+	end
+	return cv
 end
 
 
@@ -140,8 +388,6 @@ if (SERVER) then
 	ZDEV.GAME = {}
 	ZDEV.PLYR = {}
 	ZDEV.PLYR._INDEX = {}
-	ZDEV.INDX = {}
-	ZDEV.REGS = {}
 	ZDEV.MSQL = {}
 
 	ZDEV.FILE.DIR.ROOT = ZDEV.DATA.RootDir or "zdev/"
@@ -201,7 +447,14 @@ if (SERVER) then
 
 	end
 
-	ZDEV.CONV.Create( "zd_dev", "0", {FCVAR_CHEAT,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "Toggle Developer mode for the ZDEV addon.")
+	ZDEV.CONV.Create( "zdev_dev", "0", {FCVAR_CHEAT,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "Toggle Developer mode for the ZDEV addon.")
+	-- Legacy alias (Sweep Phase 4a): writes to zd_dev mirror to zdev_dev with a
+	-- one-time warning. Not archived, so no value migration is needed.
+	ZDEV.CONV.Create( "zd_dev", "0", {FCVAR_CHEAT,FCVAR_SERVER_CAN_EXECUTE,FCVAR_PROTECTED}, "DEPRECATED: use zdev_dev")
+	cvars.AddChangeCallback( "zd_dev", function( _, _, new )
+		ZDEV.CMDS.WarnDeprecated( "zd_dev", "zdev_dev" )
+		RunConsoleCommand( "zdev_dev", new )
+	end, "zdev_cvar_migrate" )
 
 
 	local b_firstrun = false
@@ -209,7 +462,7 @@ if (SERVER) then
 	timer.Create( "zdev_auto_filecheck", 6, 0, function() 
 
 		if !ZDEV then return end
-		if !GetConVar( "zd_dev" ):GetBool() then return end
+		if !GetConVar( "zdev_dev" ):GetBool() then return end
 		if ZDEV.FILE.INDEX then
 			indx_files = ZDEV.FILE.INDEX
 			if !b_firstrun then
@@ -236,56 +489,29 @@ if (SERVER) then
 		["port"] = "3306",
 	}
 
-	local has_mysqloo, mysqloo = pcall(require, "mysqloo")
-	if not has_mysqloo or not mysqloo then
-		zdev.log( "E", "MySQLoo module not found! Database functionality disabled." )
-		ZDEV.MSQL.Connect = nil
-		return
-	end
-	--[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-	-- REMOTE DATA - MYSQL (MySQLoo)
-	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
-
-	ZDEV.MSQL.Connect = msqloo.connect( ZDEV.MSQL.Database["host"], ZDEV.MSQL.Database["database"], ZDEV.MSQL.Database["password"], ZDEV.MSQL.Database["user"], ZDEV.MSQL.Database["port"] )
-
-	if ZDEV.MSQL.Connect then
-		function ZDEV.MSQL.Connect:onConnected()
-			MsgC( Color(200,200,255), "ZDEV ", Color(200,100,255), "MySQL Database", Color(255,150,255), "Establishing secure Connection-Pool: ", Color(100,255,100), "SUCCESS\n" )
-			local t_lastInfo = {
-				count = ZDEV.MSQL.Connect:queueSize(),
-				version = ZDEV.MSQL.Connect:serverInfo(),
-				host = ZDEV.MSQL.Database["host"],
-				ping = ZDEV.MSQL.Connect:ping()
-			}
-			for k, v in pairs( t_lastInfo ) do
-				v = tostring(v)
-				local clr1, clr2 = Color(200,200,200), Color(0,200,255)
-				MsgC( clr1, "\t" .. tostring(k) .. ": ", clr2, v .. "\n" )
-			end
-			if not ZDEV.MSQL.Connect then return end
-			local q = ZDEV.MSQL.Connect:query( "SELECT * FROM players" )
-			function q:onSuccess( data )
-				print( "Query successful!" )
-				PrintTable( data )
-			end
-			function q:onError( err, sql )
-				print( "Query errored!" )
-				print( "Query:", sql )
-				print( "Error:", err )
-			end
-			q:start()
-		end
-		function MYSQL_DB:onConnectionFailed( err )
-			print( "Connection to database failed!" )
-			print( "Error:", err )
-		end
-		ZDEV.MSQL.Connect:connect()
-	end
+	-- Database config is set above in ZDEV.MSQL.Database.
+	-- The actual connection is handled by zd_sv_database.lua (TMysql4).
+	-- It reads ZDEV.MSQL.Database and connects automatically on load.
+	zdev.log("I", "Database config set. Connection will be established by zd_sv_database.lua")
 
 	--AddCSLuaFile( "zdev/shared.lua" )
 	--AddCSLuaFile( "zdev/cl_init.lua" )
 	include( "zdev/init.lua" )
 
+	-- Reload all ZDEV files without restarting the map.
+	-- Clears the file-loaded index so every guarded include re-runs.
+	concommand.Add("zdev_reload", function(ply)
+		if IsValid(ply) and not ply:IsAdmin() then
+			ply:ChatPrint("[ZDEV] Reload requires admin.")
+			return
+		end
+		ZDEV.FILE.INDEX = {}
+		ZDEV.FILE.ResetTracking()
+		include("zdev/init.lua")
+		net.Start("zdev_reload")
+		if IsValid(ply) then net.Send(ply) else net.Broadcast() end
+		zdev.log("S", "ZDEV server reload complete.")
+	end)
 end
 
 if (CLIENT) then 
@@ -300,7 +526,6 @@ if (CLIENT) then
 
 	■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
 
-	ZDEV.LPLY = {}
 	ZDEV.VGUI = {}
 		ZDEV.VGUI.MENU = {}
 		ZDEV.VGUI.DERM = {}
@@ -310,13 +535,12 @@ if (CLIENT) then
 	ZDEV.REND = {}
 	ZDEV.SEFX = {}
 	ZDEV.DRAW = {}
-	ZDEV.TEXT = {}
-	ZDEV.CHAT = {}
-	ZDEV.VIEW = {}
 	ZDEV.FONT = {}
-	ZDEV.EDIT = {}
-	ZDEV.EDIT.PART = {}
-	ZDEV.EDIT.EMIT = {}
+	-- NOTE: ZDEV.EDIT is created with its full subtable set in the SHARED block
+	-- above. Re-assigning `ZDEV.EDIT = {}` here used to wipe ENVM/MATS/NPCS/
+	-- ENTS/WEAP on clients — only add what the shared block doesn't have.
+	ZDEV.EDIT.PART = ZDEV.EDIT.PART or {}
+	ZDEV.EDIT.EMIT = ZDEV.EDIT.EMIT or {}
 	--[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 
 		CLIENT CONVARS
@@ -327,107 +551,63 @@ if (CLIENT) then
 		Author: zcomstudios
 		Description: Handles client initialization and setup for the addon.
 	]]
-	CreateClientConVar( "zd_hud_visor", "1", true, false, "Toggle drawing of Visor material overlay texture")
-	CreateClientConVar( "zd_hud_vitals", "1", true, false, "Toggle drawing of Health, Armor and other vitals")
-	CreateClientConVar( "zd_hud_ammo", "1", true, false, "Toggle drawing rounds in clip, ammo count, etc")
-	CreateClientConVar( "zd_hud_crosshair", "1", true, false, "Toggle drawing custom crosshair/reticle")
-	CreateClientConVar( "zd_hud_info", "1", true, false, "Toggle drawing player info in top left HUD")
-	CreateClientConVar( "zd_hud_chat", "0", true, false, "Toggle drawing chat messages and custom chatbox")
-	CreateClientConVar( "zd_hud_messages", "1", true, false, "Toggle drawing chat messages and custom chatbox")
-	CreateClientConVar( "zd_hud_effects", "1", true, false, "Toggle drawing chat messages and custom chatbox")
-	CreateClientConVar( "zd_hud_font_pri", "", true, false, "Font-name of the primary font used for large numbers")
-	CreateClientConVar( "zd_hud_font_sec", "", true, false, "Font-name of the secondary font used for small details")
-	CreateClientConVar( "zd_hud_clr_pri", "255 150 0 255", true, false, "R G B values for the primary color of the HUD")
+	-- Canonicalized (Sweep Phase 4a): zdev_* names are authoritative; the old
+	-- zd_* names stay registered as mirroring legacy aliases via ClientVar.
+	ZDEV.CONV.ClientVar( "zdev_hud_visor", "1", "Toggle drawing of Visor material overlay texture", { legacy = "zd_hud_visor" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_vitals", "1", "Toggle drawing of Health, Armor and other vitals", { legacy = "zd_hud_vitals" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_ammo", "1", "Toggle drawing rounds in clip, ammo count, etc", { legacy = "zd_hud_ammo" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_crosshair", "1", "Toggle drawing custom crosshair/reticle", { legacy = "zd_hud_crosshair" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_info", "1", "Toggle drawing player info in top left HUD", { legacy = "zd_hud_info" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_chat", "0", "Toggle drawing chat messages and custom chatbox", { legacy = "zd_hud_chat" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_messages", "1", "Toggle drawing HUD messages (info, hints, warnings, announcements)", { legacy = "zd_hud_messages" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_markers", "1", "Toggle drawing 3D world markers (entity/position indicators)", { legacy = "zd_hud_markers" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_exp", "1", "Toggle drawing experience bar, XP popups, and level-up announcements", { legacy = "zd_hud_exp" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_effects", "1", "Toggle drawing custom screen effects", { legacy = "zd_hud_effects" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_font_pri", "", "Font-name of the primary font used for large numbers", { legacy = "zd_hud_font_pri" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_font_sec", "", "Font-name of the secondary font used for small details", { legacy = "zd_hud_font_sec" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_clr_pri", "255 150 0 255", "R G B values for the primary color of the HUD", { legacy = "zd_hud_clr_pri" } )
 
-	CreateClientConVar( "zd_hud_clr_sec", "255 150 0 255", true, false, "R G B values for the secondary color of the HUD")
-	CreateClientConVar( "zd_xhair_clr", "255 150 0 255", true, false, "R G B values for the color of the Crosshair")
+	ZDEV.CONV.ClientVar( "zdev_hud_clr_sec", "255 150 0 255", "R G B values for the secondary color of the HUD", { legacy = "zd_hud_clr_sec" } )
+	ZDEV.CONV.ClientVar( "zdev_hud_xhair_clr", "255 150 0 255", "R G B values for the color of the Crosshair", { legacy = "zd_xhair_clr" } )
 
-	CreateClientConVar( "zd_dev_console_x", "100", true, false, "Developer Lua-Console X Position ")
-	CreateClientConVar( "zd_dev_console_y", "400", true, false, "Developer Lua-Console Y Position ")
-	CreateClientConVar( "zd_dev_console_w", "600", true, false, "Developer Lua-Console Width ")
-	CreateClientConVar( "zd_dev_console_h", "200", true, false, "Developer Lua-Console Height ")
+	ZDEV.CONV.ClientVar( "zdev_dev_console_x", "100", "Developer Lua-Console X Position", { legacy = "zd_dev_console_x" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_console_y", "400", "Developer Lua-Console Y Position", { legacy = "zd_dev_console_y" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_console_w", "600", "Developer Lua-Console Width", { legacy = "zd_dev_console_w" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_console_h", "200", "Developer Lua-Console Height", { legacy = "zd_dev_console_h" } )
 
-	CreateClientConVar( "zd_dev_hud_time", "0", true, false, "Toggle drawing global time-function(s) output on the HUD")
-	CreateClientConVar( "zd_dev_hud_xhair", "1", true, false, "Toggle drawing development crosshair on HUD")
-	CreateClientConVar( "zd_dev_hud_grid", "1", true, false, "Toggle drawing development grid on HUD")
-	CreateClientConVar( "zd_dev_hud_entinfo", "1", true, false, "")
-	CreateClientConVar( "zd_dev_hud_ents", "1", true, false, "")
+	ZDEV.CONV.ClientVar( "zdev_dev_hud_time", "0", "Toggle drawing global time-function(s) output on the HUD", { legacy = "zd_dev_hud_time" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_hud_xhair", "1", "Toggle drawing development crosshair on HUD", { legacy = "zd_dev_hud_xhair" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_hud_grid", "1", "Toggle drawing development grid on HUD", { legacy = "zd_dev_hud_grid" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_hud_entinfo", "1", "Toggle drawing entity info on HUD", { legacy = "zd_dev_hud_entinfo" } )
+	ZDEV.CONV.ClientVar( "zdev_dev_hud_ents", "1", "Toggle drawing tracked entities on HUD", { legacy = "zd_dev_hud_ents" } )
 
-	CreateClientConVar( "zd_debug_render", "0", true, false, "")
-	CreateClientConVar( "zd_debug_render_entinfo", "0", true, false, "")
+	ZDEV.CONV.ClientVar( "zdev_debug_render", "0", "Toggle debug render overlays", { legacy = "zd_debug_render" } )
+	ZDEV.CONV.ClientVar( "zdev_debug_render_entinfo", "0", "Toggle debug render entity info", { legacy = "zd_debug_render_entinfo" } )
 
-	---Editor: Light [zedit_light]
-	--CreateClientConVar( "zedit_light", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_toggle", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_show_helpers", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_show_timegraph", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_emitter", "0e001", true, false, "")
-	CreateClientConVar( "zedit_particle_entity", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_pos", "0 0 0", true, false, "")
-	CreateClientConVar( "zedit_particle_offset", "0 0 16", true, false, "") -- Arguments: Right, Fwd, Up )
-	CreateClientConVar( "zedit_particle_id", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_count_min", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_count_max", "5", true, false, "")
-	CreateClientConVar( "zedit_particle_delay", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_repeat", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_mat", "sprites/efx_0a_glow_25", true, false, "")
-	CreateClientConVar( "zedit_particle_lifetime", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_dietime", "0.5", true, false, "")
-	CreateClientConVar( "zedit_particle_size_s", "5", true, false, "")
-	CreateClientConVar( "zedit_particle_alpha_s", "255", true, false, "")
-	CreateClientConVar( "zedit_particle_length_s", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_size_e", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_alpha_e", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_length_e", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_airres", "100", true, false, "")
-	CreateClientConVar( "zedit_particle_bounce", "0.5", true, false, "")
-	CreateClientConVar( "zedit_particle_collide", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_lighting", "1", true, false, "")
-	CreateClientConVar( "zedit_particle_gravity", "0 0 -100", true, false, "")
-	CreateClientConVar( "zedit_particle_velocity", "0 0 0", true, false, "")
-	CreateClientConVar( "zedit_particle_velocity_mul", "1.0", true, false, "")
-	CreateClientConVar( "zedit_particle_angles", "0 0 0", true, false, "")
-	CreateClientConVar( "zedit_particle_angular_velocity", "0 0 0", true, false, "")
-	CreateClientConVar( "zedit_particle_color", "255 255 255 255", true, false, "")
-	CreateClientConVar( "zedit_particle_color_r", "255", true, false, "")
-	CreateClientConVar( "zedit_particle_color_g", "255", true, false, "")
-	CreateClientConVar( "zedit_particle_color_b", "255", true, false, "")
-	CreateClientConVar( "zedit_particle_color_a", "255", true, false, "")
-	CreateClientConVar( "zedit_particle_roll", "0", true, false, "")
-	CreateClientConVar( "zedit_particle_rolldelta", "0", true, false, "")
-
-	CreateClientConVar( "zedit_env_toggle", "0", true, false, "")
-	CreateClientConVar( "zedit_env_tool_mode", "0", true, true, "")
-	CreateClientConVar( "zedit_env_brush_mode", "1", true, true, "")
-	CreateClientConVar( "zedit_env_brush_radius", "128", true, false, "")
-	CreateClientConVar( "zedit_env_brush_spacing", "16", true, false, "")
-	CreateClientConVar( "zedit_env_brush_density", "0.5", true, false, "")
-	CreateClientConVar( "zedit_env_brush_flow", "32", true, false, "")
-	CreateClientConVar( "zedit_env_factor_trees", "1.0", true, false, "")
-	CreateClientConVar( "zedit_env_factor_shrubs", "1.0", true, false, "")
-	CreateClientConVar( "zedit_env_factor_grass", "1.0", true, false, "")
-	CreateClientConVar( "zedit_env_factor_rocks", "1.0", true, false, "")
-	CreateClientConVar( "zedit_env_factor_misc", "1.0", true, false, "")
-
-	-- ZDEV_UID: ZDEV_FUNC_6F602247 | Path: ZDEV.CONV.EditorCallback
-	function ZDEV.CONV.EditorCallback(convar_name, value_old, value_new)
-		local LP = LocalPlayer()
-		if value_new == 1 then
-			LP:DrawViewModel( false )
-			zdev.log( "F", "ZDEV Editor Mode: OFF")
-		else
-			LP:DrawViewModel( true )
-			zdev.log( "S", "ZDEV Editor Mode: ON")
-		end
-	end
-	cvars.AddChangeCallback("zedit_particle_toggle", ZDEV.CONV.EditorCallback )
-	cvars.AddChangeCallback("zedit_env_toggle", ZDEV.CONV.EditorCallback )
+	-- zedit_* editor convars + ZDEV.CONV.EditorCallback moved to their owning
+	-- feature files (Sweep Phase 3): particle → zd_cl_menu_editor_particle.lua,
+	-- env → zdev/shared/zd_sh_editor.lua. Each convar must have exactly ONE
+	-- registration point — this autorun copy was first to run, silently
+	-- overriding the editors' own defaults.
 
 
 	--[[ =============================================
 		FONTS
 	==================================================]]--
-	ZDEV.FONT._INDEX = {}
+	ZDEV.FONT._INDEX  = ZDEV.FONT._INDEX  or {}  -- newname -> fontdata
+	ZDEV.FONT._ALIAS  = ZDEV.FONT._ALIAS  or {}  -- newname -> existing cached name (exact dedupe only)
+	ZDEV.FONT._WARNED = ZDEV.FONT._WARNED or {}  -- de-noise key -> true
+
+	-- 0=silent, 1=warn on exact dedupe, 2=warn on near-miss too
+	CreateClientConVar( "zdev_font_warn_dedupe", "1", true, false,
+		"Warn when ZDEV.FONT.Register deduplicates a font. 0=off, 1=exact, 2=near-miss" )
+
+	-- Fields that define font identity. All must match for "exact"; one mismatch = "near".
+	local FONT_IDENT_FIELDS = {
+		"font", "size", "weight", "antialias", "shadow", "additive",
+		"outline", "extended", "scanlines", "blursize",
+		"italic", "underline", "strikeout", "symbol", "rotary"
+	}
 
 	-- ZDEV_UID: ZDEV_FUNC_30DE908D | Path: ZDEV.FONT.GetFontFiles
 	function ZDEV.FONT.GetFontFiles( )
@@ -436,33 +616,84 @@ if (CLIENT) then
 		return f
 	end
 
-	--function ZDEV.FONT.Register( newname, name, extended, size, weight, blur, scan, antialias, u, i, s, symbol, rotary, shadow, additive, outline )
+	-- Compare two font property tables.
+	-- Returns: "exact" | "near" | nil, differing_field_name (only meaningful for "near")
+	-- ZDEV_UID: ZDEV_FUNC_F0N7M4TC | Path: ZDEV.FONT.PropertiesMatch
+	function ZDEV.FONT.PropertiesMatch( a, b )
+		if not a or not b then return nil end
+		local diffs, diff_field = 0, nil
+		for _, k in ipairs( FONT_IDENT_FIELDS ) do
+			local av, bv = a[k], b[k]
+			-- Normalize booleans: GMod treats nil/false as equivalent for these flags.
+			if av == nil or av == false then av = false end
+			if bv == nil or bv == false then bv = false end
+			if av ~= bv then
+				diffs = diffs + 1
+				diff_field = diff_field or k
+				if diffs > 1 then return nil end
+			end
+		end
+		if diffs == 0 then return "exact" end
+		return "near", diff_field
+	end
+
 	-- ZDEV_UID: ZDEV_FUNC_29501EC9 | Path: ZDEV.FONT.Register
 	function ZDEV.FONT.Register( newname, fontdata )
+		if not newname or not fontdata then return end
 
-		local	t_fontdata = {
-			font = name,
-			extended = extended,
-			size = size,
-			weight = weight,
-			blursize = blur,
-			scanlines = scan,
-			antialias = antialias,
-			underline = u,
-			italic = i,
-			strikeout = s,
-			symbol = symbol,
-			rotary = rotary,
-			shadow = shadow,
-			additive = additive,
-			outline = outline	}
+		local warn_level = GetConVar( "zdev_font_warn_dedupe" )
+		warn_level = warn_level and warn_level:GetInt() or 0
+
+		-- Same-name re-register: if properties match exactly, it's a true no-op duplicate.
+		-- If they differ, the caller wants to update — fall through to re-create.
+		local existing = ZDEV.FONT._INDEX[ newname ]
+		if existing and ZDEV.FONT.PropertiesMatch( fontdata, existing ) == "exact" then
+			if warn_level >= 1 then
+				local key = "self:" .. newname
+				if not ZDEV.FONT._WARNED[ key ] then
+					ZDEV.FONT._WARNED[ key ] = true
+					zdev.log( "W", "Font '" .. newname .. "' re-registered with identical properties — skipped." )
+				end
+			end
+			return
+		end
+
+		for cachedName, cachedData in pairs( ZDEV.FONT._INDEX ) do
+			if cachedName ~= newname then
+				local kind, field = ZDEV.FONT.PropertiesMatch( fontdata, cachedData )
+
+				if kind == "exact" then
+					-- Skip surface.CreateFont entirely — saves a font slot.
+					ZDEV.FONT._ALIAS[ newname ] = cachedName
+					if warn_level >= 1 then
+						local key = newname .. "->" .. cachedName
+						if not ZDEV.FONT._WARNED[ key ] then
+							ZDEV.FONT._WARNED[ key ] = true
+							zdev.log( "W", "Font '" .. newname .. "' is a duplicate of '" .. cachedName .. "' — aliased, slot saved." )
+						end
+					end
+					return
+
+				elseif kind == "near" and warn_level >= 2 then
+					local key = newname .. "->" .. cachedName .. ":" .. tostring(field)
+					if not ZDEV.FONT._WARNED[ key ] then
+						ZDEV.FONT._WARNED[ key ] = true
+						zdev.log( "W", "Font '" .. newname .. "' is near-identical to '" .. cachedName .. "' (differs only in '" .. tostring(field) .. "') — possible typo?" )
+					end
+					-- Fall through: still register it. Near-miss is informational only.
+				end
+			end
+		end
 
 		surface.CreateFont( newname, fontdata )
+		ZDEV.FONT._INDEX[ newname ] = fontdata
+	end
 
-		if not ZDEV.FONT._INDEX[ newname ] then
-			ZDEV.FONT._INDEX[ newname ] = fontdata
-		end
-		--print('')
+	-- Resolve an alias to its underlying cached font name.
+	-- Downstream addons can call this before surface.SetFont if they want alias awareness.
+	-- ZDEV_UID: ZDEV_FUNC_F0N7R5LV | Path: ZDEV.FONT.Resolve
+	function ZDEV.FONT.Resolve( name )
+		return ZDEV.FONT._ALIAS[ name ] or name
 	end
 
 	--[[ =============================================
@@ -487,7 +718,14 @@ if (CLIENT) then
 	--zdev.IncludeFilesIn("zdev/client/")
 	--include( "autorun/client/cl_ui3d2d.lua")
 	--include( "autorun/client/cl_ui3d2d_extras.lua")
-	
+
+	-- Receive a server-triggered reload: re-run the full client init chain.
+	net.Receive("zdev_reload", function()
+		ZDEV.FILE.INDEX = {}
+		ZDEV.FILE.ResetTracking()
+		include("zdev/cl_init.lua")
+		zdev.log("S", "ZDEV client reload complete.")
+	end)
 end
 
 --timer.Simple( 0, function() include( "autorun/zd_snpcs_autorun.lua") end )
