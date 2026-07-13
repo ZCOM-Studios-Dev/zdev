@@ -2,13 +2,14 @@
  Core Addon for ZCOM Development Suite Addon Pack
 # ZDEV Core Addon
 
-![ZCOM Studios](zdev/logo_zcom_studios.png)
+![ZCOM Studios](logo_zcom_studios.png)
 
 **ZCOM Development Master Addon** - The core foundation for all ZCOM Studios addons and gamemodes in Garry's Mod.
 
-[![License: GPL v3](https:--img.shields.io/badge/License-GPLv3-blue.svg)](https:--www.gnu.org/licenses/gpl-3.0)
-![Version](https:--img.shields.io/badge/Version-0.7.2-green.svg)
-![Garry's Mod](https:--img.shields.io/badge/Garry's%20Mod-Compatible-orange.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-red.svg)](https:www.gnu.org/licenses/gpl-3.0)
+![Version](https://img.shields.io/badge/Version-0.7.2-orange.svg)
+![Garry's Mod](https://img.shields.io/badge/Garry's%20Mod-Compatible-green.svg)
+![Static Badge](https://img.shields.io/badge/glua-blue?style=flat)
 
 ## Overview
 
@@ -106,6 +107,8 @@ zdev_hud_enabled 1          -- Enable custom HUD elements
 ```
 
 ## Development
+
+See **[ROADMAP.md](ROADMAP.md)** for the platform vision (visual configuration → GLua code generation), planned features (Font Lab, Module Registrar), and namespace cleanup tasks.
 
 ### Building Dependencies
 

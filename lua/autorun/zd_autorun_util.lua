@@ -1,15 +1,11 @@
-local _f = 'autorun/zd_autorun_util.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',color_white,_f .. '\n')
+local _f = 'autorun/zd_autorun_util.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',Color(150,255,150),"(AUTORUN)",color_white,_f .. '\n')
 --
 if ZDEV.FILE.Loaded( _f ) then return end
-require "glon"
+if SERVER then pcall( require, "glon" ) end  -- glon is a server-side binary; skip silently if absent
 
 if SERVER then
 	AddCSLuaFile()
 end
-
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
-MsgC(Color(50,255,200),'\tZDEV Util Loaded.\n',color_white)
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
 
 --[[
 	zd_autorun_util.lua
@@ -96,11 +92,17 @@ local win	= system.IsWindows();
 
 
 if(not SERVER) then
-	surface.CreateFont("ConsoleText", {
+	local _font_data = {
 		font	= ((linux or mac) and "Verdana" or "Lucida Console");
 		size	= (mac and 11 or linux and 14 or 10);
 		weight	= 500;
-	});
+	}
+	-- Fallback to surface.CreateFont if ZDEV.FONT.Register isn't ready yet (load-order safety).
+	if ZDEV and ZDEV.FONT and ZDEV.FONT.Register then
+		ZDEV.FONT.Register("ConsoleText", _font_data)
+	else
+		surface.CreateFont("ConsoleText", _font_data)
+	end
 end
 
 --[[---------------------------------------------------------------------
@@ -265,60 +267,45 @@ for k, v in ipairs( HexaRanges ) do
 
 end
 
-
---
 -- Converts an ASCII character in to a Hexa Character
---
 local function CharToHexa( c )
 
 	return Char2HexaLookup[ c ]
 
 end
 
---
 -- Converts a Hexa character in to an ASCII character
---
 local function HexaToChar( h )
 
 	return Hexa2CharLookup[ h ]
 
 end
 
---
 -- Returns true if the string can be represented in 7-Bit ASCII
 -- Null bytes are not allowed as they are used for termination
---
 local function Is7BitString( str )
 
 	return str:find( "[\x80-\xFF%z]" ) == nil
 
 end
 
---
 -- Returns true if the string can be represented in Hexa
---
 local function IsHexaString( str )
 
 	return str:find( "[^a-zA-Z0-9_]" ) == nil
 
 end
 
---
 -- Returns true if the argument is NaN ( can also be interpreted as 0/0 )
---
 local function IsNaN( x )
 	return x ~= x
 end
 
---
 -- An imaginary NaN table for caching in writing.table
---
 local NaN = {}
 
---
 -- This exists because you can't make a table index NaN
 -- We need to do this so we can cache it in our references table
---
 local function IndexSafe( x )
 	if ( IsNaN( x ) ) then return NaN end
 	return x
@@ -326,12 +313,10 @@ end
 
 local reading, writing
 
---
 -- Gets the type of way we are going to send the data
 -- Not all of these exist in reality
 -- We are only going to add 16 types ( 0-15 ) since that's
 -- the max we can fit into 4 bits
---
 local function SendType( x )
 
 	local t = type( x )
@@ -898,15 +883,12 @@ do
 	===============================================]]
 -- ZDEV_UID: ZDEV_FUNC_51C15DA0 | Path: ZDEV.UTIL.GenerateUID
 	function ZDEV.UTIL.GenerateUID( len )
-
 		local uid = ""
 		for i = 1, len do
 			local rand = math.random(1,9)
 			uid = uid .. rand
 		end
-
 		return uid
-
 	end
 
 
@@ -915,25 +897,15 @@ do
 	===============================================]]
 -- ZDEV_UID: ZDEV_FUNC_A885DCD4 | Path: ZDEV.UTIL.PrintFuncParam
 	function ZDEV.UTIL.PrintFuncParam( func, lvl, count  )
-
 		--local args = {...}
-
 		MsgC( Color(255,100,255), "Retrieving Parameters of " .. tostring(func) .. " Level: "..tostring(lvl) .." Count: "..tostring(count) .."\n ")
-
 		local k, param = lvl, debug.getlocal( func, (lvl-1), count )
-
 		while param ~= nil do
-
 			MsgC( Color(150,150,150), "["..tostring(k).."] ", color_white, param, Color(100,200,255), " (" .. tostring(type(param)) .. "), " )
-
 			param = debug.getlocal( func, k )
-
 			k = k - 1
-
 		end
-
 		print( k, param, lvl, count, func )
-
 		Msg("\n")
 	end
 
@@ -942,19 +914,13 @@ do
 	===============================================]]
 -- ZDEV_UID: ZDEV_FUNC_BA2C9B40 | Path: ZDEV.UTIL.DumpEntityMeta
 	function ZDEV.UTIL.DumpEntityMeta( ent )
-
 		local meta = debug.getmetatable( ent )
-
 		local t_func = {}
-
 		for k, v in pairs( meta ) do
-
 			MsgC( color_white, tostring(k) .. " = ", Color(255,150,0), tostring( ent[k] ) .. "\n" )
 			t_func[ k ] = v
 		end
-
 		return t_func
-
 	end
 
 end
@@ -981,7 +947,8 @@ function ZDEV.UTIL.DropPrimaryWeapon( ply )
 		zdev.log( "W", "Forced " ..tostring(ply:Nick()).." to drop primary weapon: "..tostring(wep).." via Utility CMD" )
 	end
 end
-concommand.Add( "zd_dropprimary",function(ply, cmd, arg) ZDEV.UTIL.DropPrimaryWeapon(ply) end,nil,nil,0)
+ZDEV.CMDS.Register( "zdev_dev_dropprimary", function(ply, cmd, arg) ZDEV.UTIL.DropPrimaryWeapon(ply) end,
+	{ aliases = { "zd_dropprimary" }, flags = 0 } )
 
 
 -- ZDEV_UID: ZDEV_FUNC_7D4B2DA5 | Path: ZDEV.UTIL.DataFileExists
@@ -1069,7 +1036,7 @@ do
 		if CLIENT then
 			value = tonumber(value)
 			if value then
-				RunConsoleCommand("dbgutl_slider_vars", key, value)
+				RunConsoleCommand("zdev_dev_slider_vars", key, value)
 			end
 		end
 
@@ -1112,9 +1079,21 @@ do
 			end
 		end
 
-		concommand.Add("dbgutl_slider_vars", ZDEV.UTIL.ReceiveSliderVar)
+		ZDEV.CMDS.Register( "zdev_dev_slider_vars", ZDEV.UTIL.ReceiveSliderVar,
+			{ aliases = { "dbgutl_slider_vars" } } )
 	end
 end
+
+-- ╥▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+-- ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+-- ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+-- ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃
+-- ════════════════════════════════════════════════════════════════
+-- ▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
+-- ──────────────────────────────────────────────────────────────────────
+-- ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+-- CLIENT UTILITY FUNCTIONS
+-- ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
 
 if CLIENT then
 	ZDEV.UTIL.PrintQueue = {}
@@ -1219,8 +1198,55 @@ if CLIENT then
 		s.Print(id, pos, unpack(args))
 	end
 	usermessage.Hook("debugutils", ZDEV.UTIL.ReceiveServerMessage)
+
+	-- ════════════════════════════════════════════════════════════════
+	-- ZDEV Particle Emitter Utility Functions
+	function ZDEV.UTIL.SetParticleData( emit, n, mat, particle_data )
+		
+	end
+
+	--[[-------------------------------------------------------------------------
+		Custom Particle Helper Function
+	---------------------------------------------------------------------------]]
+	local function AddParticle(EmitterEntity, Count, mat, ParticleData)
+		-- 1. Check that EmitterEntity is valid
+		if not IsValid(EmitterEntity) then return end
+
+		-- 2. Loop for the specified Count
+		for i = 1, Count do
+			-- Declare local particle at the emitter's current position
+			local particle = EmitterEntity:Add(mat, EmitterEntity:GetPos())
+
+			if not particle then continue end
+
+			-- 3. Loop through ParticleData and call corresponding setter functions
+			-- Expected table format: { ["DieTime"] = 2, ["Velocity"] = Vector(0, 0, 100), ... }
+			for key, value in pairs(ParticleData) do
+				local setterName = "Set" .. key
+				local setterFunc = particle[setterName]
+
+				if type(setterFunc) == "function" then
+					-- Handle cases where parameters are passed as a sub-table or unpackable array
+					if type(value) == "table" and value.unpack then
+						setterFunc(particle, unpack(value))
+					elseif type(value) == "table" and #value > 0 and type(value[1]) ~= "table" then
+						-- Fallback for standard array-style tables (like color channels)
+						setterFunc(particle, unpack(value))
+					else
+						-- Single value (Vector, Angle, number, boolean, IMaterial)
+						setterFunc(particle, value)
+					end
+				else
+					ErrorNoHalt("CLuaParticle: Method " .. setterName .. " does not exist!\n")
+				end
+			end
+		end
+	end
 end
 
+-- ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
+-- SERVER UTILITY FUNCTIONS
+-- ▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆▆
 if SERVER then
 -- ZDEV_UID: ZDEV_FUNC_D0D3D1A1 | Path: ZDEV.UTIL.Print
 	function ZDEV.UTIL.Print(id, pos, ...)
@@ -1284,11 +1310,23 @@ function ZDEV.UTIL.NoCollideWorld( ply )
 	return const
 end
 
-concommand.Add( "zd_nocollideworld", function( ply, cmd, arg )
+ZDEV.CMDS.Register( "zdev_dev_nocollideworld", function( ply, cmd, arg )
 
 	if !SERVER then return end
 	ZDEV.UTIL.NoCollideWorld( ply )
 
-end )
+end, { aliases = { "zd_nocollideworld" } } )
+
+-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-- CLAUDE CODE 
+-- GMod side: watch a command file, execute, write output back
+timer.Create("zdev_bridge", 1, 0, function()
+    if file.Exists("zdev/bridge_cmd.txt", "DATA") then
+        local cmd = file.Read("zdev/bridge_cmd.txt", "DATA")
+        file.Delete("zdev/bridge_cmd.txt")
+        -- execute cmd, write result back
+        file.Write("zdev/bridge_out.txt", tostring(RunString(cmd)))
+    end
+end)
 
 ZDEV.FILE.SetLoaded( _f )

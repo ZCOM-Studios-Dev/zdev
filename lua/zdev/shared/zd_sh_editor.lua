@@ -9,7 +9,7 @@ end
 
 BRUSH_NONE			= 0
 BRUSH_GRASS 		= 1
-BRUSH_SHRUB 		= 2
+BRUSH_SHRUB 		= 2	
 BRUSH_TREE 			= 3
 BRUSH_ROCK 			= 4
 BRUSH_OTHER 		= 5
@@ -28,6 +28,48 @@ EDIT_TOOL_VIEW 		= 1
 EDIT_TOOL_SELECT 	= 2
 EDIT_TOOL_BRUSH 	= 3
 EDIT_TOOL_ERASE 	= 4
+
+-- ─── Editor convars (owned here since Sweep Phase 3; canonicalized Phase 4b:
+-- zdev_edit_env_* authoritative, old zedit_env_* names mirror via LegacyAlias) ─
+if CLIENT then
+	local function EditorVar( name, default, shouldsave, userinfo, help )
+		local cv = CreateClientConVar( name, default, shouldsave, userinfo, help or "" )
+		ZDEV.CONV.LegacyAlias( name, ( string.gsub( name, "^zdev_edit_", "zedit_" ) ) )
+		return cv
+	end
+
+	EditorVar( "zdev_edit_env_toggle", "0", true, false, "" )
+	EditorVar( "zdev_edit_env_tool_mode", "0", true, true, "" )
+	EditorVar( "zdev_edit_env_brush_mode", "1", true, true, "" )
+	EditorVar( "zdev_edit_env_brush_radius", "128", true, false, "" )
+	EditorVar( "zdev_edit_env_brush_spacing", "16", true, false, "" )
+	EditorVar( "zdev_edit_env_brush_density", "0.5", true, false, "" )
+	EditorVar( "zdev_edit_env_brush_flow", "32", true, false, "" )
+	EditorVar( "zdev_edit_env_factor_trees", "1.0", true, false, "" )
+	EditorVar( "zdev_edit_env_factor_shrubs", "1.0", true, false, "" )
+	EditorVar( "zdev_edit_env_factor_grass", "1.0", true, false, "" )
+	EditorVar( "zdev_edit_env_factor_rocks", "1.0", true, false, "" )
+	EditorVar( "zdev_edit_env_factor_misc", "1.0", true, false, "" )
+
+	-- Shared editor-mode toggle callback (particle editor also hooks it).
+	-- NOTE pre-existing quirk preserved verbatim: change callbacks receive
+	-- value_new as a STRING, so `== 1` is never true — the else branch always
+	-- runs. Fixing that changes behavior; tracked in PLAN_CONSISTENCY_SWEEP
+	-- Phase 6 notes, not silently altered here.
+	-- ZDEV_UID: ZDEV_FUNC_6F602247 | Path: ZDEV.CONV.EditorCallback
+	function ZDEV.CONV.EditorCallback(convar_name, value_old, value_new)
+		local LP = LocalPlayer()
+		if value_new == 1 then
+			LP:DrawViewModel( false )
+			zdev.log( "F", "ZDEV Editor Mode: OFF")
+		else
+			LP:DrawViewModel( true )
+			zdev.log( "S", "ZDEV Editor Mode: ON")
+		end
+	end
+	-- Identifier makes re-adding on zdev_reload replace instead of stack.
+	cvars.AddChangeCallback( "zdev_edit_env_toggle", function( ... ) ZDEV.CONV.EditorCallback( ... ) end, "zdev_editor_mode" )
+end
 
 local REGISTRY = {}
 
@@ -114,13 +156,13 @@ function ZDEV.EDIT.ENVM.SpawnGrass( spawnpos, radius )
 
 end
 
-concommand.Add( "zedit_env_spawn_grass", function( ply, cmd, arg ) 
+ZDEV.CMDS.Register( "zdev_edit_env_spawn_grass", function( ply, cmd, arg )
 	print( ply, cmd, arg )
 	local tr = ply:GetEyeTrace()
 	local pos = tr.HitPos
-	local size = GetConVarNumber( "zedit_env_brush_radius" )
+	local size = GetConVarNumber( "zdev_edit_env_brush_radius" )
 	ZDEV.EDIT.ENVM.SpawnGrass( pos, size )
-end )
+end, { aliases = { "zedit_env_spawn_grass" } } )
 
 function ZDEV.EDIT.ENVM.RemoveGrassByIndex( index )
 
@@ -144,7 +186,7 @@ function ZDEV.EDIT.ENVM.BrushErase( ply )
 
 	local tr = ply:GetEyeTrace()
 	local pos = tr.HitPos
-	local size = GetConVarNumber( "zedit_env_brush_radius" )
+	local size = GetConVarNumber( "zdev_edit_env_brush_radius" )
 
 	for k, e in pairs( ents.FindInSphere( pos, size ) ) do
 
@@ -159,15 +201,15 @@ end
 local size_max = 1024
 function ZDEV.EDIT.ENVM.BrushPaint( ply )
 
-	local size = GetConVarNumber( "zedit_env_brush_radius" )
-	local density = GetConVarNumber( "zedit_env_brush_density" )
-	local brushmode = GetConVarNumber( "zedit_env_brush_mode" )
+	local size = GetConVarNumber( "zdev_edit_env_brush_radius" )
+	local density = GetConVarNumber( "zdev_edit_env_brush_density" )
+	local brushmode = GetConVarNumber( "zdev_edit_env_brush_mode" )
 
 	local pos = ply:GetEyeTrace().HitPos
 
 	local max = math.Round( density * 20, 0 )
 	for i = 1, max do
-		RunConsoleCommand( "zedit_env_spawn_grass" )
+		RunConsoleCommand( "zdev_edit_env_spawn_grass" )
 		--ZDEV.EDIT.ENVM.SpawnGrass( pos, size )
 	end
 
@@ -192,7 +234,7 @@ function ZDEV.EDIT.ENVM.Hook_Spawn( )
 end
 
 hook.Add( "PlayerBindPress", "ZDEV.EDIT.ENVM.BrushPaint", function( ply, bind, pressed )
-	if GetConVar( "zedit_env_toggle" ):GetBool() then
+	if GetConVar( "zdev_edit_env_toggle" ):GetBool() then
 		if string.find( bind, "+attack" ) then
 			ZDEV.EDIT.ENVM.BrushPaint( ply )
 			print( "PAINT" )
@@ -211,39 +253,39 @@ ZDEV.EDIT.EMIT = {}
 function ZDEV.EDIT.EMIT.GetConVars( )
 
 	local convars = {
-		id = GetConVarString( "zedit_particle_id"),
-		emitter = GetConVarString( "zedit_particle_emitter" ),
-		entity = GetConVarString( "zedit_particle_entity" ),
-		pos = GetConVarString( "zedit_particle_pos" ),
-		offset = GetConVarString( "zedit_particle_offset" ),
-		material = GetConVarString( "zedit_particle_mat" ),
-		rep = GetConVar("zedit_particle_repeat"):GetFloat(),
-		lifetime = GetConVar("zedit_particle_lifetime"):GetFloat(),
-		dietime = GetConVar("zedit_particle_dietime"):GetFloat(),
-		start_size = GetConVarNumber("zedit_particle_size_s"),
-		start_alpha = GetConVarNumber("zedit_particle_alpha_s"),
-		start_length = GetConVarNumber("zedit_particle_length_s"),
-		end_size = GetConVarNumber("zedit_particle_size_e"),
-		end_alpha = GetConVarNumber("zedit_particle_alpha_e"),
-		end_length = GetConVarNumber("zedit_particle_length_e"),
-		roll = GetConVarNumber("zedit_particle_roll"),
-		rolldelta = GetConVarNumber("zedit_particle_rolldelta"),
-		angles = GetConVarString("zedit_particle_angles"),
-		ang_velocity = GetConVarString("zedit_particle_angular_velocity"),
-		airres = GetConVarNumber("zedit_particle_airres"),
-		bounce = GetConVar("zedit_particle_bounce"):GetFloat(),
-		collide = GetConVar("zedit_particle_collide"):GetBool(),
-		lighting = GetConVar("zedit_particle_lighting"):GetBool(),
-		color = string.ToColor( GetConVar("zedit_particle_color"):GetString() ),
-		color_r = GetConVarNumber("zedit_particle_color_r"),
-		color_g = GetConVarNumber("zedit_particle_color_g"),
-		color_b = GetConVarNumber("zedit_particle_color_b"),
-		color_a = GetConVarNumber("zedit_particle_color_a"),
-		gravity = GetConVarString("zedit_particle_gravity"),
-		velocity = GetConVarString("zedit_particle_velocity"),
-		velocity_mul = GetConVarNumber( "zedit_particle_velocity_mul"),
-		count_min = GetConVarNumber("zedit_particle_count_min"),
-		count_max = GetConVarNumber("zedit_particle_count_max")
+		id = GetConVarString( "zdev_edit_particle_id"),
+		emitter = GetConVarString( "zdev_edit_particle_emitter" ),
+		entity = GetConVarString( "zdev_edit_particle_entity" ),
+		pos = GetConVarString( "zdev_edit_particle_pos" ),
+		offset = GetConVarString( "zdev_edit_particle_offset" ),
+		material = GetConVarString( "zdev_edit_particle_mat" ),
+		rep = GetConVar("zdev_edit_particle_repeat"):GetFloat(),
+		lifetime = GetConVar("zdev_edit_particle_lifetime"):GetFloat(),
+		dietime = GetConVar("zdev_edit_particle_dietime"):GetFloat(),
+		start_size = GetConVarNumber("zdev_edit_particle_size_s"),
+		start_alpha = GetConVarNumber("zdev_edit_particle_alpha_s"),
+		start_length = GetConVarNumber("zdev_edit_particle_length_s"),
+		end_size = GetConVarNumber("zdev_edit_particle_size_e"),
+		end_alpha = GetConVarNumber("zdev_edit_particle_alpha_e"),
+		end_length = GetConVarNumber("zdev_edit_particle_length_e"),
+		roll = GetConVarNumber("zdev_edit_particle_roll"),
+		rolldelta = GetConVarNumber("zdev_edit_particle_rolldelta"),
+		angles = GetConVarString("zdev_edit_particle_angles"),
+		ang_velocity = GetConVarString("zdev_edit_particle_angular_velocity"),
+		airres = GetConVarNumber("zdev_edit_particle_airres"),
+		bounce = GetConVar("zdev_edit_particle_bounce"):GetFloat(),
+		collide = GetConVar("zdev_edit_particle_collide"):GetBool(),
+		lighting = GetConVar("zdev_edit_particle_lighting"):GetBool(),
+		color = string.ToColor( GetConVar("zdev_edit_particle_color"):GetString() ),
+		color_r = GetConVarNumber("zdev_edit_particle_color_r"),
+		color_g = GetConVarNumber("zdev_edit_particle_color_g"),
+		color_b = GetConVarNumber("zdev_edit_particle_color_b"),
+		color_a = GetConVarNumber("zdev_edit_particle_color_a"),
+		gravity = GetConVarString("zdev_edit_particle_gravity"),
+		velocity = GetConVarString("zdev_edit_particle_velocity"),
+		velocity_mul = GetConVarNumber( "zdev_edit_particle_velocity_mul"),
+		count_min = GetConVarNumber("zdev_edit_particle_count_min"),
+		count_max = GetConVarNumber("zdev_edit_particle_count_max")
 	}
 
 	return convars

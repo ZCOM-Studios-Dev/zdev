@@ -67,11 +67,11 @@ end )
 -- ZDEV_UID: ZDEV_FUNC_F3487FBD | Path: ZDEV.REND.EnvironmentEditor
 function ZDEV.REND.EnvironmentEditor()
 
-	if !GetConVar( "zedit_env_toggle" ):GetBool() then return end
+	if !GetConVar( "zdev_edit_env_toggle" ):GetBool() then return end
 
 	local trace = LocalPlayer():GetEyeTrace()
 	local angle = trace.HitNormal:Angle()
-	local radius = GetConVarNumber("zedit_env_brush_radius")
+	local radius = GetConVarNumber("zdev_edit_env_brush_radius")
 
 	render.DrawLine( trace.HitPos, trace.HitPos + 8 * angle:Forward(), Color( 255, 0, 0 ), true )
 	render.DrawLine( trace.HitPos, trace.HitPos + 8 * -angle:Right(), Color( 0, 255, 0 ), true )
@@ -222,7 +222,7 @@ local sprpos,material = Vector(0,0,0), Material( "effects/phaz_impact" )
 -- ZDEV_UID: ZDEV_FUNC_D053681B | Path: ZDEV.REND.ParticleEditor
 function ZDEV.REND.ParticleEditor( )
 
-	if !GetConVar( "zedit_particle_toggle" ):GetBool() then return end
+	if !GetConVar( "zdev_edit_particle_toggle" ):GetBool() then return end
 	RenderHelperLines( )
 	local p = ZDEV.EDIT.EMIT.GetConVars()
 
@@ -294,7 +294,7 @@ function ZDEV.REND.ParticleEditor( )
 					end)
 					]]
 				end
-					cam.IgnoreZ( false )
+				cam.IgnoreZ( false )
 			--end
 			i_nextparticle = CurTime() + rep
 			emit:Finish()
@@ -312,7 +312,11 @@ hook.Add("PostDrawOpaqueRenderables", "ZDEV.REND.ParticleEditor", ZDEV.REND.Part
 -- ZDEV_UID: ZDEV_FUNC_B3E50E40 | Path: ZDEV.REND.LightEditor
 function ZDEV.REND.LightEditor(  )
 	
-	if !GetConVar( "zedit_light_toggle" ):GetBool() then return end
+	-- Phase 6 guard: zedit_light_* convars are registered NOWHERE (the zedit_light
+	-- registration has been commented out since before the sweep). Nil-guard so
+	-- this painter can't crash if it is ever invoked; behavior = always off.
+	local cv_light = GetConVar( "zedit_light_toggle" )
+	if not cv_light or not cv_light:GetBool() then return end
 
 	local p = {
 		id = GetConVarString( "zedit_light_id")
@@ -333,9 +337,9 @@ hook.Add("PostDrawOpaqueRenderables", "ZDEV.REND.LightEditor", ZDEV.REND.LightEd
 
 
 local imgui = include("zdev/client/zd_cl_imgui.lua") -- imgui.lua should be in same folder and AddCSLuaFile'd
-zdev.log( "D", "▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄" )
+--zdev.log( "D", "▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄▬▄" )
 if (imgui) then
-	DebugPrintTable(imgui)
+	--DebugPrintTable(imgui)
 end
 hook.Add("PostDrawTranslucentRenderables", "PaintIMGUI", function(bDrawingSkybox, bDrawingDepth)
 
@@ -372,5 +376,26 @@ hook.Add("PostDrawTranslucentRenderables", "PaintIMGUI", function(bDrawingSkybox
     imgui.End3D2D()
   end
 end)
+
+local mat = Material( "debug/debugwireframe" ) -- The material (a wireframe)
+local obj = Mesh() -- Create the IMesh object
+
+local verts = { -- A table of 4 vertices that form a square
+	{ pos = Vector( 0,  0,  0 ), u = 0, v = 0 }, -- Vertex 1
+	{ pos = Vector( 10, 0,  0 ), u = 1, v = 0 }, -- Vertex 2
+	{ pos = Vector( 10, 10, 0 ), u = 1, v = 1 }, -- Vertex 3
+
+	{ pos = Vector( -10, 10, 0 ), u = 0, v = 1 }, -- Vertex 4
+
+}
+
+obj:BuildFromTriangles( verts ) -- Load the vertices into the IMesh object
+
+hook.Add( "PostDrawOpaqueRenderables", "IMeshTest", function()
+
+	render.SetMaterial( mat ) -- Apply the material
+	obj:Draw() -- Draw the mesh
+
+end )
 
 ZDEV.FILE.SetLoaded( _f )

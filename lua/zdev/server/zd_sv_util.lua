@@ -95,7 +95,8 @@ function ZDEV.CMDS.DEV.EntCreate( ply, cmd, arg, args )
 	zdev.log( "W", tostring(ply) .. " spawned entity " ..tostring(e) .. " using the Z-Developer menu." )
 
 end
-concommand.Add( "zd_ent_create", ZDEV.CMDS.DEV.EntCreate, nil, "", {FCVAR_CHEAT,FCVAR_CLIENTCMD_CAN_EXECUTE} )
+ZDEV.CMDS.Register( "zdev_ent_create", ZDEV.CMDS.DEV.EntCreate,
+	{ aliases = { "zd_ent_create" }, flags = {FCVAR_CHEAT,FCVAR_CLIENTCMD_CAN_EXECUTE} } )
 
 
 function ZDEV.CMDS.DEV.RunLua( ply, cmd )
@@ -130,5 +131,196 @@ function ZDEV.UTIL.EntityKeyValue( ent, key, value )
 
 end
 hook.Add( "EntityKeyValue", "ZDEV.UTIL.EntityKeyValue", ZDEV.UTIL.EntityKeyValue)
+
+--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Inventory Sync (Server → Client)
+    Serializes the player's backpack and sends it via net message.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
+function ZDEV.SyncInventory( ply )
+	if not (ZDEV.Settings and ZDEV.Settings.InventoryEnabled) then return end
+	if not IsValid(ply) then return end
+
+	ply.Inv = ply.Inv or {}
+	ply.Inv.Backpack = ply.Inv.Backpack or {}
+	ply.Inv.Equipped = ply.Inv.Equipped or {}
+
+	local backpack, equipped, seen = {}, {}, {}
+
+	for _, inst in ipairs(ply.Inv.Backpack) do
+		if inst and inst.Serialize then
+			local s = inst:Serialize()
+			table.insert(backpack, s)
+			seen[s.id] = true
+		end
+	end
+
+	for slot, inst in pairs(ply.Inv.Equipped) do
+		if inst and inst.Serialize then
+			local s = inst:Serialize()
+			equipped[slot] = s
+			seen[s.id] = true
+		end
+	end
+
+	-- Auto-generated defs: server made them on demand, client needs the def
+	-- table to instantiate them. Marker: description == our auto-gen sentinel.
+	local autogen = {}
+	for id in pairs(seen) do
+		local def = ZDEV.Items[id]
+		if def and def.weaponClass == id
+				and def.description == "Auto-generated from SWEP metadata." then
+			autogen[id] = {
+				name          = def.name,
+				width         = def.width,
+				height        = def.height,
+				weight        = def.weight,
+				icon          = def.icon,
+				category      = def.category,
+				itemType      = def.itemType,
+				eligibleSlots = def.eligibleSlots,
+				weaponClass   = def.weaponClass,
+				rarity        = def.rarity,
+			}
+		end
+	end
+
+	local payload = { backpack = backpack, equipped = equipped, autogen = autogen }
+	local json = util.TableToJSON(payload)
+
+	net.Start("zdev_inv_sync")
+		net.WriteString(json)
+	net.Send(ply)
+end
+
+--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    Item System Console Commands
+    Used by the dev menu Items tab to spawn, give, and use items.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
+-- zd_item_spawn <item_id>
+-- Spawns a prop at the player's aim position with the item ID stored on it.
+function ZDEV.CMDS.DEV.ItemSpawn( ply, cmd, args )
+	if not (ZDEV.Settings and ZDEV.Settings.InventoryEnabled) then return end
+	if not IsValid(ply) or (not ply:IsAdmin() and not ply:IsSuperAdmin()) then return end
+
+	local itemID = args[1]
+	if not itemID or itemID == "" then
+		ply:ChatPrint("[ZDEV] Usage: zd_item_spawn <item_id>")
+		return
+	end
+
+	local def = ZDEV.GetItemDef(itemID)
+	if not def then
+		ply:ChatPrint("[ZDEV] Unknown item: " .. itemID)
+		return
+	end
+
+	local tr = ply:GetEyeTrace()
+	local spawnPos = tr.HitPos + tr.HitNormal * 8
+
+	local ent = ents.Create("prop_physics")
+	ent:SetModel("models/items/boxsrounds.mdl")
+	ent:SetPos(spawnPos)
+	ent:SetAngles(Angle(0, ply:EyeAngles().y, 0))
+	ent:SetOwner(ply)
+	ent:Spawn()
+	ent:Activate()
+
+	ent:SetNWString("zd_item_id", itemID)
+	ent:SetNWString("zd_item_name", def.name)
+
+	ent:SetColor(Color(255, 255, 255, 255))
+	ent:GetPhysicsObject():SetMass(math.max(def.weight or 1, 1))
+
+	zdev.log("I", tostring(ply) .. " spawned item '" .. def.name .. "' (" .. itemID .. ") at " .. tostring(spawnPos))
+	ply:ChatPrint("[ZDEV] Spawned: " .. def.name)
+end
+ZDEV.CMDS.Register( "zdev_item_spawn", ZDEV.CMDS.DEV.ItemSpawn, { aliases = { "zd_item_spawn" } } )
+
+-- zd_item_give <item_id>
+-- Creates an item instance and adds it to the player's inventory data.
+function ZDEV.CMDS.DEV.ItemGive( ply, cmd, args )
+	if not (ZDEV.Settings and ZDEV.Settings.InventoryEnabled) then return end
+	if not IsValid(ply) or (not ply:IsAdmin() and not ply:IsSuperAdmin()) then return end
+
+	local itemID = args[1]
+	if not itemID or itemID == "" then
+		ply:ChatPrint("[ZDEV] Usage: zd_item_give <item_id>")
+		return
+	end
+
+	local def = ZDEV.GetItemDef(itemID)
+	if not def then
+		ply:ChatPrint("[ZDEV] Unknown item: " .. itemID)
+		return
+	end
+
+	-- Ensure player inventory table exists
+	ply.Inv = ply.Inv or {}
+	ply.Inv.Backpack = ply.Inv.Backpack or {}
+
+	-- Check if a stackable instance already exists in the backpack
+	if def.maxStack and def.maxStack > 1 then
+		for _, inst in ipairs(ply.Inv.Backpack) do
+			if inst:GetID() == itemID and inst:CanAddToStack(1) then
+				inst:AddToStack(1)
+				zdev.log("I", tostring(ply) .. " received item '" .. def.name .. "' (stacked)")
+				ply:ChatPrint("[ZDEV] Received: " .. def.name .. " (x" .. inst:GetStack() .. ")")
+				ZDEV.SyncInventory(ply)
+				return
+			end
+		end
+	end
+
+	-- Create new instance
+	local inst = ZD_ItemBase:FromDef(itemID)
+	if not inst then
+		ply:ChatPrint("[ZDEV] Failed to create item instance: " .. itemID)
+		return
+	end
+
+	table.insert(ply.Inv.Backpack, inst)
+	zdev.log("I", tostring(ply) .. " received item '" .. def.name .. "' (" .. itemID .. ")")
+	ply:ChatPrint("[ZDEV] Received: " .. def.name)
+
+	ZDEV.SyncInventory(ply)
+end
+ZDEV.CMDS.Register( "zdev_item_give", ZDEV.CMDS.DEV.ItemGive, { aliases = { "zd_item_give" } } )
+
+-- zd_item_use <item_id>
+-- Creates a temporary item instance and immediately uses it on the player.
+function ZDEV.CMDS.DEV.ItemUse( ply, cmd, args )
+	if not (ZDEV.Settings and ZDEV.Settings.InventoryEnabled) then return end
+	if not IsValid(ply) or (not ply:IsAdmin() and not ply:IsSuperAdmin()) then return end
+
+	local itemID = args[1]
+	if not itemID or itemID == "" then
+		ply:ChatPrint("[ZDEV] Usage: zd_item_use <item_id>")
+		return
+	end
+
+	local def = ZDEV.GetItemDef(itemID)
+	if not def then
+		ply:ChatPrint("[ZDEV] Unknown item: " .. itemID)
+		return
+	end
+
+	if not def.onUse then
+		ply:ChatPrint("[ZDEV] Item '" .. def.name .. "' has no use action.")
+		return
+	end
+
+	local inst = ZD_ItemBase:FromDef(itemID)
+	if not inst then
+		ply:ChatPrint("[ZDEV] Failed to create item instance: " .. itemID)
+		return
+	end
+
+	inst:Use(ply)
+	zdev.log("I", tostring(ply) .. " used item '" .. def.name .. "' (" .. itemID .. ")")
+	ply:ChatPrint("[ZDEV] Used: " .. def.name)
+end
+ZDEV.CMDS.Register( "zdev_item_use", ZDEV.CMDS.DEV.ItemUse, { aliases = { "zd_item_use" } } )
 
 ZDEV.FILE.SetLoaded( _f )

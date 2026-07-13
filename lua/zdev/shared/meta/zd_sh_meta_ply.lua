@@ -65,7 +65,6 @@ function meta:InitZData( )
 	self.ZData.nick 		= self:Nick()
 	self.ZData.playtime 	= 0
 	self.ZData.rank			= RANK_PLAYER
-	self.ZData.gold			= 0
 	self.ZData.ugroup 		= self:GetUserGroup()
 
 	return self.ZData
@@ -140,13 +139,6 @@ end
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 function meta:ZID()
   return self:GetZData( "ZID" )
-end
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SH Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:ZGold()
-  return self:GetZData( "ZGold")
 end
 
 function meta:ValidateCachedZData( )

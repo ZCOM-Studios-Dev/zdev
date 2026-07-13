@@ -14,3 +14,5 @@ local SS = ScreenScale
 function ZDEV.CHUD.DrawEffects()
 
 end
+
+ZDEV.FILE.SetLoaded( _f )

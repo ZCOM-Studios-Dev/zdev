@@ -5,37 +5,24 @@ if ZDEV.FILE.Loaded( _f ) then return end
 
 --[[
     ZD_EquipSlot - Equipment Slot Panel
-    A slot overlaid on the player model for equipping items to body regions.
-    Each slot has a body region (head, chest, legs, feet, hands, backpack)
-    and accepts drag-and-drop items that match its region type.
+    A single slot overlaid on the player model for equipping items. Handles
+    both armor regions (exact equipRegion match) and the seven weapon slots
+    (eligibleSlots multi-match). Consumes ZDEV.VGUI.DragState on release.
+
     Context: Client
 ]]
 
 local PANEL = {}
 
-AccessorFunc(PANEL, "m_sRegion", "Region")
-AccessorFunc(PANEL, "m_ItemPanel", "ItemPanel")
-AccessorFunc(PANEL, "m_sLabel", "Label")
+AccessorFunc(PANEL, "m_sRegion",   "Region")
+AccessorFunc(PANEL, "m_sLabel",    "Label")
 
 local SLOT_SIZE = 56
 
--- Region-specific icons (fallback drawing)
-local REGION_COLORS = {
-    head     = Color(200, 180, 100),
-    chest    = Color(100, 150, 200),
-    legs     = Color(100, 200, 130),
-    feet     = Color(180, 130, 200),
-    hands    = Color(200, 150, 100),
-    backpack = Color(160, 140, 120),
-    weapon   = Color(220, 80,  80),
-}
 local MAT = {
     SLOT = {
-        base = Material("ui/ui_slot.png"),
+        base  = Material("ui/ui_slot.png"),
         hover = Material("ui/ui_slot_hover.png"),
-        active = Material("ui/ui_slot_active.png"),
-        selected = Material("ui/ui_slot_selected.png"),
-        disabled = Material("ui/ui_slot_disabled.png")
     }
 }
 
@@ -43,162 +30,157 @@ function PANEL:Init()
     self:SetSize(SLOT_SIZE, SLOT_SIZE)
     self:SetMouseInputEnabled(true)
     self:SetRegion("generic")
-    self:SetItemPanel(false)
     self:SetLabel("")
-    self:SetZPos(100) -- Render above the model panel
-
+    self:SetZPos(100)
     self.m_bHovered = false
-
-    -- Accept equipment drops
-    self:Receiver("zd_invitem", function(pnl, items, bDropped)
-        if not bDropped then
-            self.m_bHovered = true
-            return
-        end
-
-        local itemPanel = items[1]
-        if not itemPanel or not IsValid(itemPanel) then return end
-
-        local item = itemPanel:GetItem()
-        if not item then return end
-
-        -- Validate region compatibility
-        if not self:CanEquip(item) then return end
-
-        -- Unequip existing item first
-        if self:GetItemPanel() and IsValid(self:GetItemPanel()) then
-            self:Unequip()
-        end
-
-        -- Equip the new item
-        self:Equip(itemPanel)
-    end, {})
+    self.m_Item     = nil      -- ZD_ItemBase instance currently equipped here
 end
 
---- Check if the item can be equipped in this slot's region
+---------------------------------------------------------------------------
+-- Eligibility
+---------------------------------------------------------------------------
+
 function PANEL:CanEquip(item)
     if not item then return false end
     local region = self:GetRegion()
-    if region == "generic" then return true end
-
+    if ZDEV.Items.IsWeaponSlot(region) then
+        local elig = item.GetEligibleSlots and item:GetEligibleSlots()
+        return elig ~= nil and table.HasValue(elig, region)
+    end
+    -- Armor region: exact match
     if item.GetEquipRegion then
         return item:GetEquipRegion() == region
     end
-
-    -- If no region info on item, allow it
-    return true
+    return region == "generic"
 end
 
---- Equip an item panel into this slot
-function PANEL:Equip(itemPanel)
-    if not IsValid(itemPanel) then return end
+---------------------------------------------------------------------------
+-- Equip / Unequip
+---------------------------------------------------------------------------
 
-    -- Remove from grid if it was in one
-    local oldParent = itemPanel:GetParent()
-    if oldParent and oldParent.RemoveItemPanel then
-        oldParent:RemoveItemPanel(itemPanel)
-    end
-
-    self:SetItemPanel(itemPanel)
-    itemPanel:SetParent(self)
-    itemPanel:SetPos(0, 0)
-    itemPanel:SetSize(self:GetSize())
-    itemPanel:SetMouseInputEnabled(false) -- Disable drag while equipped
-
-    -- Fire callback
-    if self.OnEquip then
-        self:OnEquip(itemPanel:GetItem())
-    end
+function PANEL:Equip(item)
+    self.m_Item = item
+    if self.OnEquip then self:OnEquip(item) end
 end
 
---- Unequip the current item, returning it or dropping it
 function PANEL:Unequip()
-    local itemPanel = self:GetItemPanel()
-    if not IsValid(itemPanel) then return end
+    local item = self.m_Item
+    if not item then return nil end
+    if self.OnUnequip then self:OnUnequip(item) end
+    self.m_Item = nil
 
-    -- Fire callback before removing
-    if self.OnUnequip then
-        self:OnUnequip(itemPanel:GetItem())
+    if ZDEV.Items.IsWeaponSlot(self:GetRegion()) then
+        net.Start("zdev_inv_unequip_weapon")
+            net.WriteString(self:GetRegion())
+        net.SendToServer()
     end
-
-    itemPanel:SetMouseInputEnabled(true)
-    self:SetItemPanel(false)
-
-    return itemPanel
+    return item
 end
 
-function PANEL:OnCursorEntered()
-    self.m_bHovered = true
-end
+function PANEL:GetItem() return self.m_Item end
 
+---------------------------------------------------------------------------
+-- Mouse
+---------------------------------------------------------------------------
+
+function PANEL:OnCursorEntered() self.m_bHovered = true end
 function PANEL:OnCursorExited()
     self.m_bHovered = false
+    if ZDEV.VGUI and ZDEV.VGUI.Tooltip then ZDEV.VGUI.Tooltip:Hide() end
+end
+
+function PANEL:Think()
+    if self.m_bHovered and self.m_Item and ZDEV.VGUI and ZDEV.VGUI.Tooltip then
+        local mx, my = gui.MousePos()
+        ZDEV.VGUI.Tooltip:Show(self.m_Item, mx, my)
+    end
 end
 
 function PANEL:OnMousePressed(mc)
-    if mc == MOUSE_RIGHT and self:GetItemPanel() then
-        local menu = DermaMenu()
-        menu:AddOption("Unequip", function()
-            local itemPnl = self:Unequip()
-            if IsValid(itemPnl) then
-                itemPnl:Remove()
-            end
-        end):SetIcon("icon16/arrow_undo.png")
-        menu:Open()
-    end
+    if mc ~= MOUSE_RIGHT or not self.m_Item then return end
+    local menu = DermaMenu()
+    menu:AddOption("Unequip", function() self:Unequip() end):SetIcon("icon16/arrow_undo.png")
+    menu:Open()
 end
 
-function PANEL:Paint(w, h)
-    local region = self:GetRegion()
-    local baseColor = REGION_COLORS[region] or Color(120, 120, 120)
-    local mat = MAT.SLOT.base
+function PANEL:OnMouseReleased(mc)
+    if mc ~= MOUSE_LEFT then return end
+    local DS = ZDEV.VGUI.DragState
+    if not DS.active then return end
 
-    local matColor = Color(255, 255, 255, 255)
-    if self.m_bHovered then
-        mat = MAT.SLOT.hover
+    local item = DS.item
+    if not self:CanEquip(item) then DS:End() return end
+
+    -- Determine the item's Backpack index for the server message (weapons only).
+    local ply = LocalPlayer()
+    local backpackIndex = nil
+    if ply and ply.Inv and ply.Inv.Backpack then
+        for i, inst in ipairs(ply.Inv.Backpack) do
+            if inst == item then backpackIndex = i break end
+        end
     end
 
-    ZDEV.DRAW.TexturedRect(0, 0, w, h, mat, matColor)
+    -- Remove from source grid
+    if DS.sourceGrid and DS.sourceGrid.RemoveEntry then
+        DS.sourceGrid:RemoveEntry(DS.entryID)
+    end
 
-    --[[
-    -- Slot background
-    local alpha = self.m_bHovered and 180 or 120
-    surface.SetDrawColor(ColorAlpha(baseColor, alpha))
-    surface.DrawRect(0, 0, w, h)
+    -- Send equip message for weapon slots
+    if ZDEV.Items.IsWeaponSlot(self:GetRegion()) and backpackIndex then
+        net.Start("zdev_inv_equip_weapon")
+            net.WriteUInt(backpackIndex, 8)
+            net.WriteString(self:GetRegion())
+        net.SendToServer()
+    end
 
-    -- Border - brighter when hovered
-    local borderAlpha = self.m_bHovered and 255 or 150
-    surface.SetDrawColor(ColorAlpha(baseColor, borderAlpha))
-    surface.DrawOutlinedRect(0, 0, w, h, 2)
-    ]]
+    self:Equip(item)
+    DS:End()
+end
 
-    -- Inner darkened area if empty
-    if not self:GetItemPanel() then
+---------------------------------------------------------------------------
+-- Paint
+---------------------------------------------------------------------------
+
+function PANEL:Paint(w, h)
+    surface.SetDrawColor(255, 255, 255, self.m_bHovered and 220 or 140)
+    surface.SetMaterial(MAT.SLOT.base)
+    surface.DrawTexturedRect(0, 0, w, h)
+
+    if self.m_Item then
+        ZDEV.Items.DrawIcon(self.m_Item, 0, 0, w, h, {})
+    else
         surface.SetDrawColor(0, 0, 0, 80)
         surface.DrawRect(4, 4, w - 8, h - 8)
+    end
+
+    -- Invalid-drop tint while dragging an incompatible item
+    local DS = ZDEV.VGUI.DragState
+    if DS.active and self.m_bHovered and DS.item and not self:CanEquip(DS.item) then
+        surface.SetDrawColor(255, 60, 60, 120)
+        surface.DrawRect(0, 0, w, h)
     end
 
     return true
 end
 
 function PANEL:PaintOver(w, h)
-    -- Draw region label below the slot
     local label = self:GetLabel()
     if label == "" then label = self:GetRegion() end
     if label and label ~= "" then
         draw.SimpleText(
             string.upper(label),
-            "DermaDefault",
+            "DermaDefaultBold",
             w / 2, h + 2,
-            Color(200, 200, 200, 180),
+            Color(210, 210, 225, 200),
             TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP
         )
     end
 end
 
---- Callback stubs - override these in the menu
+--- Overridable hooks
 function PANEL:OnEquip(item) end
 function PANEL:OnUnequip(item) end
 
 derma.DefineControl("ZD_EquipSlot", "ZDEV Equipment Body Slot", PANEL, "DPanel")
+
 ZDEV.FILE.SetLoaded( _f )

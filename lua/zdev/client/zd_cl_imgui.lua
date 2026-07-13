@@ -1,3 +1,12 @@
+--local _f = 'zdev/client/zd_cl_imgui.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',color_white,_f .. '\n')
+--
+--if ZDEV.FILE.Loaded( _f ) then return end
+
+-- Singleton: re-includes return the already-built instance so every consumer
+-- (render module, entities, etc.) shares one input/render state instead of
+-- each spawning its own PreRender input hook.
+if ZDEV and ZDEV.IMGUI and ZDEV.IMGUI.Start3D2D then return ZDEV.IMGUI end
+
 local imgui = {}
 
 imgui.skin = {
@@ -54,6 +63,24 @@ imgui.Hook("PreRender", "Input", function()
 		gState.pressing = (USE and input.IsButtonDown(USE)) or (ATTACK and input.IsButtonDown(ATTACK))
 		gState.pressed = not wasPressing and gState.pressing
 	end
+
+	-- reset per-frame tracking counters
+	imgui._allFrameCalls      = {}
+	imgui._callsThisFrame     = 0
+	imgui._contextsThisFrame  = 0
+	imgui._perfFrame          = 0
+end)
+
+imgui.Hook("PostRender", "Tracking", function()
+	if imgui._tracking then
+		imgui._lastContexts = imgui._allFrameCalls
+	end
+	imgui._lastCallsPerFrame    = imgui._callsThisFrame    or 0
+	imgui._lastContextsPerFrame = imgui._contextsThisFrame or 0
+
+	local head = (imgui._perfHistoryHead % 120) + 1
+	imgui._perfHistory[head]   = (imgui._perfFrame or 0) * 1000
+	imgui._perfHistoryHead     = head
 end)
 
 hook.Add("NotifyShouldTransmit", "IMGUI / ClearRenderBounds", function(ent, shouldTransmit)
@@ -94,18 +121,24 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 		localPlayer = LocalPlayer()
 	end
 
+	local _C_ok    = Color(80, 255, 120)
+	local _C_skip  = Color(255, 200, 60)
+	local _C_err   = Color(255, 80, 80)
+	local _C_info  = Color(130, 200, 255)
+	local _C_label = Color(180, 180, 180)
+
 	if gState.shutdown == true then
+		-- MsgC(_C_err, "[IMGUI] Start3D2D: SKIPPED — pipeline shut down\n")
 		return
 	end
 
 	if gState.rendering == true then
-		print(
-			"[IMGUI] Starting a new IMGUI context when previous one is still rendering" ..
-			"Shutting down rendering pipeline to prevent crashes.."
-		)
+		-- MsgC(_C_err, "[IMGUI] Start3D2D: ERROR — new context started while previous still rendering! Shutting down.\n")
 		gState.shutdown = true
 		return false
 	end
+
+	-- MsgC(_C_info, "[IMGUI] Start3D2D: pos=" .. tostring(pos) .. " scale=" .. tostring(scale) .. "\n")
 
 	_devMode = imgui.IsDeveloperMode()
 
@@ -121,6 +154,7 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 
 		-- since normal is pointing away from surface towards viewer, dot<0 is visible
 		if dot >= 0 then
+			-- MsgC(_C_skip, "[IMGUI] Start3D2D: CULLED — dot=" .. string.format("%.2f", dot) .. " (panel facing away)\n")
 			return false
 		end
 	end
@@ -129,6 +163,7 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 	if distanceHide then
 		local distance = eyePosToPos:Length()
 		if distance > distanceHide then
+			-- MsgC(_C_skip, "[IMGUI] Start3D2D: CULLED — dist=" .. string.format("%.1f", distance) .. " > hide=" .. tostring(distanceHide) .. "\n")
 			return false
 		end
 
@@ -148,8 +183,15 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 	gState.pos = pos
 	gState.angles = angles
 	gState.scale = scale
+	gState._contextStart = SysTime()
+	if imgui._tracking then
+		imgui._frameCalls = {}
+		imgui._contextsThisFrame = imgui._contextsThisFrame + 1
+	end
 
+	--MsgC(Color(80,255,120), "[IMGUI] Start3D2D: cam.Start3D2D called — rendering OPEN\n")
 	cam.Start3D2D(pos, angles, scale)
+	draw.NoTexture()
 
 	-- calculate mousepos
 	if not vgui.CursorVisible() or vgui.IsHoveringWorld() then
@@ -196,7 +238,7 @@ function imgui.Start3D2D(pos, angles, scale, distanceHide, distanceFadeStart)
 		if _devMode then gState._devInputBlocker = "not hovering world" end
 	end
 
-	if _devMode then gState._renderStarted = SysTime() end
+	if _devMode then gState._renderStarted = gState._contextStart end
 
 	return true
 end
@@ -266,13 +308,13 @@ function imgui.ExpandRenderBoundsFromRect(x, y, w, h)
 
 		ent:SetRenderBoundsWS(minrb, maxrb)
 		if _devMode then
-			print("[IMGUI] Updated renderbounds of ", ent, " to ", minrb, "x", maxrb)
+			--print("[IMGUI] Updated renderbounds of ", ent, " to ", minrb, "x", maxrb)
 		end
 
 		ent._imguiRBExpansion = {x, y, w, h}
 	else
 		if _devMode then
-			print("[IMGUI] Attempted to update renderbounds when entity is not valid!! ", debug.traceback())
+			--print("[IMGUI] Attempted to update renderbounds when entity is not valid!! ", debug.traceback())
 		end
 	end
 end
@@ -369,10 +411,77 @@ local function drawDeveloperInfo()
 	end
 end
 
+local function _track(callType, props)
+	if not imgui._tracking then return end
+	local entry = { type = callType }
+	if props then for k, v in pairs(props) do entry[k] = v end end
+	imgui._frameCalls[#imgui._frameCalls + 1] = entry
+	imgui._callsThisFrame = imgui._callsThisFrame + 1
+end
+
+function imgui.xDebugRect(x, y, w, h, label, color)
+	if not _devMode then return end
+	_track("xDebugRect", {x=x, y=y, w=w, h=h, label=label})
+	color = color or Color(0, 255, 0, 200)
+	surface.SetDrawColor(color)
+	surface.DrawOutlinedRect(x, y, w, h)
+	if label then
+		draw.SimpleText(label, "DefaultFixed", x + 2, y + 2, color, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+	end
+end
+
+function imgui.xDebugText(x, y, text, color)
+	if not _devMode then return end
+	_track("xDebugText", {x=x, y=y, text=tostring(text)})
+	draw.SimpleText(tostring(text), "DefaultFixed", x, y, color or Color(255, 255, 0), TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+end
+
+function imgui.xDebugWatch(key, value)
+	if not _devMode then return end
+	_track("xDebugWatch", {key=tostring(key), value=tostring(value)})
+	if not gState._watches then gState._watches = {} end
+	gState._watches[#gState._watches + 1] = tostring(key) .. ": " .. tostring(value)
+end
+
+imgui.debugWatchX = 0
+imgui.debugWatchY = 0
+
+local _watchLineH = 14
+local _watchBg    = Color(0, 0, 0, 180)
+local _watchFg    = Color(255, 255, 150)
+
+local function drawWatches()
+	local watches = gState._watches
+	if not watches then return end
+	local wx, wy = imgui.debugWatchX, imgui.debugWatchY
+	surface.SetDrawColor(_watchBg)
+	surface.DrawRect(wx, wy, 200, #watches * _watchLineH + 4)
+	for i, line in ipairs(watches) do
+		draw.SimpleText(line, "DefaultFixed", wx + 4, wy + 2 + (i - 1) * _watchLineH, _watchFg, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP)
+	end
+	gState._watches = nil
+end
+
 function imgui.End3D2D()
 	if gState then
+		local _elapsed = SysTime() - (gState._contextStart or SysTime())
+		imgui._perfFrame = (imgui._perfFrame or 0) + _elapsed
+
+		if imgui._tracking then
+			imgui._allFrameCalls[#imgui._allFrameCalls + 1] = {
+				entity       = gState.entity or false,
+				pos          = gState.pos,
+				scale        = gState.scale,
+				calls        = imgui._frameCalls,
+				renderTimems = _elapsed * 1000,
+			}
+			imgui._frameCalls = {}
+		end
+
 		if _devMode then
-			local renderTook = SysTime() - gState._renderStarted
+			drawWatches()
+
+			local renderTook = _elapsed
 			gState._devBenchTests = (gState._devBenchTests or 0) + 1
 			gState._devBenchTaken = (gState._devBenchTaken or 0) + renderTook
 			if gState._devBenchTests == 100 then
@@ -382,6 +491,7 @@ function imgui.End3D2D()
 			end
 		end
 
+		MsgC(Color(80,255,120), "[IMGUI] End3D2D: cam.End3D2D called — rendering CLOSED\n")
 		gState.rendering = false
 		cam.End3D2D()
 		render.SetBlend(1)
@@ -440,7 +550,7 @@ function imgui.xFont(font, defaultSize)
 		local fontName = string.format("IMGUI_%s_%d", name, size)
 		_imguiFontToGmodFont[font] = fontName
 		if not _createdFonts[fontName] then
-			surface.CreateFont(fontName, {
+			ZDEV.FONT.Register(fontName, {
 				font = name,
 				size = size
 			})
@@ -453,6 +563,7 @@ function imgui.xFont(font, defaultSize)
 end
 
 function imgui.xButton(x, y, w, h, borderWidth, borderClr, hoverClr, pressColor)
+	_track("xButton", {x=x, y=y, w=w, h=h})
 	local bw = borderWidth or 1
 
 	local bgColor = imgui.IsHovering(x, y, w, h) and imgui.skin.backgroundHover or imgui.skin.background
@@ -477,6 +588,7 @@ function imgui.xButton(x, y, w, h, borderWidth, borderClr, hoverClr, pressColor)
 end
 
 function imgui.xCursor(x, y, w, h)
+	_track("xCursor", {x=x, y=y, w=w, h=h})
 	local fgColor = imgui.IsPressing() and imgui.skin.foregroundPress or imgui.skin.foreground
 	local mx, my = gState.mx, gState.my
 
@@ -492,6 +604,7 @@ function imgui.xCursor(x, y, w, h)
 end
 
 function imgui.xTextButton(text, font, x, y, w, h, borderWidth, color, hoverClr, pressColor)
+	_track("xTextButton", {x=x, y=y, w=w, h=h, text=text})
 	local fgColor =
 		((imgui.IsPressing() and imgui.IsHovering(x, y, w, h)) and (pressColor or imgui.skin.foregroundPress))
 		or (imgui.IsHovering(x, y, w, h) and (hoverClr or imgui.skin.foregroundHover))
@@ -505,4 +618,75 @@ function imgui.xTextButton(text, font, x, y, w, h, borderWidth, color, hoverClr,
 	return clicked
 end
 
+-- ── Call tracking ────────────────────────────────────────────────────────────
+-- Set imgui._tracking = true to enable; all widget calls record to _lastContexts.
+imgui._tracking             = false
+imgui._frameCalls           = {}
+imgui._allFrameCalls        = {}
+imgui._lastContexts         = {}
+imgui._perfHistory          = {}
+imgui._perfHistoryHead      = 0
+imgui._perfFrame            = 0
+imgui._contextsThisFrame    = 0
+imgui._callsThisFrame       = 0
+imgui._lastCallsPerFrame    = 0
+imgui._lastContextsPerFrame = 0
+
+function imgui.xPanel(x, y, w, h, bgColor, borderColor, bw)
+	_track("xPanel", {x=x, y=y, w=w, h=h})
+	bw = bw or 0
+	bgColor = bgColor or imgui.skin.background
+	borderColor = borderColor or imgui.skin.border
+
+	surface.SetDrawColor(bgColor)
+	surface.DrawRect(x, y, w, h)
+
+	if bw > 0 then
+		surface.SetDrawColor(borderColor)
+		surface.DrawRect(x, y, w, bw)
+		surface.DrawRect(x, y + bw, bw, h - bw * 2)
+		surface.DrawRect(x, y + h - bw, w, bw)
+		surface.DrawRect(x + w - bw + 1, y, bw, h)
+	end
+end
+
+function imgui.xProgressBar(x, y, w, h, value, min, max, fillColor, bgColor)
+	_track("xProgressBar", {x=x, y=y, w=w, h=h, value=value})
+	min = min or 0
+	max = max or 1
+	fillColor = fillColor or imgui.skin.foreground
+	bgColor = bgColor or imgui.skin.background
+
+	surface.SetDrawColor(bgColor)
+	surface.DrawRect(x, y, w, h)
+
+	local fraction = math.Clamp((value - min) / (max - min), 0, 1)
+	if fraction > 0 then
+		surface.SetDrawColor(fillColor)
+		surface.DrawRect(x, y, math.floor(w * fraction), h)
+	end
+end
+
+local _matCache = {}
+function imgui.xIcon(mat, x, y, w, h, color)
+	_track("xIcon", {x=x, y=y, w=w, h=h})
+	color = color or color_white
+
+	if type(mat) == "string" then
+		if not _matCache[mat] then
+			_matCache[mat] = Material(mat)
+		end
+		mat = _matCache[mat]
+	end
+
+	surface.SetMaterial(mat)
+	surface.SetDrawColor(color)
+	surface.DrawTexturedRect(x, y, w, h)
+end
+
+ZDEV = ZDEV or {}
+ZDEV.IMGUI = imgui
+
+--ZDEV.FILE.SetLoaded( _f )
+              
 return imgui

@@ -1,13 +1,10 @@
-local _f = 'autorun/zd_autorun_enums.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',color_white,_f .. '\n')
+local _f = 'autorun/zd_autorun_enums.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',Color(150,255,150),"(AUTORUN)",color_white,_f .. '\n')
 if ZDEV.FILE.Loaded( _f ) then return end
 
 if SERVER then
 	AddCSLuaFile()
 end
 
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
-MsgC(Color(50,255,200),'\tZDEV Enums Loaded.\n',color_white)
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
 --[[
 	zd_autorun_enums.lua
 	Enum definitions for Garry's Mod addon.
@@ -83,16 +80,40 @@ AMMO_ARROW       = 13
 AMMO_GADGET		 = 14
 
 -- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-RANK_NULL 		= -1
-RANK_PLAYER 	= 0
-RANK_TRAINEE	= 1
-RANK_PRIVATE 	= 2
-RANK_CORPORAL 	= 3
-RANK_SERGEANT 	= 4
-RANK_LIEUTENANT = 5
-RANK_CAPTAIN 	= 6
-RANK_MAJOR 		= 7
-RANK_COLONEL 	= 8
+RANK_NULL				= -1
+RANK_PLAYER				= 0
+RANK_PRIVATE			= 1
+RANK_PRIVATE_1_CL		= 2
+RANK_CORPORAL           = 3
+RANK_SERGEANT           = 3
+RANK_STF_SGT			= 4
+RANK_SGT_1_CL			= 5
+RANK_MASTER_SGT			= 6
+RANK_1ST_SGT			= 7
+RANK_SGT_MJR			= 8
+RANK_CMD_SGT_MJR		= 9
+RANK_SGT_MJR_OTA		= 10
+RANK_2_LIEUTENANT		= 11
+RANK_1_LIEUTENANT		= 12
+RANK_CAPTAIN			= 13
+RANK_MAJOR				= 14
+RANK_LIEUTENANT_COL		= 15
+RANK_COLONEL			= 16
+RANK_BRIGADIER_GEN		= 17
+RANK_MJR_GENERAL		= 18
+RANK_LIEUTENANT_GEN		= 19
+RANK_GENERAL			= 20
+RANK_GENERAL_OTA		= 21
+
+-- ■■ ENUMERATOR: PLAYER STATS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+STAT_NULL				= -1
+STAT_STRENGTH			= 0
+STAT_ENDURANCE			= 1
+STAT_INTELLECT			= 2
+STAT_DEXTERITY			= 3
+STAT_AGILITY			= 4
+STAT_WILLPOWER			= 5
+STAT_LUCK				= 6
 
 -- ■■ ENUMERATOR: AI ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 AI_NULL 		= 0
@@ -169,20 +190,54 @@ UPMODE_DESTROY		= 4
 -- ITEM TYPE
 ITEM_NULL			= 0
 ITEM_RECOVERY		= 1
-	RECOVERY_NULL		= 0
-	RECOVERY_EDIBLE		= 1
-	RECOVERY_MEDICAL	= 2
-	RECOVERY_CHEMICAL	= 3
-	RECOVERY_MISC		= 4
 ITEM_EQUIPMENT		= 2
-	EQUIP_NULL			= 0
-	EQUIP_CLOTHING		= 1
-	EQUIP_GEAR			= 2
-	EQUIP_STORAGE		= 3
-	EQUIP_ARMOR			= 4
-	EQUIP_ATTACHMENT	= 5
-	EQUIP_WEAPON		= 6
-	EQUIP_MISC			= 7
+ITEM_AMMO			= 3
+ITEM_CRAFTING		= 4
+
+-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-- CRAFTING ITEM TYPE
+CRAFTING_MATERIAL			= 0
+CRAFTING_REFINED_MATERIAL	= 1
+CRAFTING_RESOURCE			= 1
+CRAFTING_NATURAL_RESOURCE	= 3
+CRAFTING_COMPONENT			= 4
+CRAFTING_PART 				= 5
+
+MATERIAL_GEOLOGICAL	= 1
+MATERIAL_BIOLOGICAL	= 2
+MATERIAL_SYNTHETIC	= 3
+
+GEOLOGICAL_MINERAL = 0
+GEOLOGICAL_METALLIC = 1
+GEOLOGICAL_STONE	= 2
+
+BIOLOGICAL_WOOD = 0
+BIOLOGICAL_HIDE = 1
+BIOLOGICAL_FOOD = 2
+
+COMPONENT_MECHANICAL = 0
+COMPONENT_ELECTRICAL = 1
+COMPONENT_OTHER = 2
+
+
+-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-- RECOVERY ITEM TYPE
+RECOVERY_NULL		= 0
+RECOVERY_EDIBLE		= 1
+RECOVERY_MEDICAL	= 2
+RECOVERY_CHEMICAL	= 3
+RECOVERY_MISC		= 4
+
+-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-- EQUIPMENT ITEM TYPE
+EQUIP_NULL			= 0
+EQUIP_CLOTHING		= 1
+EQUIP_GEAR			= 2
+EQUIP_STORAGE		= 3
+EQUIP_ARMOR			= 4
+EQUIP_ATTACHMENT	= 5
+EQUIP_WEAPON		= 6
+EQUIP_MISC			= 7
 
 -- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 -- SLOT TYPE
@@ -214,5 +269,8 @@ INVENTORY_SAFE				= 9
 INVENTORY_DEPOSIT			= 10
 INVENTORY_BANK				= 11
 
+-- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+-- PLAYER VARIABLE TYPE
+PLYVAR_VITAL 				= 1
 
 ZDEV.FILE.SetLoaded( _f )

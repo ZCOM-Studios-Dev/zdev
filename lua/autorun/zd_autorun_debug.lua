@@ -1,13 +1,113 @@
-local _f = 'autorun/zd_autorun_debug.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',color_white,_f .. '\n')
+local _f = 'autorun/zd_autorun_debug.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV File:',Color(150,255,150),"(AUTORUN)",color_white,_f .. '\n')
 if ZDEV.FILE.Loaded( _f ) then return end
 
 if SERVER then
 	AddCSLuaFile()
 end
 
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
-MsgC(Color(50,255,200),'\tZDEV Debug Loaded.\n',color_white)
-Msg('■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n')
+--[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+	STRUCTURED LOGGING WRAPPER
+	Installs a Lua-side zdev.log with greppable single-line output when the
+	gmcl_zdev / gmsv_zdev binary module is absent. Format:
+	  [HH:MM:SS] [CL|SV] [LEVEL] message
+	ConVars:
+	  zdev_log_level    0=silent, 1=warn+err, 2=normal (default), 3=verbose
+	  zdev_log_banners  0=suppress per-file load banners, 1=show (default 1)
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
+do
+	-- Verbosity tier per tag. Real zdev.log uses tags S/W/E/I/D/T/Q/H/C/N;
+	-- unknown tags default to lvl 2 (normal) so untouched callers keep working.
+	local TAG_LEVEL = {
+		E = 1, W = 1, F = 1, T = 1, C = 1,        -- always-on: errors / warnings / stop / critical
+		S = 2, I = 2, N = 2, Q = 2, H = 2,        -- normal info
+		D = 3,                                     -- debug only
+	}
+	local DEFAULT_LVL = 2
+	local REALM = SERVER and "SV" or "CL"
+	local REALM_CLR = SERVER and Color( 100, 200, 255 ) or Color( 255, 180, 100 )
+
+	-- Capture whatever zdev.log currently is. If the real module loaded
+	-- (lua/includes/modules/zdev.lua), this is the structured impl. If require
+	-- failed, this is the no-op stub at zd_autorun.lua:17.
+	zdev = zdev or {}
+	local original_log = zdev.log
+
+	local function is_noop_stub( fn )
+		if type( fn ) ~= "function" then return true end
+		local info = debug.getinfo( fn, "S" )
+		if not info or not info.short_src then return true end
+		return not string.find( info.short_src, "modules[/\\]zdev", 1, false )
+	end
+	local stub_active = is_noop_stub( original_log )
+
+	-- Fallback formatter used only when the real module failed to load. Mirrors
+	-- the real impl's shape so console output stays uniform across both paths.
+	local FALLBACK_TAG = {
+		S = { name = "OK",    clr = Color( 100, 255, 100 ) },
+		N = { name = "..",    clr = Color( 180, 180, 180 ) },
+		I = { name = "INFO",  clr = Color( 150, 200, 255 ) },
+		D = { name = "DEBUG", clr = Color( 150, 150, 200 ) },
+		W = { name = "WARN",  clr = Color( 255, 200,  50 ) },
+		E = { name = "ERR",   clr = Color( 255,  80,  80 ) },
+		F = { name = "FAIL",  clr = Color( 255,  60, 200 ) },
+		T = { name = "STOP",  clr = Color( 200,  25,  25 ) },
+		C = { name = "CRIT",  clr = Color( 255, 255,   0 ) },
+		Q = { name = "QUERY", clr = Color( 255, 100, 255 ) },
+		H = { name = "HINT",  clr = Color( 255, 100, 255 ) },
+	}
+	local UNKNOWN = { name = "LOG", clr = Color( 200, 200, 200 ) }
+
+	local function fallback_emit( tag, msg )
+		local meta = FALLBACK_TAG[ tag ] or UNKNOWN
+		MsgC( REALM_CLR, "• [" .. REALM .. "] ",
+		      meta.clr,  meta.name .. "\t",
+		      color_white, tostring( msg or "" ) .. "\n" )
+	end
+
+	-- Decorator: prepend timestamp, gate by verbosity, delegate to the
+	-- original zdev.log. Variadic to match callers that pass a third arg.
+	zdev.log = function( tag, msg, ... )
+		local lvl = TAG_LEVEL[ tag ] or DEFAULT_LVL
+		local cv = GetConVar( "zdev_log_level" )
+		if lvl > ( cv and cv:GetInt() or DEFAULT_LVL ) then return end
+
+		MsgC( color_white, "[" .. os.date( "%H:%M:%S" ) .. "] " )
+		if stub_active then
+			fallback_emit( tag, msg )
+		else
+			original_log( tag, msg, ... )
+		end
+	end
+
+	-- Mirror under the namespaced table some callers use.
+	ZDEV.DBUG.LOG = ZDEV.DBUG.LOG or {}
+	ZDEV.DBUG.LOG.Write = zdev.log
+
+	-- Single helper file-load banners CAN call instead of bespoke MsgC lines.
+	-- Existing 63 banners stay as-is; new files should prefer this.
+	function ZDEV.FILE.LogLoad( path, tag )
+		local cv = GetConVar( "zdev_log_banners" )
+		if cv and cv:GetInt() == 0 then return end
+		MsgC(
+			Color( 200,  50, 255 ), "ZDEV File: ",
+			tag and Color( 150, 255, 150 ) or color_white,
+			tag and ( "(" .. tag .. ") " ) or "",
+			color_white, path, "\n"
+		)
+	end
+end
+
+if not ConVarExists( "zdev_log_level" ) then
+	CreateConVar( "zdev_log_level", "2",
+		bit.bor( FCVAR_ARCHIVE, FCVAR_REPLICATED ),
+		"ZDEV log verbosity: 0=silent, 1=warn+err only, 2=normal, 3=verbose" )
+end
+if not ConVarExists( "zdev_log_banners" ) then
+	CreateConVar( "zdev_log_banners", "1",
+		bit.bor( FCVAR_ARCHIVE, FCVAR_REPLICATED ),
+		"ZDEV per-file load banners: 0=suppress, 1=show" )
+end
+
 --[[■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 	UTILITY FUNCTIONS
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■]]
@@ -299,11 +399,11 @@ function ZDEV.DBUG.SetModelScale( ent, scale, deltatime )
 
 end
 
-concommand.Add( "zdev_dbug_setmodelscale", function(ply, cmd, arg) 
+ZDEV.CMDS.Register( "zdev_dev_setmodelscale", function(ply, cmd, arg)
 	local ent = ply:GetEyeTrace().Entity
 	local scale = arg[1]
 	local deltatime = arg[2]
-	ZDEV.DBUG.SetModelScale(ent, scale, deltatime) 
-end,nil,nil,0)
+	ZDEV.DBUG.SetModelScale(ent, scale, deltatime)
+end, { aliases = { "zdev_dbug_setmodelscale" }, flags = 0 } )
 -- ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
 ZDEV.FILE.SetLoaded( _f )

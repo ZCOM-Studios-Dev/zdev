@@ -533,6 +533,7 @@ if (CLIENT) then
 		ZDEV.VGUI.HTTP = {}
 	ZDEV.CHUD = {}
 	ZDEV.REND = {}
+	ZDEV.R3D  = ZDEV.R3D or {}   -- 3D render utility library (primitives + gizmos + widgets)
 	ZDEV.SEFX = {}
 	ZDEV.DRAW = {}
 	ZDEV.FONT = {}

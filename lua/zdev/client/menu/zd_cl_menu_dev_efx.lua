@@ -351,12 +351,11 @@ NODE TREE
 	menu.dPL = vgui.Create( "DPanelList", menu )
 	menu.dPL:Dock( BOTTOM )
 	menu.dPL.bt0 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "SPAWN", "sadmachine", Color(100,255,100), function( self )
-		RunConsoleCommand("zd_ent_create", DEV.SelectedClass )
+		RunConsoleCommand("zdev_ent_create", DEV.SelectedClass )
 		timer.Simple( 0.1, function() local ent = cli:GetNWEntity( "LastDevSpawn" )	t_list_ents[ #t_list_ents + 1 ] = ent:EntIndex() end )
 	end)
 	menu.dPL.bt0:Dock(LEFT)
-	menu.dPL.bt1 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "CONSOLE",  "sadmachine", Color(255,150,100),function( self ) RunConsoleCommand( "zd_dev_console") end )
-	menu.dPL.bt1:Dock(LEFT)
+	-- (CONSOLE button removed Phase 6: dead command — see zd_cl_menu_dev.lua note.)
 	menu.dPL.bt2 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "GO-TO",  "sadmachine", Color(255,150,0),function( self )	ZDEV.VGUI.FileManager( "lua" )	end )
 	menu.dPL.bt2:Dock(LEFT)
 	menu.dPL.btx = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "CLOSE",  "sadmachine", Color(255,100,100),function( self )	menu:Close() end )
@@ -368,5 +367,5 @@ NODE TREE
 
 end
 
-concommand.Add( "zd_menu_dev_efx", ZDEV.VGUI.EffectsMenu )
-ZDEV.VGUI.AddToMainMenu( "zd_menu_dev_efx" )
+ZDEV.CMDS.Register( "zdev_menu_dev_efx", ZDEV.VGUI.EffectsMenu, { aliases = { "zd_menu_dev_efx" } } )
+ZDEV.VGUI.AddToMainMenu( "zdev_menu_dev_efx" )

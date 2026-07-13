@@ -170,25 +170,25 @@ function ZDEV.VGUI.DevMenu( ply, cmd, arg )
 		menu.mb.m2:AddOption( "Lock", function() end ):SetIcon( "icon16/lock.png")
 	menu.mb.m4 = menu.mb:AddMenu( "View" )
 		menu.mb.m4:AddOption( "Toggle HUD Time-Globals", function() 
-			local conv = GetConVar("zd_dev_hud_time"):GetBool()
+			local conv = GetConVar("zdev_dev_hud_time"):GetBool()
 			local new
 			if ( conv == true ) then new = 0 
 			elseif ( conv == nil or conv == false ) then new = 1 end
-			LocalPlayer():ConCommand( "zd_dev_hud_time "..new )
+			LocalPlayer():ConCommand( "zdev_dev_hud_time "..new )
 		end) 
 		menu.mb.m4:AddOption( "Toggle Dev Crosshair", function() 
-			local conv = GetConVar("zd_dev_hud_xhair"):GetBool()
+			local conv = GetConVar("zdev_dev_hud_xhair"):GetBool()
 			local new
 			if ( conv == true ) then new = 0 
 			elseif ( conv == nil or conv == false ) then new = 1 end
-			LocalPlayer():ConCommand( "zd_dev_hud_xhair "..new )
+			LocalPlayer():ConCommand( "zdev_dev_hud_xhair "..new )
 		end) 
 		menu.mb.m4:AddOption( "Toggle Dev HUD-Grid", function() 
-			local conv = GetConVar("zd_dev_hud_grid"):GetBool()
+			local conv = GetConVar("zdev_dev_hud_grid"):GetBool()
 			local new
 			if ( conv == true ) then new = 0 
 			elseif ( conv == nil or conv == false ) then new = 1 end
-			LocalPlayer():ConCommand( "zd_dev_hud_grid "..new )
+			LocalPlayer():ConCommand( "zdev_dev_hud_grid "..new )
 		end) 
 	menu.mb.m3 = menu.mb:AddMenu( "Options" )
 
@@ -197,83 +197,40 @@ function ZDEV.VGUI.DevMenu( ply, cmd, arg )
 		menu.mb.m3:AddOption( "Settings", function() 
 		end ):SetIcon( "icon16/cog.png")
 	
+  --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    LEFT SIDEBAR - Node Tree
+	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 	menu.spL = vgui.Create("DScrollPanel", menu )
-	menu.spR = vgui.Create("DScrollPanel", menu )
-	menu.spC = vgui.Create("DScrollPanel", menu )
-
-	menu.nt = ZDEV.VGUI.CreateNodeTree( menu.spL, 2, 26, wide, tall, t_nodes_ents )
-	menu.spL:AddItem( menu.nt )
-	
-	menu.pr = vgui.Create( "DProperties", menu.spR )
-	menu.spR:AddItem( menu.pr )
-
-	menu.lv = vgui.Create( "DListView", menu.spC )
-	menu.spC:AddItem( menu.lv )
-	
 	menu.spL:Dock( LEFT )
-	--menu.spL:DockMargin(2, 2, 2, tall*0.33)
 	menu.spL:SetSize( wide *0.2, tall*0.5 )
 	menu.spL.Paint = function( self, w, h )
 		local clr = Color(0,200,255, 100)
 		ZDEV.DRAW.OutlinedBox( 0, 0, w, h, 2, clr )
 		draw.RoundedBox(0, 0, 0, w, h, ColorAlpha(clr,30) )
 	end
+
+	menu.nt = ZDEV.VGUI.CreateNodeTree( menu.spL, 2, 26, wide, tall, t_nodes_ents )
+	menu.spL:AddItem( menu.nt )
+	menu.nt:Dock( TOP )
+	menu.nt:SetTall( menu_h*0.5)
+	menu.nt.OnNodeSelected = function( self, node ) end
+	local n = menu.nt:AddNode( "Materials" )
+	n:MakeFolder( "materials", "THIRDPARTY", true )
+
+  --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    RIGHT SIDEBAR - Properties
+	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+	menu.spR = vgui.Create("DScrollPanel", menu )
 	menu.spR:Dock( RIGHT )
-	--menu.spR:DockMargin( 2,2,2,tall*0.33 )
 	menu.spR:SetSize( wide *0.2, tall*0.5)
 	menu.spR.Paint = function( self, w, h )
 		local clr = Color(255,180,50)
 		ZDEV.DRAW.OutlinedBox( 0, 0, w, h, 2, clr )
 		draw.RoundedBox(0, 0, 0, w, h, ColorAlpha(clr,30) )
 	end
-	menu.spC:Dock( TOP )
-	--menu.spC:DockMargin(wide*0.15, 2, wide*0.15, tall*0.33)
-	menu.spC:SetSize( wide *0.66, tall*0.33)
-	menu.spC.Paint = function( self, w, h )
-		local clr = Color(100,255,100, 100)
-		ZDEV.DRAW.OutlinedBox( 0, 0, w, h, 2, clr )
-		draw.RoundedBox(0, 0, 0, w, h, ColorAlpha(clr,30) )
-	end
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-NODE TREE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]	
 
-	menu.nt:Dock( TOP )
-	menu.nt:SetTall( menu_h*0.5)
-	--menu.nt:DockMargin(2, 2, 2,2)
-	menu.nt.OnNodeSelected = function( self, node )
-		--menu._DevSelectEnt( node._name )
-	end
-
-	local n = menu.nt:AddNode( "Materials" )
-	n:MakeFolder( "materials", "THIRDPARTY", true )
-
-  --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    LISTVIEW
-	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-
-	menu.lv:Dock(TOP)
-	menu.lv:SetTall( menu_h * 0.33)
-	--menu.lv:SetSize( wide, tall*0.5 - 30 )
-	menu.lv:SetMultiSelect( false )
-	menu.lv:AddColumn( "Index" )
-	menu.lv:AddColumn( "Classname" )
-	menu.lv:AddColumn( "BaseClass" )
-	for k, i in pairs( ents.GetAll() ) do
-		local n = i
-		menu.lv:AddLine( n:EntIndex(), n:GetClass(), tostring(n:GetPos()) )
-	end
-	menu.lv.OnRowSelected = function( lst, index, pnl )
-		print(lst, index, pnl )
-		
-		menu._DevSelectEnt( pnl:GetColumnText(1) )
-		--ZDEV.DBUG.GetNPCInfo( Entity(pnl:GetColumnText(1) ) )
-		--DebugPrintTable( ZDEV.DBUG.NPC )
-	end
-
-	--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	PANELLIST:LEFT - PROPERTIES
-	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+	menu.pr = vgui.Create( "DProperties", menu.spR )
+	menu.spR:AddItem( menu.pr )
 	menu.pr:Dock( TOP )
 	menu.pr:SetTall( menu_h )
 	local row_tgtname = menu.pr:CreateRow( "Global", "EntityName")
@@ -282,10 +239,312 @@ NODE TREE
 	row_tgtname.DataChanged = function( _, val )
 		DEV.PROPERTIES["EntityName"] = val
 	end
-	--menu.pr:DockMargin( 2, 2, 2, 2 )
-	--menu.pr:SetSize( wide, tall * 0.33)
-	--menu.pr:MoveBelow( menu.lv )
 	menu.pr.rows = {}
+
+  --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    CENTER - Tabbed Content (DPropertySheet)
+	━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+	menu.tabs = vgui.Create( "DPropertySheet", menu )
+	menu.tabs:Dock( FILL )
+	menu.tabs:DockMargin( 2, 2, 2, 2 )
+
+	--------------------------------------------------------------
+	-- TAB: Items  (populated with dense item button grid)
+	--------------------------------------------------------------
+	local pnlItems = vgui.Create( "DPanel" )
+	pnlItems.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+	end
+
+	-- Filter bar at top
+	local filterBar = vgui.Create( "DPanel", pnlItems )
+	filterBar:Dock( TOP )
+	filterBar:SetTall( 22 )
+	filterBar:DockMargin( 2, 2, 2, 0 )
+	filterBar.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(40, 45, 55, 255) )
+	end
+
+	local filterLabel = vgui.Create( "DLabel", filterBar )
+	filterLabel:Dock( LEFT )
+	filterLabel:SetWide( 40 )
+	filterLabel:SetText( " Filter:" )
+	filterLabel:SetFont( "DermaDefault" )
+	filterLabel:SetTextColor( Color(180, 200, 255) )
+
+	local filterEntry = vgui.Create( "DTextEntry", filterBar )
+	filterEntry:Dock( FILL )
+	filterEntry:DockMargin( 2, 2, 2, 2 )
+	filterEntry:SetPlaceholderText( "Search items..." )
+	filterEntry:SetFont( "DermaDefault" )
+
+	-- Scrollable item grid
+	local itemScroll = vgui.Create( "DScrollPanel", pnlItems )
+	itemScroll:Dock( FILL )
+	itemScroll:DockMargin( 2, 2, 2, 2 )
+
+	-- Category display order and colors
+	local CAT_ORDER = {
+		{ key = "consumable", label = "CONSUMABLES",  clr = Color(80, 200, 80) },
+		{ key = "ammo",       label = "AMMO",          clr = Color(255, 180, 50) },
+		{ key = "weapon",     label = "WEAPONS",       clr = Color(255, 80, 80) },
+		{ key = "equipment",  label = "EQUIPMENT",     clr = Color(60, 140, 255) },
+		{ key = "tool",       label = "TOOLS",          clr = Color(180, 180, 180) },
+		{ key = "material",   label = "MATERIALS",      clr = Color(160, 120, 80) },
+	}
+
+	-- Rarity colors for item name text
+	local RARITY_CLR = {
+		common    = Color(180, 180, 180),
+		uncommon  = Color(80, 200, 80),
+		rare      = Color(60, 120, 255),
+		epic      = Color(180, 60, 255),
+		legendary = Color(255, 180, 40),
+	}
+
+	-- Sort items into category buckets
+	local catBuckets = {}
+	for _, cat in ipairs( CAT_ORDER ) do
+		catBuckets[cat.key] = {}
+	end
+	if ZDEV.Items then
+		for id, def in pairs( ZDEV.Items ) do
+			-- Skip sub-namespace helpers (WEAPON_SLOTS table, IsWeaponSlot function, DrawIcon function)
+			if type(def) == "table" and def.category then
+				local cat = def.category or "tool"
+				if not catBuckets[cat] then catBuckets[cat] = {} end
+				table.insert( catBuckets[cat], { id = id, def = def } )
+			end
+		end
+	end
+	-- Alpha-sort within each category
+	for _, bucket in pairs( catBuckets ) do
+		table.sort( bucket, function(a, b) return a.def.name < b.def.name end )
+	end
+
+	-- Build rows for each category
+	local ROW_H   = 20
+	local BTN_W   = 44
+	local BTN_H   = 18
+	local ICON_SZ = 16
+	local allItemRows = {}
+
+	local function BuildItemRows( parentPanel )
+		-- Clear existing
+		for _, row in ipairs( allItemRows ) do
+			if IsValid(row) then row:Remove() end
+		end
+		allItemRows = {}
+
+		local filterText = filterEntry:GetValue():lower()
+
+		for _, cat in ipairs( CAT_ORDER ) do
+			local items = catBuckets[cat.key]
+			if not items or #items == 0 then continue end
+
+			-- Filter items by search text
+			local filtered = {}
+			for _, item in ipairs( items ) do
+				if filterText == "" or item.def.name:lower():find( filterText, 1, true ) or item.id:lower():find( filterText, 1, true ) then
+					table.insert( filtered, item )
+				end
+			end
+			if #filtered == 0 then continue end
+
+			-- Category header
+			local header = vgui.Create( "DPanel", parentPanel )
+			header:Dock( TOP )
+			header:SetTall( 18 )
+			header:DockMargin( 0, 2, 0, 0 )
+			header.Paint = function( self, w, h )
+				draw.RoundedBox( 0, 0, 0, w, h, ColorAlpha(cat.clr, 40) )
+				surface.SetDrawColor( cat.clr.r, cat.clr.g, cat.clr.b, 120 )
+				surface.DrawRect( 0, h - 1, w, 1 )
+				draw.SimpleText( cat.label .. " (" .. #filtered .. ")", "DermaDefaultBold", 4, h * 0.5, cat.clr, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER )
+			end
+			table.insert( allItemRows, header )
+
+			-- Item rows
+			for _, item in ipairs( filtered ) do
+				local row = vgui.Create( "DPanel", parentPanel )
+				row:Dock( TOP )
+				row:SetTall( ROW_H )
+				row:DockMargin( 0, 1, 0, 0 )
+				local rarClr = RARITY_CLR[item.def.rarity] or RARITY_CLR.common
+				row.Paint = function( self, w, h )
+					local bgAlpha = self:IsHovered() and 50 or 20
+					draw.RoundedBox( 0, 0, 0, w, h, Color(60, 65, 75, bgAlpha) )
+				end
+
+				-- Icon
+				local icon = vgui.Create( "DImage", row )
+				icon:Dock( LEFT )
+				icon:SetWide( ICON_SZ )
+				icon:DockMargin( 2, 2, 2, 2 )
+				if item.def.icon then
+					icon:SetImage( item.def.icon )
+				end
+
+				-- Name label
+				local nameLabel = vgui.Create( "DLabel", row )
+				nameLabel:Dock( LEFT )
+				nameLabel:SetWide( 140 )
+				nameLabel:DockMargin( 2, 0, 2, 0 )
+				nameLabel:SetText( item.def.name )
+				nameLabel:SetFont( "DermaDefault" )
+				nameLabel:SetTextColor( rarClr )
+				nameLabel:SetTooltip( item.id .. "\n" .. (item.def.description or "") .. "\n[" .. (item.def.rarity or "common") .. "] W:" .. (item.def.width or 1) .. " H:" .. (item.def.height or 1) .. " Wt:" .. (item.def.weight or 0) )
+
+				-- Grid size indicator
+				local sizeLabel = vgui.Create( "DLabel", row )
+				sizeLabel:Dock( LEFT )
+				sizeLabel:SetWide( 28 )
+				sizeLabel:DockMargin( 0, 0, 2, 0 )
+				sizeLabel:SetText( item.def.width .. "x" .. item.def.height )
+				sizeLabel:SetFont( "DermaDefault" )
+				sizeLabel:SetTextColor( Color(120, 120, 140) )
+				sizeLabel:SetContentAlignment( 5 )
+
+				-- Spawn button (spawn item entity at trace pos)
+				local btnSpawn = vgui.Create( "DButton", row )
+				btnSpawn:Dock( LEFT )
+				btnSpawn:SetWide( BTN_W )
+				btnSpawn:DockMargin( 1, 1, 0, 1 )
+				btnSpawn:SetText( "Spawn" )
+				btnSpawn:SetFont( "DermaDefault" )
+				btnSpawn:SetTextColor( Color(100, 255, 100) )
+				btnSpawn.Paint = function( self, w, h )
+					local bg = self:IsHovered() and Color(50, 80, 50, 200) or Color(30, 40, 30, 180)
+					draw.RoundedBox( 2, 0, 0, w, h, bg )
+				end
+				btnSpawn.DoClick = function()
+					RunConsoleCommand( "zdev_item_spawn", item.id )
+				end
+
+				-- Give button (add to player inventory)
+				local btnGive = vgui.Create( "DButton", row )
+				btnGive:Dock( LEFT )
+				btnGive:SetWide( BTN_W )
+				btnGive:DockMargin( 1, 1, 0, 1 )
+				btnGive:SetText( "Give" )
+				btnGive:SetFont( "DermaDefault" )
+				btnGive:SetTextColor( Color(100, 180, 255) )
+				btnGive.Paint = function( self, w, h )
+					local bg = self:IsHovered() and Color(40, 60, 80, 200) or Color(25, 35, 50, 180)
+					draw.RoundedBox( 2, 0, 0, w, h, bg )
+				end
+				btnGive.DoClick = function()
+					RunConsoleCommand( "zdev_item_give", item.id )
+				end
+
+				-- Use button (force-use the item on player)
+				local btnUse = vgui.Create( "DButton", row )
+				btnUse:Dock( LEFT )
+				btnUse:SetWide( 32 )
+				btnUse:DockMargin( 1, 1, 0, 1 )
+				btnUse:SetText( "Use" )
+				btnUse:SetFont( "DermaDefault" )
+				btnUse:SetTextColor( Color(255, 220, 100) )
+				btnUse.Paint = function( self, w, h )
+					local bg = self:IsHovered() and Color(70, 60, 30, 200) or Color(40, 35, 20, 180)
+					draw.RoundedBox( 2, 0, 0, w, h, bg )
+				end
+				btnUse.DoClick = function()
+					RunConsoleCommand( "zdev_item_use", item.id )
+				end
+
+				table.insert( allItemRows, row )
+			end
+		end
+	end
+
+	-- Initial build
+	BuildItemRows( itemScroll )
+
+	-- Rebuild on filter change
+	filterEntry.OnValueChange = function( self, val )
+		BuildItemRows( itemScroll )
+	end
+
+	if ZDEV.Settings and ZDEV.Settings.InventoryEnabled then
+		menu.tabs:AddSheet( "Items", pnlItems, "icon16/box.png" )
+	end
+
+	--------------------------------------------------------------
+	-- TAB: Equipment  (empty placeholder)
+	--------------------------------------------------------------
+	local pnlEquip = vgui.Create( "DPanel" )
+	pnlEquip.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+		draw.SimpleText( "Equipment — Coming Soon", "DermaDefaultBold", w * 0.5, h * 0.5, Color(120, 120, 140), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	end
+	if ZDEV.Settings and ZDEV.Settings.InventoryEnabled then
+		menu.tabs:AddSheet( "Equipment", pnlEquip, "icon16/shield.png" )
+	end
+
+	--------------------------------------------------------------
+	-- TAB: Weapons  (empty placeholder)
+	--------------------------------------------------------------
+	local pnlWeapons = vgui.Create( "DPanel" )
+	pnlWeapons.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+		draw.SimpleText( "Weapons — Coming Soon", "DermaDefaultBold", w * 0.5, h * 0.5, Color(120, 120, 140), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	end
+	menu.tabs:AddSheet( "Weapons", pnlWeapons, "icon16/gun.png" )
+
+	--------------------------------------------------------------
+	-- TAB: Effects  (empty placeholder)
+	--------------------------------------------------------------
+	local pnlEffects = vgui.Create( "DPanel" )
+	pnlEffects.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+		draw.SimpleText( "Effects — Coming Soon", "DermaDefaultBold", w * 0.5, h * 0.5, Color(120, 120, 140), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	end
+	menu.tabs:AddSheet( "Effects", pnlEffects, "icon16/wand.png" )
+
+	--------------------------------------------------------------
+	-- TAB: Entities  (migrated existing entity listview)
+	--------------------------------------------------------------
+	local pnlEnts = vgui.Create( "DPanel" )
+	pnlEnts.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+	end
+
+	menu.lv = vgui.Create( "DListView", pnlEnts )
+	menu.lv:Dock( FILL )
+	menu.lv:DockMargin( 2, 2, 2, 2 )
+	menu.lv:SetMultiSelect( false )
+	menu.lv:AddColumn( "Index" )
+	menu.lv:AddColumn( "Classname" )
+	menu.lv:AddColumn( "Position" )
+	for k, i in pairs( ents.GetAll() ) do
+		menu.lv:AddLine( i:EntIndex(), i:GetClass(), tostring(i:GetPos()) )
+	end
+	menu.lv.OnRowSelected = function( lst, index, pnl )
+		menu._DevSelectEnt( pnl:GetColumnText(1) )
+	end
+
+	menu.tabs:AddSheet( "Entities", pnlEnts, "icon16/bricks.png" )
+
+	--------------------------------------------------------------
+	-- TAB: NPCs  (empty placeholder)
+	--------------------------------------------------------------
+	local pnlNPCs = vgui.Create( "DPanel" )
+	pnlNPCs.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+		draw.SimpleText( "NPCs — Coming Soon", "DermaDefaultBold", w * 0.5, h * 0.5, Color(120, 120, 140), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	end
+	menu.tabs:AddSheet( "NPCs", pnlNPCs, "icon16/user.png" )
+
+	--------------------------------------------------------------
+	-- TAB: Misc  (empty placeholder)
+	--------------------------------------------------------------
+	local pnlMisc = vgui.Create( "DPanel" )
+	pnlMisc.Paint = function( self, w, h )
+		draw.RoundedBox( 0, 0, 0, w, h, Color(25, 28, 35, 240) )
+		draw.SimpleText( "Misc — Coming Soon", "DermaDefaultBold", w * 0.5, h * 0.5, Color(120, 120, 140), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER )
+	end
+	menu.tabs:AddSheet( "Misc", pnlMisc, "icon16/cog.png" )
 
 
 
@@ -295,15 +554,15 @@ NODE TREE
 	menu.dPL = vgui.Create( "DPanelList", menu )
 	menu.dPL:Dock( BOTTOM )
 
-	menu.dPL.bt0 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "SPAWN", "sadmachine", Color(100,255,100), function( self )	RunConsoleCommand("zd_ent_create", DEV.SelectedClass )	timer.Simple( 0.1, function() 
+	menu.dPL.bt0 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "SPAWN", "sadmachine", Color(100,255,100), function( self )	RunConsoleCommand("zdev_ent_create", DEV.SelectedClass )	timer.Simple( 0.1, function()
 		local ent = cli:GetNWEntity( "LastDevSpawn" )
 		print(ent)
 		t_list_ents[ #t_list_ents + 1 ] = ent:EntIndex()
 	end ) end )
 	menu.dPL.bt0:Dock(LEFT)
 
-	menu.dPL.bt1 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "CONSOLE",  "sadmachine", Color(255,150,100),function( self ) RunConsoleCommand( "zd_dev_console") end )
-	menu.dPL.bt1:Dock(LEFT)
+	-- (CONSOLE button removed Phase 6: it ran "zd_dev_console", a command whose
+	-- +/- registration has been commented out for some time — dead UI.)
 
 	menu.dPL.bt2 = ZDEV.VGUI.CreateButton( menu.dPL, 64, 28, "GO-TO",  "sadmachine", Color(255,150,0),function( self )	ZDEV.VGUI.FileManager( "lua" )	end )
 	menu.dPL.bt2:Dock(LEFT)
@@ -312,8 +571,8 @@ NODE TREE
 	menu.dPL.btx:Dock(RIGHT)
 
 end
-concommand.Add( "zd_menu_dev", ZDEV.VGUI.DevMenu )
-ZDEV.VGUI.AddToMainMenu( "zd_menu_dev" )
+ZDEV.CMDS.Register( "zdev_menu_dev", ZDEV.VGUI.DevMenu, { aliases = { "zd_menu_dev" } } )
+ZDEV.VGUI.AddToMainMenu( "zdev_menu_dev" )
 
 local function SendZDevConCmd( cmd )
 	net.Start( "zdev_con_lua_tosv", false)
@@ -342,9 +601,9 @@ function ZDEV.VGUI.DevConsole( ply, cnd, arg )
 	CONSOLE.LOG = CONSOLE.LOG or ""
 
 	local conv = {}
-	conv.con_x = GetConVar( "zd_dev_console_x" ):GetInt() or SW * 0.1
-	conv.con_y = GetConVar( "zd_dev_console_y"):GetInt() or SH * 0.33
-	conv.con_w, conv.con_h = GetConVar( "zd_dev_console_w"):GetInt() or SW * 0.33, GetConVar( "zd_dev_console_h" ):GetInt() or SH * 0.2
+	conv.con_x = GetConVar( "zdev_dev_console_x" ):GetInt() or SW * 0.1
+	conv.con_y = GetConVar( "zdev_dev_console_y"):GetInt() or SH * 0.33
+	conv.con_w, conv.con_h = GetConVar( "zdev_dev_console_w"):GetInt() or SW * 0.33, GetConVar( "zdev_dev_console_h" ):GetInt() or SH * 0.2
 
 	local con = ZDEV.VGUI.CreateFrame( conv.con_w, conv.con_h, "ZDEV Development Lua Console" )
 	con:SetPos( conv.con_w *-1, conv.con_y)

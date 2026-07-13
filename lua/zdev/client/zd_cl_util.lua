@@ -124,12 +124,12 @@ end
 
 TSIN = ZDEV.UTIL.TimedSin
 
-concommand.Add("derma_setskin", function(_, _, args)
+ZDEV.CMDS.Register("zdev_vgui_setskin", function(_, _, args)
 	if GetConVar("sv_allowcslua"):GetInt() == 0 then return end
 	for k, v in pairs(vgui.GetWorldPanel():GetChildren()) do
 		v:SetSkin(args[1])
 	end
-end, nil, "Sets skin for all Derma objects.")
+end, { aliases = { "derma_setskin" }, help = "Sets skin for all Derma objects." })
 
 local function deepskin(children, skin)
 	for k, v in pairs(children) do
@@ -138,12 +138,12 @@ local function deepskin(children, skin)
 	end
 end
 
-concommand.Add("derma_deepsetskin", function(_, _, args)
+ZDEV.CMDS.Register("zdev_vgui_deepsetskin", function(_, _, args)
 	if GetConVar("sv_allowcslua"):GetInt() == 0 then return end
 	deepskin(vgui.GetWorldPanel():GetChildren(), args[1])
-end, nil, "Forces skin set for all Derma objects and their children.")
+end, { aliases = { "derma_deepsetskin" }, help = "Forces skin set for all Derma objects and their children." })
 
-concommand.Add("derma_updateskin", function()
+ZDEV.CMDS.Register("zdev_vgui_updateskin", function()
 	if GetConVar("sv_allowcslua"):GetInt() == 0 then return end
 	for k, v in pairs(derma.GetSkinTable()) do
 		if v.GwenTexture then
@@ -152,7 +152,7 @@ concommand.Add("derma_updateskin", function()
 		end
 	end
 	derma.RefreshSkins()
-end, nil, "Updates skins for all Derma objects.")
+end, { aliases = { "derma_updateskin" }, help = "Updates skins for all Derma objects." })
 
 hook.Add("ForceDermaSkin", "Windows10SkinForce", function()
 	return "ZDEV" -- This will paint all Derma objects to new skin

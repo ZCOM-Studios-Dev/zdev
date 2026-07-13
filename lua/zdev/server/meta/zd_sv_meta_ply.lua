@@ -2,283 +2,249 @@ local _f = 'zdev/server/meta/zd_sv_meta_ply.lua'; Msg("■") MsgC(Color(200,50,2
 if ZDEV.FILE.Loaded( _f ) then return end
 
 --[[
-	zd_sv_meta_ply.lua
-	Server player meta extensions for zdev addon.
-	Author: zcomstudios
-	Description: Extends player metatables with server-side logic for zdev.
+    Server Player Meta Extensions
+    Extends the Player metatable with ZDEV data methods.
+    Now backed by SQL via ZDEV.PDATA instead of JSON files.
+    Context: Server
 ]]
-include("zdev/server/zd_sv_database.lua" )
 
 local meta = FindMetaTable( "Player" )
 if not meta then return end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:GenerateZID( )
-	local rand, zid = 0, ""
-	for i = 1, 9 do
-		rand = math.random(0,9)
-		zid = zid .. tostring(rand)
-	end
-	if ZDEV.PLYR._INDEX[ zid ] then
-		self:GenerateZID( )
-	else
-		zdev.log( "S", "Generated player " .. tostring(self) .. " a new ZID: " .. tostring( zid ) )
-		ZDEV.PLYR._INDEX[ zid ] = {}
-		return zid
-	end
+    ZID — ZDEV Unique ID
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 
+function meta:ZID()
+    return self.ZID or "000000000"
 end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:InitZData( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:InitZData( )
+    ZData — Backward-compatible accessors
+    These now read/write NW vars (which are synced to SQL on save).
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 
-	zdev.log( "I", "Initializing data for " .. tostring( self ) )
+-- Map ZData keys to NW var names (Core essentials only)
+local ZDATA_NW_MAP = {
+    rank     = { nw = "ZDEV_Rank",     type = "Int" },
+    playtime = { nw = "ZDEV_Playtime", type = "Int" },
+}
 
-	if not self.ZData then self.ZData = {}	end
-	local zid = self:GenerateZID()
+function meta:GetZData( key )
+    -- Check NW map first
+    local mapping = ZDATA_NW_MAP[key]
+    if mapping then
+        if mapping.type == "Int" then
+            return self:GetNWInt(mapping.nw, 0)
+        elseif mapping.type == "String" then
+            return self:GetNWString(mapping.nw, "")
+        end
+    end
 
-	self.ZData.file 		= tostring( "zdev/plyr/" .. self:UniqueID() .. ".txt" )
+    -- Simple property lookups
+    if key == "zid" then return self.ZID or "" end
+    if key == "sid" then return self:SteamID() end
+    if key == "uid" then return self:UniqueID() end
+    if key == "nick" then return self:Nick() end
+    if key == "ip" then return self:IPAddress() end
+    if key == "ugroup" then return self:GetUserGroup() end
 
-	self.ZData.zid 			= zid
-	self.ZData.sid 			= self:SteamID()
-	self.ZData.uid 			= self:UniqueID()
-	self.ZData.ip 			= self:IPAddress()
-	self.ZData.nick 		= self:Nick()
-	self.ZData.playtime 	= 0
-	self.ZData.rank			= RANK_PLAYER
-	self.ZData.gold			= 0
-	self.ZData.ugroup 		= self:GetUserGroup()
-
-	self:SaveZData()
-	self:SendAllZData()
-	--self:InsertIntoPlayersTbl( )
-
-	return self.ZData
-
+    -- Fallback to PData for anything else
+    return self:GetPData(key)
 end
 
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:ZID( )
-	return self:GetZData( "zid" )
+function meta:SetZData( key, val )
+    -- Check NW map
+    local mapping = ZDATA_NW_MAP[key]
+    if mapping then
+        if mapping.type == "Int" then
+            self:SetNWInt(mapping.nw, tonumber(val) or 0)
+        elseif mapping.type == "String" then
+            self:SetNWString(mapping.nw, tostring(val))
+        end
+        return
+    end
+
+    -- Fallback to PData
+    self:SetPData(key, val)
 end
 
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 function meta:ZRank()
-	return self:GetZData( "rank" )
+    return self:GetNWInt("ZDEV_Rank", 0)
 end
 
-function meta:ZGold()
-	return self:GetZData( "gold" )
-end
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:ZDataExists( )
-	local uid = self:UniqueID()
-	local s_file = "zdev/plyr/" .. tostring(uid) .. ".txt"
-	if !self.ZData then self.ZData = {} end
-	self.ZData.file = s_file
-	return tobool( file.Exists( s_file, "DATA" ) )  
-end
-
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:SaveZData( )
-	local s_data = util.TableToJSON( self.ZData, true )
-	file.Write( self.ZData.file, s_data )
-	zdev.log( "I", "Saved player-data file for " .. tostring( self ) .. " - " .. tostring( s_file ) )
-end
-
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:LoadZData( )
-	local t_data = util.JSONToTable( file.Read( self.ZData.file, "DATA" ) )
-	for k, v in pairs( t_data ) do
-		self:SetZData( k, v )
-	end
-	zdev.log( "N", "Loaded player-data file for: " .. tostring( self ) )
-	return t_data
-end
-
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:SetZData( data, val )
-	--self.CacheZData( data, val )
-	self:SetPData( data, val )
-	local nwtyp = ZDEV.PLYR.DataNWTranslate( data )
-	if nwtyp == "Int" then
-		self:SetNWInt( data, val )
-	elseif nwtyp == "String" then
-		self:SetNWString( data, val )
-	end
-	zdev.log( "S", "Set "..tostring(self).."'s ZData-Var: '"..tostring(data).."' to '"..tostring(val).."'")
-end
-function meta:SendAllZData( data )
-	for k, v in pairs( self.ZData ) do
-		self:SetZData( k, v )
-	end
+--- Total accumulated playtime in seconds (live for the current session).
+function meta:GetPlaytime()
+    if ZDEV.PDATA and ZDEV.PDATA.GetPlaytime then
+        return ZDEV.PDATA.GetPlaytime(self)
+    end
+    return self:GetNWInt("ZDEV_Playtime", 0)
 end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:InsertIntoPlayersTbl( )
-	local uid, sid, ip = self:UniqueID(), self:SteamID(), self:IPAddress()
-	if ip == "loopback" then ip = "0.0.0.0" end
-	print( uid, sid, ip )
-	local s_q = string.format( "INSERT INTO players (uniqueid, steamid, ip) VALUES(%u, '%s', '%s, '%s', '%s', '%s')", uid, sid, ip, os.date(os.time()), os.date(os.time()), self:Nick() )
-	local q = MYSQL_DB:query( s_q )
-	q.onSuccess = function( data )
-		zdev.log( "S", "Inserted Player " .. tostring(self) .. " ("..tostring(uid) .. ", " .. sid .. ", " .. ip .. " ) into `players` table." )
-		DebugPrintTable( data )
-	end
-	q.onError = function( q, err )
-		zdev.log( "E", "Error inserting Player into `players` table: " .. type(err) .. " " .. tostring(err) )
-	end
-	q:start()
+    InitZData — Now delegates to PDATA
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
+function meta:InitZData()
+    zdev.log("I", "InitZData called for " .. tostring(self) .. " — delegating to PDATA.Load")
+    if ZDEV.PDATA then
+        ZDEV.PDATA.Load(self)
+    else
+        zdev.log("W", "ZDEV.PDATA not available, applying defaults")
+        ZDEV.PDATA.ApplyDefaults(self)
+    end
 end
 
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:RegisterToDatabase( )
-
+function meta:SaveZData()
+    if ZDEV.PDATA then
+        ZDEV.PDATA.SaveAll(self)
+    end
 end
 
-
---[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:UploadData( )
-
+function meta:LoadZData()
+    if ZDEV.PDATA then
+        ZDEV.PDATA.Load(self)
+    end
 end
 
-
+function meta:ZDataExists()
+    -- Always true when using SQL — the Load function handles registration
+    return true
+end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+    Database Registration
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
+function meta:InsertIntoPlayersTbl()
+    -- Now handled automatically by PDATA.Register on first join
+    zdev.log("D", "InsertIntoPlayersTbl called — handled by PDATA.Register")
+end
+
+function meta:RegisterToDatabase()
+    if ZDEV.PDATA then
+        ZDEV.PDATA.Register(self)
+    end
+end
+
+--[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    HUD Messages (unchanged)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
 local b_extraData, t_data = false, {}
 function meta:SendHUDMessage( msgtype, txt, time, args )
+    if args and type(args) == "table" and table.Count(args) > 0 then
+        b_extraData = true
 
-	if args and type(args) == "table" and table.Count(args) > 0 then
+        if msgtype == HUDMSG_MARKER then
+            if not args.ent or not IsValid(args.ent) then return end
+            t_data.ent = args.ent
+            t_data.entindex = args.ent:EntIndex()
+        elseif msgtype == HUDMSG_WORLD then
+            if not args.pos or not util.IsInWorld( args.pos ) then return end
+            t_data.pos = Vector(args.pos.x, args.pos.y, args.pos.z)
+        end
+    end
 
-		b_extraData = true
-
-		if msgtype == HUDMSG_MARKER then
-
-			if !args.ent or !IsValid(args.ent) then return end
-
-			t_data.ent = ent
-			t_data.entindex = ent:EntIndex()
-			
-		elseif msgtype == HUDMSG_WORLD then
-
-			if !args.pos or !util.IsInWorld( args.pos ) then return end
-
-			t_data.pos = Vector(pos.x, pos.y, pos.z)
-			t_data.posstr = string.Implode(",", {x=pos.x,y=pos.y,z=pos.z})
-
-		end
-
-	end
-
-	net.Start( "zdev_hud_msg_send", false )
-		net.WriteString( txt )
-		net.WriteUInt( msgtype, 3 )
-		net.WriteFloat( time )
-		if b_extraData then
-			net.WriteTable( t_data )
-		end
-	net.Send(self)
-
+    net.Start( "zdev_hud_msg_send", false )
+        net.WriteString( txt )
+        net.WriteUInt( msgtype, 3 )
+        net.WriteFloat( time )
+        if b_extraData then
+            net.WriteTable( t_data )
+        end
+    net.Send(self)
 end
 
-
-
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+    HUD Markers (unchanged)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
+
 function meta:AddEntMarker( id, ent, pos, material, clr, time )
+    local puid = tostring(self:UniqueID())
 
-	local puid = tostring(self:UniqueID())
+    if not IsValid(ent) then zdev.log( "E", "Invalid entity passed to AddEntMarker" ) return end
 
-	if !IsValid(ent) then zdev.log( "E", "Invalid entity passed to AddEntMarker" ) return end
+    local t_marker = {id=id, mat=material, clr=clr, time=time}
 
-	local t_marker = {id=id, mat=material, clr=clr, time=time}
+    if not ent.zdev_marker then ent.zdev_marker = {} end
+    if not ent.zdev_marker[ puid ] then ent.zdev_marker[ puid ] = {} end
+    table.insert( ent.zdev_marker[ puid ], t_marker )
 
-	if !ent.zdev_marker then ent.zdev_marker = {} end
-	if !ent.zdev_marker[ puid ] then ent.zdev_marker[ puid ] = {} end
-	table.insert( ent.zdev_marker[ puid ], t_marker )
+    net.Start( "zdev_hud_marker_ent",false )
+        net.WriteString( id )
+        net.WriteEntity( ent )
+        net.WriteVector( pos )
+        net.WriteString( material )
+        net.WriteColor( clr )
+        net.WriteFloat( time )
+    net.Send( self )
 
-	net.Start( "zdev_hud_marker_ent",false )
-		net.WriteString( id )
-		net.WriteEntity( ent )
-		net.WriteVector( pos )
-		net.WriteString( material )
-		net.WriteColor( clr )
-		net.WriteFloat( time )
-	net.Send( self )
-
-	if time > 0 then
-		timer.Simple( time, function() 
-			self:RemoveEntMarker( id, ent, false )
-		end)
-	end
-
+    if time > 0 then
+        timer.Simple( time, function()
+            if IsValid(self) then
+                self:RemoveEntMarker( id, ent, false )
+            end
+        end)
+    end
 end
 
+function meta:RemoveEntMarker( id, ent, send )
+    local puid = tostring(self:UniqueID())
+
+    if not IsValid(ent) then zdev.log( "E", "Invalid entity passed to RemoveEntMarker" ) return end
+    if not ent.zdev_marker or not ent.zdev_marker[ puid ] then return end
+
+    local t_markers = ent.zdev_marker[ puid ]
+    local b_marker_removed = false
+    for k, v in pairs( t_markers ) do
+        if v.id == id then
+            ent.zdev_marker[ puid ][ k ] = nil
+            b_marker_removed = true
+        end
+    end
+
+    if b_marker_removed then
+        zdev.log( "S", "Removed entity HUD marker from " .. tostring( ent ) )
+        if send then
+            net.Start( "zdev_hud_marker_ent_remove", false )
+                net.WriteString( id )
+                net.WriteEntity( ent )
+            net.Send( self )
+        end
+    end
+end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	FUNC-SV Player:GenerateZID( )
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
-function meta:RemoveEntMarker( id, ent, send )
+    World Marker (position-based, no entity required)
+    Sends a marker at a world position to the client's
+    marker system with full customization parameters.
 
-	local puid = tostring(self:UniqueID())
+    @param text      string   Text label for the marker
+    @param pos       Vector   World position
+    @param opts      table    (optional) Override defaults:
+        .icon        string   Material path for the icon
+        .iconClr     Color    Icon tint color
+        .iconW       number   Icon width
+        .iconH       number   Icon height
+        .textClr     Color    Text color
+        .bgClr       Color    Background color
+        .font        string   Font name
+        .duration    number   Total lifetime in seconds
+        .calloutDur  number   Initial text-visible duration
+        .lookAngle   number   Degrees tolerance for look-at
+        .lookDist    number   Max distance for look-at reveal
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 
-	if !IsValid(ent) then zdev.log( "E", "Invalid entity passed to RemoveEntMarker" ) return end
-	if !ent.zdev_marker[ puid ] then zdev.log( "E", "Player " .. tostring(self).. " does not have any active hud-markers." ) return end
-	local t_markers = ent.zdev_marker[ puid ]
-	if t_markers and type( t_markers ) == "table" and table.Count( t_markers ) > 0 then
-		local b_marker_removed
-		for k, v in pairs( t_markers ) do
-			if v.id == id then
-				ent.zdev_marker[ puid ][ k ] = nil
-				b_marker_removed = true
-			end
-		end
-		if !b_marker_removed then
-			zdev.log( "E", "Player " .. tostring(self) .. " does not have an active hud-marker for Entity " ..tostring(ent) .. " with id: " .. tostring( id ) )
-		end
-	end
+function meta:AddWorldMarker( text, pos, opts )
+    if not pos then zdev.log("E", "AddWorldMarker: no position") return end
+    opts = opts or {}
 
-	if b_marker_removed then
-		zdev.log( "S", "Removed entity HUD marker from " .. tostring( ent ) )
-		if send then
-			net.Start( "zdev_hud_marker_ent_remove", false )
-				net.WriteString( id )
-				net.WriteEntity( ent )
-			net.Send( self )
-		end
-	end
-
+    net.Start("zdev_hud_marker_world", false)
+        net.WriteString( text )
+        net.WriteVector( pos )
+        net.WriteTable( opts )
+    net.Send( self )
 end
 
 ZDEV.FILE.SetLoaded( _f )

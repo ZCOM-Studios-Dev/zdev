@@ -96,12 +96,15 @@ end
 	PRIMITIVES — LINES
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 
--- Thick, camera-facing 3D line. width is in world units.
+-- Thick, camera-facing 3D line. width is in WORLD units.
+-- nil/0 width = engine 1px line. ANY positive width renders a real beam —
+-- including sub-1 widths, which matter up close: a 0.1-unit beam 10 units from
+-- the camera is visibly thick on screen. (The old `width <= 1` cutoff collapsed
+-- close-range gizmos to 1px lines because gizmo width scales with distance.)
 -- Path: ZDEV.R3D.Line
 function R3D.Line( startPos, endPos, color, width )
 	color = color or color_white
-	width = width or 1
-	if width <= 1 then
+	if not width or width <= 0 then
 		render.DrawLine( startPos, endPos, color, false )
 		return
 	end
@@ -138,7 +141,7 @@ end
 -- Path: ZDEV.R3D.Ring
 function R3D.Ring( pos, normal, radius, color, width, segments, arcStart, arcEnd )
 	color    = color or color_white
-	width    = width or 1
+	width    = width or 0   -- nil/0 = 1px lines; any positive width = beams (see R3D.Line)
 	segments = segments or 48
 	arcStart = arcStart or 0
 	arcEnd   = arcEnd or 360
@@ -146,14 +149,15 @@ function R3D.Ring( pos, normal, radius, color, width, segments, arcStart, arcEnd
 	local span   = math_rad( arcEnd - arcStart )
 	local base   = math_rad( arcStart )
 
-	if width > 1 then render.SetColorMaterial() end
+	local beam = width > 0
+	if beam then render.SetColorMaterial() end
 
 	local prev
 	for i = 0, segments do
 		local t = base + span * ( i / segments )
 		local p = pos + ( ax * math_cos( t ) + ay * math_sin( t ) ) * radius
 		if prev then
-			if width > 1 then
+			if beam then
 				render.DrawBeam( prev, p, width, 0, 1, color )
 			else
 				render.DrawLine( prev, p, color, false )

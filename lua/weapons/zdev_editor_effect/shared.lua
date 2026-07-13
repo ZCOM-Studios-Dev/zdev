@@ -44,50 +44,57 @@ SWEP.m_iReloadDelay			= 1
 --function SWEP:TakeSecondaryAmmo( )	end
 --function SWEP:TranslateActivity( )	end
 
-CreateClientConVar( "fxedit_sprite_material", "sprites/efx_0a_glow_24", true, false, "")
-CreateClientConVar( "fxedit_sprite_scale", 0.25, true, false, "")
-CreateClientConVar( "fxedit_sprite_color", "255 255 255 255", true, false, "")
-CreateClientConVar( "fxedit_sprite_alpha", 255, true, false, "")
-CreateClientConVar( "fxedit_emitter_max", 100, true, false, "")
-CreateClientConVar( "fxedit_emitter_min", 50, true, false, "")
-CreateClientConVar( "fxedit_emitter_material", "sprites/efx_0a_glow_24", true, false, "")
-CreateClientConVar( "fxedit_emitter_collide", 1, true, false, "")
-CreateClientConVar( "fxedit_emitter_bounce", 0.4, true, false, "")
-CreateClientConVar( "fxedit_emitter_size_start", 1.0, true, false, "")
-CreateClientConVar( "fxedit_emitter_alpha_start", 255, true, false, "")
-CreateClientConVar( "fxedit_emitter_length_start", 0, true, false, "")
-CreateClientConVar( "fxedit_emitter_lifetime", 0, true, false, "")
-CreateClientConVar( "fxedit_emitter_dietime", 0.5, true, false, "")
-CreateClientConVar( "fxedit_emitter_size_end", 0, true, false, "")
-CreateClientConVar( "fxedit_emitter_alpha_end", 0, true, false, "")
-CreateClientConVar( "fxedit_emitter_length_end", 0, true, false, "")
-CreateClientConVar( "fxedit_emitter_color", "255 255 255 255", true, false, "")
-CreateClientConVar( "fxedit_emitter_airresistance", 100, true, false, "")
-CreateClientConVar( "fxedit_emitter_gravity", "0 0 0", true, false, "")
+CreateClientConVar( "zdev_edit_fx_sprite_material", "sprites/efx_0a_glow_24", true, false, "")
+CreateClientConVar( "zdev_edit_fx_sprite_scale", 0.25, true, false, "")
+CreateClientConVar( "zdev_edit_fx_sprite_color", "255 255 255 255", true, false, "")
+CreateClientConVar( "zdev_edit_fx_sprite_alpha", 255, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_max", 100, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_min", 50, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_material", "sprites/efx_0a_glow_24", true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_collide", 1, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_bounce", 0.4, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_size_start", 1.0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_alpha_start", 255, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_length_start", 0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_lifetime", 0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_dietime", 0.5, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_size_end", 0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_alpha_end", 0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_length_end", 0, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_color", "255 255 255 255", true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_airresistance", 100, true, false, "")
+CreateClientConVar( "zdev_edit_fx_emitter_gravity", "0 0 0", true, false, "")
 
 SWEP.ClientConVar = {
-	["fxedit_sprite_material"] = {name="Material", type="string", property="Generic", min=nil, max=nil},
-	["fxedit_sprite_scale"] = {name="Scale", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_sprite_color"] = {name="Color", type="string", property="VectorColor", min=nil, max=nil},
-	["fxedit_sprite_alpha"] = {name="Alpha", type="number", property="Int", min=0, max=9999},
-	["fxedit_emitter_max"] = {name="Particles (Max)", type="number", property="Int", min=0, max=9999},
-	["fxedit_emitter_min"] = {name="Particles (Min)", type="number", property="Int", min=0, max=9999},
-	["fxedit_emitter_material"] = {name="Material", type="string", property="Generic", min=nil, max=nil},
-	["fxedit_emitter_collide"] = {name="Collide", type="boolean", property="Boolean", min=nil, max=nil},
-	["fxedit_emitter_bounce"] = {name="Bounce", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_size_start"] = {name="Start Size", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_alpha_start"] = {name="Start Alpha", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_length_start"] = {name="Start Length", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_lifetime"] = {name="Lifetime", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_dietime"] = {name="Dietime", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_size_end"] = {name="End Size", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_alpha_end"] = {name="End Alpha", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_length_end"] = {name="End Length", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_color"] = {name="Color", type="string", property="VectorColor", min=nil, max=nil},
-	["fxedit_emitter_airresistance"] = {name="Air Resistance", type="float", property="Float", min=0.000, max=99.999},
-	["fxedit_emitter_gravity"] = {name="Gravity", type="string", property="VectorColor", min=nil, max=nil}
+	["zdev_edit_fx_sprite_material"] = {name="Material", type="string", property="Generic", min=nil, max=nil},
+	["zdev_edit_fx_sprite_scale"] = {name="Scale", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_sprite_color"] = {name="Color", type="string", property="VectorColor", min=nil, max=nil},
+	["zdev_edit_fx_sprite_alpha"] = {name="Alpha", type="number", property="Int", min=0, max=9999},
+	["zdev_edit_fx_emitter_max"] = {name="Particles (Max)", type="number", property="Int", min=0, max=9999},
+	["zdev_edit_fx_emitter_min"] = {name="Particles (Min)", type="number", property="Int", min=0, max=9999},
+	["zdev_edit_fx_emitter_material"] = {name="Material", type="string", property="Generic", min=nil, max=nil},
+	["zdev_edit_fx_emitter_collide"] = {name="Collide", type="boolean", property="Boolean", min=nil, max=nil},
+	["zdev_edit_fx_emitter_bounce"] = {name="Bounce", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_size_start"] = {name="Start Size", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_alpha_start"] = {name="Start Alpha", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_length_start"] = {name="Start Length", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_lifetime"] = {name="Lifetime", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_dietime"] = {name="Dietime", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_size_end"] = {name="End Size", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_alpha_end"] = {name="End Alpha", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_length_end"] = {name="End Length", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_color"] = {name="Color", type="string", property="VectorColor", min=nil, max=nil},
+	["zdev_edit_fx_emitter_airresistance"] = {name="Air Resistance", type="float", property="Float", min=0.000, max=99.999},
+	["zdev_edit_fx_emitter_gravity"] = {name="Gravity", type="string", property="VectorColor", min=nil, max=nil}
 
 }
+
+-- Deprecated fxedit_* aliases (Sweep Phase 4b): value-migrating, write-mirroring.
+if CLIENT and ZDEV and ZDEV.CONV and ZDEV.CONV.LegacyAlias then
+	for cvar in pairs( SWEP.ClientConVar ) do
+		ZDEV.CONV.LegacyAlias( cvar, ( string.gsub( cvar, "^zdev_edit_fx_", "fxedit_" ) ) )
+	end
+end
 
 function SWEP:GetClientConVars( )
 
@@ -221,9 +228,9 @@ function SWEP:CreateSprite( parent, pos, ang  )
 	local convar = self:GetClientConVars( )
 
 	local mat, color, scale, alpha
-	mat = convar["fxedit_sprite_material"]
-	scale = convar["fxedit_sprite_scale"]
-	color = string.ToColor( convar["fxedit_sprite_color"] )
+	mat = convar["zdev_edit_fx_sprite_material"]
+	scale = convar["zdev_edit_fx_sprite_scale"]
+	color = string.ToColor( convar["zdev_edit_fx_sprite_color"] )
 	alpha = color.a or 254
 
 	local spr = ents.Create( "effect_sprite" )
@@ -251,15 +258,15 @@ function SWEP:CreateEmitter( parent, pos, ang )
 	local convar = self:GetClientConVars( )
 
 	local mat, color, lifetime, dietime,  start_size, start_alpha, start_len, end_size, end_alpha, end_len, min, max, bounce, collide, airres, gravity
-	mat = convar["fxedit_sprite_material"]
-	color = string.ToColor( convar["fxedit_emitter_color"] )
-	lifetime, dietime = convar["fxedit_emitter_lifetime"], convar["fxedit_emitter_dietime"]
-	start_size, end_size = convar["fxedit_emitter_size_start"], convar["fxedit_emitter_size_end"]
- 	start_alpha, end_alpha = convar["fxedit_emitter_alpha_start"], convar["fxedit_emitter_alpha_end"]
-	start_len, end_len = convar["fxedit_emitter_length_start"], convar["fxedit_emitter_length_end"]
-	bounce, collide = convar["fxedit_emitter_bounce"], convar["fxedit_emitter_collide"]
-	min, max = convar["fxedit_emitter_min"], convar["fxedit_emitter_max"]
-	airres, gravity = convar["fxedit_emitter_airresistance"], convar["fxedit_emitter_gravity"]
+	mat = convar["zdev_edit_fx_sprite_material"]
+	color = string.ToColor( convar["zdev_edit_fx_emitter_color"] )
+	lifetime, dietime = convar["zdev_edit_fx_emitter_lifetime"], convar["zdev_edit_fx_emitter_dietime"]
+	start_size, end_size = convar["zdev_edit_fx_emitter_size_start"], convar["zdev_edit_fx_emitter_size_end"]
+ 	start_alpha, end_alpha = convar["zdev_edit_fx_emitter_alpha_start"], convar["zdev_edit_fx_emitter_alpha_end"]
+	start_len, end_len = convar["zdev_edit_fx_emitter_length_start"], convar["zdev_edit_fx_emitter_length_end"]
+	bounce, collide = convar["zdev_edit_fx_emitter_bounce"], convar["zdev_edit_fx_emitter_collide"]
+	min, max = convar["zdev_edit_fx_emitter_min"], convar["zdev_edit_fx_emitter_max"]
+	airres, gravity = convar["zdev_edit_fx_emitter_airresistance"], convar["zdev_edit_fx_emitter_gravity"]
 	
 	MsgC( Color(255,100,255), "Creating new Particle Emitter:\n" )
 	print( mat, airres, gravity, lifetime, dietime,  start_size, start_alpha, start_len, end_size, end_alpha, end_len, min, max, bounce, collide)

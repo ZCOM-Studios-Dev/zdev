@@ -7,7 +7,7 @@ if ZDEV.FILE.Loaded( _f ) then return end
   ZDEV CORE: PLAYER DATA
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ]]
 ZDEV.DATA.NWTranslate = {
-  ["rank|uid|gold|playtime"] = "Int",
+  ["rank|uid|playtime"] = "Int",
   ["zid|sid|nick|ip|ugroup"] = "String"
 }
 
@@ -44,29 +44,33 @@ end
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ]]
 
 ZDEV.RANK = ZDEV.RANK or {}
-ZDEV.RANK[ RANK_PLAYER ] 		  = {sym="\\", name="Player", 	clr=color_white,    ico=Material("vgui/ranks/1.png")}
-ZDEV.RANK[ RANK_TRAINEE ] 		= {sym="\\", name="Tarinee", 	clr=color_white,    ico=Material("vgui/ranks/1.png")}
-ZDEV.RANK[ RANK_PRIVATE ] 		= {sym="R", name="Private", 		clr=color_white,  ico=Material("vgui/ranks/2.png")}
-ZDEV.RANK[ RANK_CORPORAL ] 		= {sym="u", name="Corporal", 	clr=color_white,    ico=Material("vgui/ranks/3.png")}
-ZDEV.RANK[ RANK_SERGEANT ] 		= {sym="A", name="Sergeant", 	clr=color_white,    ico=Material("vgui/ranks/8.png")}
-ZDEV.RANK[ RANK_LIEUTENANT ] 	= {sym="a", name="Lieutenant", clr=color_white,   ico=Material("vgui/ranks/9.png")}
-ZDEV.RANK[ RANK_CAPTAIN ] 		= {sym=";", name="Captain", 		clr=color_white,  ico=Material("vgui/ranks/11.png")}
-ZDEV.RANK[ RANK_MAJOR ] 		  = {sym="K", name="Major", 			clr=color_white,    ico=Material("vgui/ranks/12.png")}
-ZDEV.RANK[ RANK_COLONEL ] 		= {sym="O", name="Colonel", 		clr=color_white,  ico=Material("vgui/ranks/14.png")}
+ZDEV.RANK[ RANK_PLAYER ] = {name="Player", ico=Material("")}
+ZDEV.RANK[ RANK_PRIVATE ] = {name="Private", ico=Material("vgui/ranks/1_private.png")}
+ZDEV.RANK[ RANK_PRIVATE_1_CL ] = {name="Private First Class", ico=Material("vgui/ranks/2_private_first_class.png")}
+ZDEV.RANK[ RANK_CORPORAL ] = {name="Corporal", ico=Material("vgui/ranks/3_corporal.png")}
+ZDEV.RANK[ RANK_SERGEANT ] = {name="Sergeant", ico=Material("vgui/ranks/3_sergeant.png")}
+ZDEV.RANK[ RANK_STF_SGT ] = {name="Staff Sergeant", ico=Material("vgui/ranks/4_staff_sergeant.png")}
+ZDEV.RANK[ RANK_SGT_1_CL ] = {name="Sergeant First Class", ico=Material("vgui/ranks/5_sergeant_first_class.png")}
+ZDEV.RANK[ RANK_MASTER_SGT ] = {name="Master Sergeant", ico=Material("vgui/ranks/6_master_sergeant.png")}
+ZDEV.RANK[ RANK_1ST_SGT ] = {name="First Sergeant", ico=Material("vgui/ranks/7_first_sergeant.png")}
+ZDEV.RANK[ RANK_SGT_MJR ] = {name="Sergeant Major", ico=Material("vgui/ranks/8_sergeant_major.png")}
+ZDEV.RANK[ RANK_CMD_SGT_MJR ] = {name="Command Sergeant Major", ico=Material("vgui/ranks/9_command_sergeant_major.png")}
+ZDEV.RANK[ RANK_SGT_MJR_OTA ] = {name="Sergeant Major of the Army", ico=Material("vgui/ranks/10_sergeant_major_of_the_army.png")}
+ZDEV.RANK[ RANK_2_LIEUTENANT ] = {name="Second Lieutenant", ico=Material("vgui/ranks/11_second_lieutenant.png")}
+ZDEV.RANK[ RANK_1_LIEUTENANT ] = {name="First Lieutenant", ico=Material("vgui/ranks/12_first_lieutenant.png")}
+ZDEV.RANK[ RANK_CAPTAIN ] = {name="Captain", ico=Material("vgui/ranks/13_captain.png")}
+ZDEV.RANK[ RANK_MAJOR ] = {name="Major", ico=Material("vgui/ranks/14_major.png")}
+ZDEV.RANK[ RANK_LIEUTENANT_COL ] = {name="Lieutenant Colonel", ico=Material("vgui/ranks/15_lieutenant_colonel.png")}
+ZDEV.RANK[ RANK_COLONEL ] = {name="Colonel", ico=Material("vgui/ranks/16_colonel.png")}
+ZDEV.RANK[ RANK_BRIGADIER_GEN ] = {name="Brigadier General", ico=Material("vgui/ranks/17_brigadier_general.png")}
+ZDEV.RANK[ RANK_MJR_GENERAL ] = {name="Major General", ico=Material("vgui/ranks/18_major_general.png")}
+ZDEV.RANK[ RANK_LIEUTENANT_GEN ] = {name="Lieutenant General", ico=Material("vgui/ranks/19_lieutenant_general.png")}
+ZDEV.RANK[ RANK_GENERAL ] = {name="General", ico=Material("vgui/ranks/20_general.png")}
+ZDEV.RANK[ RANK_GENERAL_OTA ] = {name="General of the Army", ico=Material("vgui/ranks/21_general_of_the_army.png")}
 
 -- ZDEV_UID: ZDEV_FUNC_A0EF4E6C | Path: ZDEV.RANK.Name
 function ZDEV.RANK.Name( rank )
 	return tostring( ZDEV.RANK[ rank ].name )
-end
-
--- ZDEV_UID: ZDEV_FUNC_D9EABF3D | Path: ZDEV.RANK.Color
-function ZDEV.RANK.Color( rank )
-	return ZDEV.RANK[ rank ].clr
-end
-
--- ZDEV_UID: ZDEV_FUNC_C256F0DC | Path: ZDEV.RANK.Symbol
-function ZDEV.RANK.Symbol( rank )
-	return tostring( ZDEV.RANK[ rank ].sym )
 end
 
 -- ZDEV_UID: ZDEV_FUNC_64328C5A | Path: ZDEV.RANK.Icon
@@ -99,6 +103,7 @@ hook.Add("PlayerPostThink", "ZDEV.PLYR.PostThink", ZDEV.PLYR.PostThink )
 --[[ ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
   FUNCTION ZDEV CORE: PLAYER HOOKS
 ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ]]
+
 -- ZDEV_UID: ZDEV_FUNC_3400F54D | Path: ZDEV.GAME.Think
 function ZDEV.GAME.Think( )
 
