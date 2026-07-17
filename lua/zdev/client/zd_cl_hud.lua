@@ -33,14 +33,19 @@ local _f = 'zdev/client/zd_cl_hud.lua'; Msg("■") MsgC(Color(200,50,255),'ZDEV 
 
 --[[ ─── Convars (idempotent; BEFORE the reload guard per gmod-file-load-order) ─ ]]
 -- Visor / parallax / curve tuning (canonical zdev_* names, legacy zd_* mirrors)
-ZDEV.CONV.ClientVar("zdev_hud_visor_ang_strength", "15",   "Pixels of visor offset per degree of mouse movement", { legacy = "zd_hud_visor_ang_strength" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_ang_strength", "15",   "Pixels of visor lag per degree the view leads the visor", { legacy = "zd_hud_visor_ang_strength" })
 ZDEV.CONV.ClientVar("zdev_hud_visor_ang_speed",    "20",   "Angle-smear lerp speed (higher = snappier, lower = more lag)", { legacy = "zd_hud_visor_ang_speed" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_ang_max",      "120",  "Max pixels the eye-angle lag can offset the visor (clamp)")
+ZDEV.CONV.ClientVar("zdev_hud_visor_ang_deadzone", "0.0",  "Dead-zone (degrees of lag) below which the visor does not drift")
 ZDEV.CONV.ClientVar("zdev_hud_visor_scale",        "1.25", "Visor texture scale (>1.0 hides edges as it shifts)", { legacy = "zd_hud_visor_scale" })
 ZDEV.CONV.ClientVar("zdev_hud_visor_aspect",       "0.85", "Visor height multiplier (relative to scale)", { legacy = "zd_hud_visor_aspect" })
-ZDEV.CONV.ClientVar("zdev_hud_visor_headbob",          "1",   "Toggle head-bone driven visor drift (0/1)", { legacy = "zd_hud_visor_headbob" })
-ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_strength", "1.0", "Multiplier on head-bone screen-space delta", { legacy = "zd_hud_visor_headbob_strength" })
-ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_speed",    "6",   "Head-bone smoothing speed (lower = more delay/lag)", { legacy = "zd_hud_visor_headbob_speed" })
-ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_max",      "40",  "Max pixels the head-bob effect can offset the visor (clamp)", { legacy = "zd_hud_visor_headbob_max" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_curve",        "0.15", "Visor glass curvature: barrel bulge + edge parallax on HUD elements (0 = flat)")
+-- DEPRECATED (no effect): the head-bone bob caused erratic first-person twitching
+-- and was removed. Kept registered only so existing binds/autoexec don't error.
+ZDEV.CONV.ClientVar("zdev_hud_visor_headbob",          "0",   "DEPRECATED (no effect) — head-bob visor drift removed", { legacy = "zd_hud_visor_headbob" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_strength", "1.0", "DEPRECATED (no effect)", { legacy = "zd_hud_visor_headbob_strength" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_speed",    "6",   "DEPRECATED (no effect)", { legacy = "zd_hud_visor_headbob_speed" })
+ZDEV.CONV.ClientVar("zdev_hud_visor_headbob_max",      "40",  "DEPRECATED (no effect)", { legacy = "zd_hud_visor_headbob_max" })
 ZDEV.CONV.ClientVar("zdev_hud_parallax",           "1",    "Master toggle: HUD elements drift with the visor (0/1)", { legacy = "zd_hud_parallax" })
 ZDEV.CONV.ClientVar("zdev_hud_parallax_visor",     "1.0",  "Parallax multiplier for the visor itself", { legacy = "zd_hud_parallax_visor" })
 ZDEV.CONV.ClientVar("zdev_hud_parallax_messages",  "0.10", "Parallax multiplier for HUD messages and markers", { legacy = "zd_hud_parallax_messages" })
@@ -410,18 +415,19 @@ end
 CHUD.LoadProfile( "_active" )
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-	VISOR OFFSET / SWAY  —  the shared per-frame HUD drift (angle smear +
-	head-bone bob), unchanged behaviour from CHUD v1.
+	VISOR OFFSET / SWAY  —  the shared per-frame HUD drift. Parametrized
+	eye-angle lag ONLY (the visor trails the view direction); the erratic
+	head-bone bob was removed 2026-07-17. CHUD.GlassOffset() exposes the visor's
+	own drift so the visor texture and all on-glass HUD elements move as one pane.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━]]
 local CV = {
 	ang_strength = GetConVar( "zdev_hud_visor_ang_strength" ),
 	ang_speed    = GetConVar( "zdev_hud_visor_ang_speed" ),
+	ang_max      = GetConVar( "zdev_hud_visor_ang_max" ),
+	ang_deadzone = GetConVar( "zdev_hud_visor_ang_deadzone" ),
 	scale        = GetConVar( "zdev_hud_visor_scale" ),
 	aspect       = GetConVar( "zdev_hud_visor_aspect" ),
-	hb_enabled   = GetConVar( "zdev_hud_visor_headbob" ),
-	hb_strength  = GetConVar( "zdev_hud_visor_headbob_strength" ),
-	hb_speed     = GetConVar( "zdev_hud_visor_headbob_speed" ),
-	hb_max       = GetConVar( "zdev_hud_visor_headbob_max" ),
+	curve        = GetConVar( "zdev_hud_visor_curve" ),
 	px_enabled   = GetConVar( "zdev_hud_parallax" ),
 	px_visor     = GetConVar( "zdev_hud_parallax_visor" ),
 	px_messages  = GetConVar( "zdev_hud_parallax_messages" ),
@@ -430,26 +436,19 @@ local CV = {
 }
 CHUD.CV = CV   -- elements (visor) read scale/aspect through this
 
-local _VISOR = {
-	headBoneId    = nil,
-	headBoneModel = nil,
-	hbRefScreen   = nil,
-}
-
 local _OFFSET = { x = 0, y = 0 }
 CHUD.Offset = _OFFSET
 
-local function ResolveHeadBone( ply )
-	local mdl = ply:GetModel()
-	if _VISOR.headBoneModel == mdl and _VISOR.headBoneId then
-		return _VISOR.headBoneId
-	end
-	_VISOR.headBoneModel = mdl
-	local bid = ply:LookupBone( "ValveBiped.Bip01_Head1" )
-	if not bid then bid = ply:LookupBone( "bip01_head1" ) end
-	if not bid then bid = ply:LookupBone( "head" ) end
-	_VISOR.headBoneId = bid
-	return bid
+-- Smooth, parametrized eye-angle lag ONLY. The visor trails the view direction:
+-- VisorLastAng lerps toward the real EyeAngles and the on-screen offset is the
+-- amount the view currently LEADS the visor (× strength), clamped and
+-- dead-zoned. (The old head-bone bob read the animating first-person skeleton
+-- every frame and jittered the visor erratically — removed 2026-07-17.)
+local function applyDeadzone( d, dz )
+	if dz <= 0 then return d end
+	if d > dz then return d - dz end
+	if d < -dz then return d + dz end
+	return 0
 end
 
 function CHUD.UpdateHUDOffset()
@@ -468,41 +467,22 @@ function CHUD.UpdateHUDOffset()
 	CHUD.VisorLastAng = LerpAngle( interp, CHUD.VisorLastAng, eyeAng )
 
 	local angStrength = CV.ang_strength:GetFloat()
-	local offsetX = math.AngleDifference( eyeAng.y, CHUD.VisorLastAng.y ) * angStrength
-	local offsetY = math.AngleDifference( eyeAng.p, CHUD.VisorLastAng.p ) * -angStrength
+	local angMax      = CV.ang_max:GetFloat()
+	local dz          = CV.ang_deadzone:GetFloat()
 
-	if CV.hb_enabled:GetBool() then
-		-- Read the engine's cached bone matrix only. Do NOT force
-		-- InvalidateBoneCache/SetupBones here: SetupBones re-enters every
-		-- BuildBonePositions callback other addons attached to the player
-		-- (VManip-style bone manipulators), and doing that from inside
-		-- HUDPaint can recurse at the C level and hard-crash on spawn.
-		-- Stale bones just yield a ~0 delta (weaker bob), never a crash.
-		local boneId = ResolveHeadBone( LP )
-		if boneId then
-			local bonePos = LP:GetBonePosition( boneId )
-			if bonePos then
-				local screen = bonePos:ToScreen()
-				if screen.visible ~= false then
-					if not _VISOR.hbRefScreen then
-						_VISOR.hbRefScreen = { x = screen.x, y = screen.y }
-					end
-					local hbInterp = Clamp( ft * CV.hb_speed:GetFloat(), 0, 1 )
-					_VISOR.hbRefScreen.x = Lerp( hbInterp, _VISOR.hbRefScreen.x, screen.x )
-					_VISOR.hbRefScreen.y = Lerp( hbInterp, _VISOR.hbRefScreen.y, screen.y )
-					local hbStrength = CV.hb_strength:GetFloat()
-					local hbMax      = CV.hb_max:GetFloat()
-					offsetX = offsetX + Clamp( ( screen.x - _VISOR.hbRefScreen.x ) * hbStrength, -hbMax, hbMax )
-					offsetY = offsetY + Clamp( ( screen.y - _VISOR.hbRefScreen.y ) * hbStrength, -hbMax, hbMax )
-				end
-			end
-		end
-	else
-		_VISOR.hbRefScreen = nil
-	end
+	local dYaw = applyDeadzone( math.AngleDifference( eyeAng.y, CHUD.VisorLastAng.y ), dz )
+	local dPit = applyDeadzone( math.AngleDifference( eyeAng.p, CHUD.VisorLastAng.p ), dz )
 
-	_OFFSET.x = offsetX
-	_OFFSET.y = offsetY
+	_OFFSET.x = Clamp( dYaw * angStrength, -angMax, angMax )
+	_OFFSET.y = Clamp( dPit * -angStrength, -angMax, angMax )
+end
+
+-- Shared "visor glass" drift: the single offset the visor texture AND every
+-- on-glass HUD element move by (so they read as one pane behind the glass).
+function CHUD.GlassOffset()
+	if not CV.px_enabled:GetBool() then return 0, 0 end
+	local m = CV.px_visor:GetFloat()
+	return _OFFSET.x * m, _OFFSET.y * m
 end
 
 --[[━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -631,17 +611,38 @@ local function paintElement( id )
 	if not x then return end
 	local s = CHUD.UIScale() * ( l.scale or 1 )
 
-	-- parallax offset for this element
+	-- screen pivot (mirrors the anchor)
+	local a = ANCHORS[ l.anchor ] or ANCHORS.tl
+	local pvx, pvy = x + a[ 1 ] * w, y + a[ 2 ] * h
+
+	-- Glass / parallax offset for this element.
+	--   on-glass (default): the element rides the SAME drift as the visor
+	--   texture (CHUD.GlassOffset) scaled by layout.parallax as a relative
+	--   "depth" (1 = flush on the glass), plus an optional barrel curvature so
+	--   the pane reads as curved visor glass. Elements therefore move together
+	--   as one surface behind the visor rather than as independent layers.
+	--   off-glass (def.onGlass == false): legacy independent _OFFSET*parallax.
 	local px, py = 0, 0
 	if CV.px_enabled:GetBool() and not CHUD.EditorActive then
-		local m = l.parallax or 0
-		px, py = _OFFSET.x * m, _OFFSET.y * m
+		if def.onGlass ~= false then
+			local gx, gy = CHUD.GlassOffset()
+			local depth  = l.parallax or 1
+			px, py = gx * depth, gy * depth
+			local curve = CV.curve:GetFloat()
+			if curve > 0 then
+				local sw, sh   = ScrW(), ScrH()
+				local hw, hh   = sw * 0.5, sh * 0.5
+				local nx       = ( pvx - hw ) / hw          -- -1..1 across screen
+				local ny       = ( pvy - hh ) / hh
+				local r2       = nx * nx + ny * ny          -- radial falloff (edges bulge)
+				px = px + nx * r2 * curve * 24 - gx * r2 * curve * 0.5
+				py = py + ny * r2 * curve * 24 - gy * r2 * curve * 0.5
+			end
+		else
+			local m = l.parallax or 0
+			px, py = _OFFSET.x * m, _OFFSET.y * m
+		end
 	end
-
-	-- transform: translate to rect origin (+parallax), rotate about the
-	-- element's pivot, scale into design space
-	local a = ANCHORS[ l.anchor ] or ANCHORS.tl
-	local pvx, pvy = x + a[ 1 ] * w, y + a[ 2 ] * h     -- screen pivot
 
 	elMat:Identity()
 	elVec.x, elVec.y, elVec.z = pvx + px, pvy + py, 0
